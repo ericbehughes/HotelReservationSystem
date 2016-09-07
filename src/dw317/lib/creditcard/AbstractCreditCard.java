@@ -8,4 +8,35 @@ public abstract class AbstractCreditCard implements CreditCard{
 	public AbstractCreditCard(CardType cardtype, String number) throws IllegalArgumentException{
 		
 	}
+	
+	/*
+	 * Still needs to be worked on. Must check to see that two Cards are identical
+	 * (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	public boolean equals(Object object) {
+		
+		return false;
+	}
+	
+	/**
+	 * @return number - The numbers of the credit card
+	 */
+	public String getNumber(){
+		return number;
+	}
+	
+	/**
+	 * @return cardtype - The type of credit card
+	 */
+	public CardType getType(){
+		return cardtype;
+	}
+	
+	/**
+	 * @return Concatenated string of card type and numbers
+	 */
+	public String toString(){
+		return this.getType() + "*" + this.getNumber();
+	}
 }
