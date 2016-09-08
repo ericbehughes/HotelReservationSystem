@@ -16,7 +16,7 @@ public abstract class AbstractCreditCard implements CreditCard{
 	 */
 	public boolean equals(Object object) {
 		
-		return true;
+		return false;
 	}
 	
 	/**
