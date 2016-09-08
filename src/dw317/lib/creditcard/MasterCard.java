@@ -28,7 +28,7 @@ public class MasterCard extends AbstractCreditCard{
 	 * must be 16 digits long.
 	 * 
 	 * @param number
-	 * @return
+	 * @return The same number value if it passes the validation
 	 * @throws IllegalArgumentException
 	 */
 	private static String validateNumber(String number) throws IllegalArgumentException {

@@ -12,7 +12,7 @@ public class Visa extends AbstractCreditCard {
 	 * the first number must be a 4, and the card must have 16 or 13 digits.
 	 * 
 	 * @param number
-	 * @return
+	 * @return The same number if it passes validation
 	 * @throws IllegalArgumentException
 	 */
 	private static String validateNumber(String number) throws IllegalArgumentException {

@@ -15,7 +15,7 @@ public interface CreditCard extends Serializable {
                       break;
                case AMEX:
                    card = new Amex(number);
-               } 
+               }
                return card;
        }
        

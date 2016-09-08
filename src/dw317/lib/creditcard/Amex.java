@@ -19,7 +19,8 @@ public class Amex extends AbstractCreditCard {
 	 * the first two numbers must be a 34 or 37, and the card must have 15 digits.
 	 * 
 	 * @param number
-	 * @return
+	 * @return The same number if it passes validation
+	 * @throws IllegalArgumentException
 	 */
 	private static String validateNumber(String number){
 		if(number.length() == 15 && checkTwoFirstNumbers(number))
