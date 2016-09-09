@@ -25,7 +25,7 @@ public class Name
 	// both first and last name must be >= 2
 	// characters, apostrophe hyphen and space between two letters are valid
 	
-	public boolean validateName(String firstName, String lastName)
+	public boolean isValidName(String firstName, String lastName)
 	{
 		if (firstName.length() < 2 || lastName.length() < 2)
 			return false;
@@ -46,7 +46,7 @@ public class Name
 		if (space == 0 || space == length || apostrophe == 0 || apostrophe == length || hyphen == 0 || hyphen == length){
 			return false;
 		}
-		
+		return true;
 	}
 			
 		
