@@ -35,14 +35,14 @@ public class Name
 		int space = firstName.indexOf(" ");
 		int apostrophe = firstName.indexOf("'");
 		int hyphen = firstName.indexOf('-');
-		int length = firstName.length();
+		int length = firstName.length()-1;
 		if (space == 0 || space == length || apostrophe == 0 || apostrophe == length || hyphen == 0 || hyphen == length)
 			return false;
 		
 		space = lastName.indexOf(" ");
 		apostrophe = lastName.indexOf("'");
 		hyphen = lastName.indexOf('-');
-		length = lastName.length();
+		length = lastName.length()-1;
 		if (space == 0 || space == length || apostrophe == 0 || apostrophe == length || hyphen == 0 || hyphen == length){
 			return false;
 		}
