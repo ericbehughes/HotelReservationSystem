@@ -16,7 +16,7 @@ public abstract class AbstractCreditCard implements CreditCard{
 	 */
 	public boolean equals(Object object) {
 		
-		return true; // changed line 19 to show you how to fetchs
+		return true; // changed line 19 to show you how to fetchsss
 	
 	/**
 	 * @return number - The numbers of the credit card
