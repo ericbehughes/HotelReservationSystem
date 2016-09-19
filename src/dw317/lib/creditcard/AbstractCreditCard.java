@@ -6,6 +6,8 @@ public abstract class AbstractCreditCard implements CreditCard{
 	private final String number;
 	
 	public AbstractCreditCard(CardType cardtype, String number) throws IllegalArgumentException{
+		this.cardtype = cardtype;
+		this.number = number;
 		
 	}
 	
@@ -15,9 +17,8 @@ public abstract class AbstractCreditCard implements CreditCard{
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	public boolean equals(Object object) {
-		
 		return true; // changed line 19 to show you how to fetchsss
-	
+	}
 	/**
 	 * @return number - The numbers of the credit card
 	 */
@@ -37,5 +38,38 @@ public abstract class AbstractCreditCard implements CreditCard{
 	 */
 	public String toString(){
 		return this.getType() + "*" + this.getNumber();
+	}
+	
+	private String validateLuhnAlgorithm(String cardNumber) throws IllegalArgumentException
+	{
+		int cardSize = cardNumber.length(), total = 0;
+		int[] cardArr = new int[cardSize];
+		String digit = new String();
+		// Parse the string into an int array for easy access to digits
+		// Possibly able to cast instead of substring, ask prof
+		try {
+			for (int i = 0; i < cardSize; i++){
+				if (cardNumber.charAt(i) < 48 || cardNumber.charAt(i) > 57)
+					throw new IllegalArgumentException("The card number cannot contain letters");
+				digit = cardNumber.substring(i,i+1);
+				cardArr[i] = Integer.parseInt(digit);
+			}
+		}
+		catch (IllegalArgumentException e){
+			System.out.println(e.getMessage());
+		}
+		// Doubles every second number and subtracts 9 if necessary
+		for (int i = cardSize - 2; i >= 0; i = i - 2){
+			cardArr[i] = cardArr[i]*2;
+			if (cardArr[i] > 9)
+				cardArr[i] = cardArr[i] - 9;
+		}
+		// Sums all the digits in the card number
+		for (int i = 0; i < cardSize; i++)
+			total += cardArr[i];
+		
+		if (total % 10 == 0)
+			return cardNumber;
+		throw new IllegalArgumentException("The card number is not valid");
 	}
 }
