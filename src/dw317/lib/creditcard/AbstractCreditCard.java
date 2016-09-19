@@ -49,7 +49,7 @@ public abstract class AbstractCreditCard implements CreditCard{
 		// Possibly able to cast instead of substring, ask prof
 		try {
 			if (cardSize < 15 || cardSize >= 18)
-				throw new IllegalArgumentException("The card number is not the right size")
+				throw new IllegalArgumentException("The card number is not the right size");
 		}
 		
 		catch (IllegalArgumentException iae){
