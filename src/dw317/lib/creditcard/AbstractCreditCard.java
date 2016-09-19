@@ -43,41 +43,39 @@ public abstract class AbstractCreditCard implements CreditCard{
 	private String validateLuhnAlgorithm(String cardNumber) throws IllegalArgumentException
 	{
 		int cardSize = cardNumber.length(), total = 0;
-		int[] cardArr = new int[cardSize];
-		String digit = new String();
+		long[] cardArr = new long[cardSize];
 		// Parse the string into an int array for easy access to digits
 		// Possibly able to cast instead of substring, ask prof
 		try {
+			// check if card size is appropriate
 			if (cardSize < 15 || cardSize >= 18)
 				throw new IllegalArgumentException("The card number is not the right size");
-		}
-		
-		catch (IllegalArgumentException iae){
-			System.out.println(iae.getMessage());
-		}
-		try {
-			for (int i = 0; i < cardSize; i++){
+			// check if card number contains letters
+			for (int i = 0; i < cardSize; i++)
 				if (cardNumber.charAt(i) < 48 || cardNumber.charAt(i) > 57)
 					throw new IllegalArgumentException("The card number cannot contain letters");
-				digit = cardNumber.substring(i,i+1);
-				cardArr[i] = Integer.parseInt(digit);
+			long cardNum = Long.parseLong(cardNumber);
+			// extract digits and make long array
+			for (int i = cardSize - 1; i >= 0; i--){
+				cardArr[i] = cardNum % 10;
+				cardNum = cardNum / 10;
 			}
+			// Doubles every second number and subtracts 9 if necessary
+			for (int i = cardSize - 2; i >= 0; i = i - 2){
+				cardArr[i] = cardArr[i]*2;
+				if (cardArr[i] > 9)
+					cardArr[i] = cardArr[i] - 9;
+			}
+			// Sums all the digits in the card number
+			for (int i = 0; i < cardSize; i++)
+				total += cardArr[i];
+			
+			if (total % 10 == 0)
+				return cardNumber;
 		}
 		catch (IllegalArgumentException e){
 			System.out.println(e.getMessage());
 		}
-		// Doubles every second number and subtracts 9 if necessary
-		for (int i = cardSize - 2; i >= 0; i = i - 2){
-			cardArr[i] = cardArr[i]*2;
-			if (cardArr[i] > 9)
-				cardArr[i] = cardArr[i] - 9;
-		}
-		// Sums all the digits in the card number
-		for (int i = 0; i < cardSize; i++)
-			total += cardArr[i];
-		
-		if (total % 10 == 0)
-			return cardNumber;
 		throw new IllegalArgumentException("The card number is not valid");
 	}
 }
