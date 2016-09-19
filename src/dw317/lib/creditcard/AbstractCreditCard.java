@@ -48,6 +48,14 @@ public abstract class AbstractCreditCard implements CreditCard{
 		// Parse the string into an int array for easy access to digits
 		// Possibly able to cast instead of substring, ask prof
 		try {
+			if (cardSize < 15 || cardSize >= 18)
+				throw new IllegalArgumentException("The card number is not the right size")
+		}
+		
+		catch (IllegalArgumentException iae){
+			System.out.println(iae.getMessage());
+		}
+		try {
 			for (int i = 0; i < cardSize; i++){
 				if (cardNumber.charAt(i) < 48 || cardNumber.charAt(i) > 57)
 					throw new IllegalArgumentException("The card number cannot contain letters");
