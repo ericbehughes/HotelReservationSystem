@@ -11,8 +11,6 @@ public class Email implements Serializable, Comparable<Email> {
 		this.address = address;
 	}
 	
-	
-	
 	public String getAddress() {
 		return address;
 	}
@@ -55,7 +53,7 @@ public class Email implements Serializable, Comparable<Email> {
 		String[] hosts = hostSplit(getHost());
 		if(checkLength(getUserId()))
 			return false;
-		if(!Name.isValidString(getUserId(), 1));
+		if(!Name.isValidString(getUserId(), 1))
 			return false;
 		for(int i = 0 ; i < hosts.length ; i++){
 			if(checkLength(hosts[i]))
@@ -64,8 +62,7 @@ public class Email implements Serializable, Comparable<Email> {
 				return false;
 		}
 		
-		
-	
+		return true;
 	}
 	
 	private static String[] hostSplit(String host){
@@ -76,6 +73,14 @@ public class Email implements Serializable, Comparable<Email> {
 		if(input.length() > 1 || input.length() < 32)
 			return false;
 		return true;
+	}
+
+
+
+	@Override
+	public int compareTo(Email o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 }
