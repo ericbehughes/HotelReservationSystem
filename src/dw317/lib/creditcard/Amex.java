@@ -4,7 +4,7 @@ public class Amex extends AbstractCreditCard {
 	private static final long serializeVersionUID = 42031768871L;
 	
 	public Amex(String number) throws IllegalArgumentException {
-		super(cardtype.AMEX, validateNumber(number));
+		super(CardType.AMEX, validateNumber(number));
 	}
 	
 	private static boolean checkTwoFirstNumbers(String number){

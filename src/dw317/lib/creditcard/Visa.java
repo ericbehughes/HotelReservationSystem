@@ -4,7 +4,7 @@ public class Visa extends AbstractCreditCard {
 	private static final long serializeVersionUID = 42031768871L;
 	
 	public Visa(String number) throws IllegalArgumentException {
-		super(cardtype.VISA, validateNumber(number));
+		super(CardType.VISA, validateNumber(number));
 	}
 	
 	/**
