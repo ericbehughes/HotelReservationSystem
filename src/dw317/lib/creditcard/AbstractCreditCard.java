@@ -2,8 +2,8 @@ package dw317.lib.creditcard;
 
 public abstract class AbstractCreditCard implements CreditCard{
 	private static final long serialVersionUID = 42031768871L;
-	protected final CardType cardtype;
-	protected final String number;
+	private final CardType cardtype;
+	private final String number;
 	
 	public AbstractCreditCard(CardType cardtype, String number) throws IllegalArgumentException{
 		this.cardtype = cardtype;
