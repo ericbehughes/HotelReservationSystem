@@ -3,7 +3,7 @@ package dw317.lib;
 import java.io.Reader;
 import java.io.Serializable;
 
-public class Email implements Serializable Comparable<Email> {
+public class Email implements Serializable, Comparable<Email> {
 	private static final long serialVersionUID = 42031768871L;
 	private final String  address;
 	
