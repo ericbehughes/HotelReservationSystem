@@ -3,6 +3,7 @@ import java.io.Serializable;
 import dw317.lib.creditcard.CreditCard;
 
 public interface HotelFactory extends Serializable {
+	//interface
 	Customer getCustomerInstance(String firstName, String lastName, String email);
 	CreditCard getCard(String cardtype, String number);
 	Room getRoomInstance(int roomNumber, String roomtype);

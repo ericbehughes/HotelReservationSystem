@@ -1,5 +1,8 @@
 package group187.hotel.business;
+import java.util.Optional;
+
 import dw317.hotel.business.interfaces.Customer;
+import dw317.lib.Email;
 import dw317.lib.creditcard.CreditCard;
 
 public class DawsonCustomer implements Customer {
@@ -19,14 +22,22 @@ public class DawsonCustomer implements Customer {
 		this.email = email;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
 	@Override
 	public int compareTo(Customer o) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public Email getEmail() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Optional<CreditCard> getCreditCard() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

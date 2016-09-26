@@ -8,7 +8,7 @@ public class DawsonReservation implements Reservation {
 	private int inYear, inMonth, inDay;
 	private int outYear, outMonth, outDay;
 	
-	
+	//constructor
 	public DawsonReservation(Customer customer, Room roomNumber, int inYear, int inMonth, int inDay, int outYear,
 			int outMonth, int outDay) {
 		super();

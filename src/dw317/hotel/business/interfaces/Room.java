@@ -1,6 +1,6 @@
 package dw317.hotel.business.interfaces;
 import java.io.Serializable;
-import group187.hotel.business.Room.RoomType;
+import dw317.hotel.business.RoomType;
 
 public interface Room extends Comparable<Room>, Serializable {
 	
@@ -10,7 +10,7 @@ public interface Room extends Comparable<Room>, Serializable {
 	}
 	
 	public static int getRoomNumber(){
-		//change later on
+		//change later onn
 		return 0;
 	}
 	

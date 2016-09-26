@@ -11,7 +11,7 @@ public interface Customer extends Comparable<Customer>, Serializable {
 		return null;
 	}
 	public Email getEmail(){
-		//return Email
+		//return Emaill
 	}
 	public  Optional<CreditCard> getCreditCard(){
 		//return CreditCard type 

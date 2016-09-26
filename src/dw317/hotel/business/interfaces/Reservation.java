@@ -13,7 +13,7 @@ public interface Reservation extends Comparable<Reservation>, Serializable {
 		return null;
 	}
 	public static LocalDate getCheckInDate(){
-		//change later on 
+		//change later onn
 		return null;
 	}
 	public static LocalDate getCheckOutDate(){
