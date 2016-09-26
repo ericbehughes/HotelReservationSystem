@@ -13,8 +13,29 @@ public class DawsonRoom implements Room {
 	}
 	
 	public boolean isValid(int roomNumber) throws IllegalArgumentException{
-		//change later onn
-		return false;
+		try{
+			int floor = -1;
+			int[] roomArr = new int[3];
+			// Converts the int to an array for easier digit extraction
+			for (int i = 2; i >= 0; i--){
+				roomArr[i] = roomNumber % 10;
+				roomNumber = roomNumber / 10;
+			}
+			floor = roomArr[0];
+			if (floor < 1 || floor > 8)
+				throw new IllegalArgumentException("The floor can only be between 1 and 8");
+			if (roomArr[1] != 0)
+				throw new IllegalArgumentException("The room number can only start with 0");
+			if (roomArr[2] < 1 || roomArr[2] > 8)
+				throw new IllegalArgumentException("The room number can only end with 1 - 8");
+		}
+		
+		catch(IllegalArgumentException e){
+			System.out.print(e.getMessage());
+		}
+		
+		return true;
+		
 	}
 	
 	public int getFloor(int floorNumber){
