@@ -6,17 +6,11 @@ import dw317.lib.creditcard.CreditCard;
 
 public interface Customer extends Comparable<Customer>, Serializable {
 	
-	public static Name getName(){
-		// return Name.Copy();
-		return null;
-	}
-	public Email getEmail(){
-		//return Emaill
-	}
-	public  Optional<CreditCard> getCreditCard(){
-		//return CreditCard type 
-	}
-	public static void setCreditCard(Optional<CreditCard> card){
-		
-	}
+	public Name getName();
+	
+	public Email getEmail();
+	
+	public Optional<CreditCard> getCreditCard();
+	
+	public void setCreditCard(Optional<CreditCard> card);
 }
