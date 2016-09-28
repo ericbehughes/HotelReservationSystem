@@ -16,7 +16,7 @@ public class Visa extends AbstractCreditCard {
 	 * @throws IllegalArgumentException
 	 */
 	private static String validateNumber(String number) throws IllegalArgumentException {
-		if(number.length() == 16 || number.length() == 13 && number.substring(0,1).equals("4"))
+		if((number.length() == 16 || number.length() == 13) && number.substring(0,1).equals("4"))
 			return number;
 		throw new IllegalArgumentException();
 	}
