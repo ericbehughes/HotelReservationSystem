@@ -17,6 +17,7 @@ public class MasterCard extends AbstractCreditCard{
 	 */
 	private static boolean checkTwoFirstNumbers(String number){
 		String checkNum = number.substring(0, 2);
+		//should be indexOf starting at position 0 instead of substring 
 		if (checkNum.equals("50") || checkNum.equals("51") || checkNum.equals("52") || checkNum.equals("53") || checkNum.equals("54") || checkNum.equals("55"))
 			return true;
 		return false;
