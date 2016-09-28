@@ -3,6 +3,7 @@ import java.util.Optional;
 
 import dw317.hotel.business.interfaces.Customer;
 import dw317.lib.Email;
+import dw317.lib.Name;
 import dw317.lib.creditcard.CreditCard;
 
 public class DawsonCustomer implements Customer {
@@ -38,6 +39,18 @@ public class DawsonCustomer implements Customer {
 	public Optional<CreditCard> getCreditCard() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public Name getName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setCreditCard(Optional<CreditCard> card) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

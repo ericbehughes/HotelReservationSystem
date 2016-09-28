@@ -3,11 +3,8 @@ package dw317.lib.creditcard;
 public class CreditCardTest {
 
 	public static void main(String[] args) {
-<<<<<<< HEAD
-		// TODO Auto-generated method stub
 
-=======
-	try {	
+		try {	
 			//Create a valid Amex Object
 			CreditCard amex = new Amex("374616906032009");
 			System.out.println("You've entered an " + amex.getType() + " card");
@@ -16,13 +13,13 @@ public class CreditCardTest {
 			//Create an invalid Amex Object
 			CreditCard amex3 = new Amex("374616906032009");
 		}
-	catch (IllegalArgumentException e){
+		catch (IllegalArgumentException e){
 			System.out.println("The card type entered is not of specified type");
 			System.out.println("");
-	}
+		}
 	
-	try {
-			//Create a valid Visa Object
+		try {
+		//Create a valid Visa Object
 			CreditCard visa = new Visa("4538018341243017");
 			System.out.println("You've entered an " + visa.getType() + " card");
 			CreditCard visa2 = CreditCard.getInstance(visa.getType(), visa.getNumber());
@@ -30,12 +27,12 @@ public class CreditCardTest {
 			//Create an invalid Visa object
 			CreditCard visa3 = new Visa("4538018341243017");
 		}
-	catch (IllegalArgumentException e){
+		catch (IllegalArgumentException e){
 			System.out.println("The card type entered is not of specified type");
 			System.out.println("");
-	}
+		}
 	
-	try {
+		try {
 			//Create a valid MasterCard Object
 			CreditCard mastercard = new MasterCard("5524890008827073");
 			System.out.println("You've entered an " + mastercard.getType() + " card");
@@ -44,14 +41,10 @@ public class CreditCardTest {
 			//Create an invalid MasterCard Object 
 			CreditCard mastercard3 = new MasterCard("5424890008827073");
 		}
-	catch (IllegalArgumentException e){
+		catch (IllegalArgumentException e){
 			System.out.println("The card type entered is not of specified type");
 			System.out.println("");
-	}
-	
-	
-	
->>>>>>> branch 'Development' of https://github.com/xavier-berthiaume/HotelReservationSystem.git
+		}
 	}
 
 }

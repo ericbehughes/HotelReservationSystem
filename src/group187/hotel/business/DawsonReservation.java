@@ -1,4 +1,6 @@
 package group187.hotel.business;
+import java.time.LocalDate;
+
 import dw317.hotel.business.interfaces.*;
 
 public class DawsonReservation implements Reservation {
@@ -25,6 +27,41 @@ public class DawsonReservation implements Reservation {
 
 	@Override
 	public int compareTo(Reservation o) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	@Override
+	public Customer getCustomer() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public Room getRoom() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public LocalDate getCheckInDate() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public LocalDate getCheckOutDate() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public int getNumberDays() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
