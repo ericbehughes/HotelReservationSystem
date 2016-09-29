@@ -9,9 +9,9 @@ import dw317.lib.creditcard.CreditCard;
 
 public interface Customer extends Comparable<Customer>, Serializable {
 	
-	public Name getName();
+	public Name getName(); // deep copy
 	
-	public Email getEmail();
+	public Email getEmail(); // not deep copy as emails are not immutable
 	
 	public Optional<CreditCard> getCreditCard();
 	

@@ -56,4 +56,28 @@ public class DawsonRoom implements Room {
 		// TODO Auto-generated method 
 		return 0;
 	}
+
+	@Override
+	public RoomType getRoomType() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int getRoomNumber() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getFloor() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getNumber() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

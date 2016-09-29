@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public interface Reservation extends Comparable<Reservation>, Serializable {
 
-	public Customer getCustomer();
+	public Customer getCustomer(); // deep copy 
 	
 	public Room getRoom();
 	
