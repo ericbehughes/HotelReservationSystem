@@ -8,10 +8,7 @@ public class Amex extends AbstractCreditCard {
 	}
 	
 	private static boolean checkTwoFirstNumbers(String number){
-		String checkNum = number.substring(0, 2);
-		if (checkNum.equals("34") || checkNum.equals("37"))
-			return true;
-		return false;
+		return number.indexOf("34") == 0 || number.indexOf("37") == 0;
 	}
 	
 	/**
