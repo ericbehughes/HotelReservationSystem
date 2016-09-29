@@ -3,10 +3,7 @@ package dw317.lib.creditcard;
 public class CreditCardTest {
 
 	public static void main(String[] args) {
-<<<<<<< HEAD
-		// TODO Auto-generated method stub
 
-=======
 	try {	
 			//Create a valid Amex Object
 			CreditCard amex = new Amex("374616906032009");
@@ -51,7 +48,7 @@ public class CreditCardTest {
 	
 	
 	
->>>>>>> branch 'Development' of https://github.com/xavier-berthiaume/HotelReservationSystem.git
+
 	}
 
 }
