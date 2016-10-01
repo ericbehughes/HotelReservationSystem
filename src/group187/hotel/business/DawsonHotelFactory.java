@@ -4,13 +4,14 @@ import dw317.hotel.business.interfaces.Customer;
 import dw317.hotel.business.interfaces.HotelFactory;
 import dw317.hotel.business.interfaces.Reservation;
 import dw317.hotel.business.interfaces.Room;
+import dw317.lib.Email;
 import dw317.lib.creditcard.CreditCard;
 
 public enum DawsonHotelFactory implements HotelFactory {
 		DAWSON;
 
 		@Override
-		public Customer getCustomerInstance(String firstName, String lastName, String email) {
+		public Customer getCustomerInstance(String firstName, String lastName, Email email) {
 			return new DawsonCustomer(firstName, lastName, email);
 		}
 
