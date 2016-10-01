@@ -21,7 +21,7 @@ public class DawsonCustomer implements Customer {
 	public DawsonCustomer(String firstN, String lastN, Email email){
 		this.firstName = firstN;
 		this.lastName = lastN;
-		this.email = new Email(email);
+		this.email = new Email(email);//
 	}
 
 	@Override
