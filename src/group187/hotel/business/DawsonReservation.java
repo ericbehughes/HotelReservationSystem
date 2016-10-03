@@ -65,6 +65,7 @@ public class DawsonReservation implements Reservation {
 	@Override
 	public int getNumberDays() {
 		// TODO Auto-generated method stub
+		//to be continued
 		LocalDate checkIn = this.getCheckInDate();
 		LocalDate checkOut = this.getCheckOutDate();
 		if (checkIn.isAfter(checkOut)){
