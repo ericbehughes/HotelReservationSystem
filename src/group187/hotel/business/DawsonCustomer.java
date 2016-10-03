@@ -69,7 +69,7 @@ public class DawsonCustomer implements Customer {
 	// returns deep copy with new keyword
 	@Override
 	public Name getName() {		
-		return new Name(this.firstName,this.lastName);
+		return new Name(this.name.getFirstName(),this.name.getLastName());
 		
 	}
 
