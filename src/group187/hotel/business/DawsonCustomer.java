@@ -9,20 +9,22 @@ import dw317.lib.Name;
 
 public class DawsonCustomer implements Customer {
 	private static final long serialVersionUID = 42031768871L;
-	private final String firstName,lastName; 
+	private final Name name; 
 	private final Email email;
 	protected final CreditCard card=null;
 	
 	@Override
 	public String toString() {
-		return email + "*" + firstName + "*" + lastName + "*" + card.getType() + "*" + card.getNumber();
+		return email + "*" + this.name.getFirstName() + "*" + this.name.getLastName() + "*" + card.getType() + "*" + card.getNumber();
 	}
 
 	public DawsonCustomer(String firstN, String lastN, Email email){
 		this.email = new Email(email);//
-		Name name = new Name(firstN, lastN);
-		this.firstName = name.getFirstName();
-		this.lastName = name.getLastName();//
+		this.name = new Name(firstN, lastN);
+	}
+	public DawsonCustomer(DawsonCustomer e){
+		this.email = new Email(e.email);//
+		this.name = new Name(e.getName().getFirstName(), e.getName().getLastName());
 	}
 	/*
 	 * str1 = "zbc"
