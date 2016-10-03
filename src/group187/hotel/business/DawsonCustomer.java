@@ -11,11 +11,13 @@ public class DawsonCustomer implements Customer {
 	private static final long serialVersionUID = 42031768871L;
 	private final Name name; 
 	private final Email email;
-	protected final CreditCard card=null;
+	protected Optional<CreditCard> card;
 	
 	@Override
 	public String toString() {
-		return email + "*" + this.name.getFirstName() + "*" + this.name.getLastName() + "*" + card.getType() + "*" + card.getNumber();
+			if (card != null) 
+			return  email + "*" + this.name.getFirstName() + "*" + this.name.getLastName() + "*" + card.get().getType() + "*" + card.get().getNumber();
+		return  email + "*" + this.name.getFirstName() + "*" + this.name.getLastName() + "*";
 	}
 
 	public DawsonCustomer(String firstN, String lastN, Email email){
@@ -53,13 +55,6 @@ public class DawsonCustomer implements Customer {
 	public Email getEmail() {
 		return this.email;
 	}
-
-	@Override
-	public Optional<CreditCard> getCreditCard() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	// returns deep copy with new keyword
 	@Override
 	public Name getName() {		
@@ -67,9 +62,16 @@ public class DawsonCustomer implements Customer {
 		
 	}
 
+
+	@Override
+	public Optional<CreditCard> getCreditCard() {
+		return this.card;
+	}
+
 	@Override
 	public void setCreditCard(Optional<CreditCard> card) {
-		// TODO Auto-generated method stub
+		 this.card = card;
+		
 		
 	}
 
