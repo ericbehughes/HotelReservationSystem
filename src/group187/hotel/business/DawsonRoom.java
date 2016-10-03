@@ -7,21 +7,24 @@ public class DawsonRoom implements Room {
 	private final int roomNumber;
 	private final RoomType roomType; 
 	
-	public DawsonRoom(int roomNumber,RoomType roomType2){
+	public DawsonRoom(int roomNumber,RoomType roomType){
+		
+		if (!isValid(roomNumber))
+			throw new IllegalArgumentException();
 		this.roomNumber = roomNumber; 
-		this.roomType = roomType2; 
+		this.roomType = roomType; 
 	}
 	
 	public boolean isValid(int roomNumber) throws IllegalArgumentException{
 		try{
-			int floor = -1;
+		
 			int[] roomArr = new int[3];
 			// Converts the int to an array for easier digit extraction
 			for (int i = 2; i >= 0; i--){
 				roomArr[i] = roomNumber % 10;
 				roomNumber = roomNumber / 10;
 			}
-			floor = roomArr[0];
+			int floor = roomArr[0];
 			if (floor < 1 || floor > 8)
 				throw new IllegalArgumentException("The floor can only be between 1 and 8");
 			if (roomArr[1] != 0)
@@ -37,12 +40,12 @@ public class DawsonRoom implements Room {
 		return true;
 		
 	}
-	
-	public int getFloor(int floorNumber){
-		return ((floorNumber / 100) % 10);
+	@Override
+	public int getFloor(){
+		return ((this.roomNumber / 100) );
 	}
-	
-	public int getNumber(int roomNumber){
+	@Override
+	public int getNumber(){
 		return (roomNumber % 10);
 	}
 	
@@ -53,31 +56,57 @@ public class DawsonRoom implements Room {
 
 	@Override
 	public int compareTo(Room o) {
-		// TODO Auto-generated method 
+		
+		if (o == null)
+			throw new NullPointerException();
+		if (this.getFloor() < o.getFloor())
+			return 1;
+		if (this.getFloor() == o.getFloor()){
+			if (this.getNumber() < o.getNumber())
+				return 1;
+			else if (this.getNumber() > o.getNumber())
+				return -1;
+			else
+				return 0;
+		}
+		if (this.getFloor() > o.getFloor())
+			return -1;
 		return 0;
 	}
 
 	@Override
 	public RoomType getRoomType() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.roomType;
 	}
 
 	@Override
 	public int getRoomNumber() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.roomNumber;
 	}
 
 	@Override
-	public int getFloor() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + roomNumber;
+		result = prime * result + ((roomType == null) ? 0 : roomType.hashCode());
+		return result;
 	}
 
 	@Override
-	public int getNumber() {
-		// TODO Auto-generated method stub
-		return 0;
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof DawsonRoom))
+			return false;
+		DawsonRoom other = (DawsonRoom) obj;
+		if (roomNumber != other.roomNumber)
+			return false;
+		if (roomType != other.roomType)
+			return false;
+		return true;
 	}
+
 }

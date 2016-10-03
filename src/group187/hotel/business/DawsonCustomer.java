@@ -26,13 +26,7 @@ public class DawsonCustomer implements Customer {
 		this.email = new Email(e.email);//
 		this.name = new Name(e.getName().getFirstName(), e.getName().getLastName());
 	}
-	/*
-	 * str1 = "zbc"
-	 * str2 = "bbc"
-	 * 
-	 * str1.compareToingnorecase(str2) 43
-	 * 
-	 * */
+	
 	@Override
 	public int compareTo(Customer o) {
 		if (o == null)
