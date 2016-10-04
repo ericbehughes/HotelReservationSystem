@@ -8,17 +8,17 @@ import dw317.hotel.business.interfaces.*;
 public class DawsonReservation implements Reservation {
 	private static final long serialVersionUID = 42031768871L;
 	private final DawsonCustomer customer; 
-	private final Room roomNumber;
+	private final Room room;
 	private int inYear, inMonth, inDay;
 	private int outYear, outMonth, outDay;
 	private LocalDate checkIn,checkOut; 
 	
 	//constructor
-	public DawsonReservation(Customer customer, Room roomNumber, int inYear, int inMonth, int inDay, int outYear,
+	public DawsonReservation(Customer customer, Room room, int inYear, int inMonth, int inDay, int outYear,
 			int outMonth, int outDay) {
 		super();
 		this.customer = (DawsonCustomer)customer;
-		this.roomNumber = roomNumber;
+		this.room = room;
 		this.inYear = inYear;
 		this.inMonth = inMonth;
 		this.inDay = inDay;
@@ -28,27 +28,7 @@ public class DawsonReservation implements Reservation {
 	}
 
 
-	@Override
-	public int compareTo(Reservation o) {
-		int result=0;
-		if(o == null){
-			throw new NullPointerException();
-		}
-		if(this.getCheckInDate().equals(o.getCheckInDate())){
-			if(this.getRoom().equals(o.getRoom())){
-				result= 0; //returns 0 if the two objects are the same
-			}
-			if(this.getRoom().getRoomNumber() > o.getRoom().getRoomNumber()){
-				result= -1;
-			} else {
-				result= 1; 
-			}
-		}
-		if(this.getCheckInDate().isBefore(o.getCheckInDate())){
-			result= -1; 
-		}
-		return result;
-	}
+
 
 
 	@Override
@@ -59,7 +39,7 @@ public class DawsonReservation implements Reservation {
 
 	@Override
 	public Room getRoom() {
-		return this.roomNumber;
+		return this.room;
 	}
 
 
@@ -100,7 +80,7 @@ public class DawsonReservation implements Reservation {
 		result = prime * result + outDay;
 		result = prime * result + outMonth;
 		result = prime * result + outYear;
-		result = prime * result + ((roomNumber == null) ? 0 : roomNumber.hashCode());
+		result = prime * result + ((room == null) ? 0 : room.hashCode());
 		return result;
 	}
 
@@ -142,11 +122,11 @@ public class DawsonReservation implements Reservation {
 		if (outYear != other.outYear) {
 			return false;
 		}
-		if (roomNumber == null) {
-			if (other.roomNumber != null) {
+		if (room == null) {
+			if (other.room != null) {
 				return false;
 			}
-		} else if (!roomNumber.equals(other.roomNumber)) {
+		} else if (!room.equals(other.room)) {
 			return false;
 		}
 		return true;
@@ -155,9 +135,47 @@ public class DawsonReservation implements Reservation {
 
 	@Override
 	public String toString() {
+
 		return customer.getEmail() + "*" + inYear + "*" + inMonth
 				+ "*" + inDay + "*" + outYear + "*" + outMonth + "*" + outDay
-				+ "*" + roomNumber;
+				+ "*" + room;
+
+//		return "DawsonReservation [email=" + customer.getEmail() + ", inYear=" + inYear + ", inMonth=" + inMonth
+//				+ ", inDay=" + inDay + ", outYear=" + outYear + ", outMonth=" + outMonth + ", outDay=" + outDay
+//				+ ", Room Number=" + room + "]";
+	}
+
+
+	@Override
+	public int compareTo(Reservation o) {
+		// check for null
+		if (o == null)
+			throw new NullPointerException();
+		if (this == o)
+			return 0;
+		// check floor 
+		if (this.room.getFloor() < o.getRoom().getFloor())
+			return -1;
+		else if (this.room.getFloor() > o.getRoom().getFloor())
+			return 1;
+		// if floors are same
+		else if (this.room.getFloor() == o.getRoom().getFloor()){
+			if (this.room.getNumber() < o.getRoom().getNumber())
+				return -1;
+			else if (this.room.getNumber() > o.getRoom().getNumber())
+				return 1;
+			// if room numbers are same
+			else if (this.room.getNumber() == o.getRoom().getNumber())
+				if (this.getCheckInDate().isBefore(o.getCheckInDate()) )
+					return 1;
+				else if (this.getCheckInDate().isAfter(o.getCheckInDate()))
+					return -1;
+				else 
+					return 0;
+		}
+		
+		return 0;
+
 	}
 	
 }

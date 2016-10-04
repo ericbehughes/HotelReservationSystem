@@ -9,13 +9,17 @@ public class DawsonRoom implements Room {
 	private final RoomType roomType;
 
 	public DawsonRoom(int roomNumber, RoomType roomType) {
-
+		this.roomType = roomType;
 		if (!isValid(roomNumber))
 			throw new IllegalArgumentException();
 		this.roomNumber = roomNumber;
-		this.roomType = roomType;
+		
 	}
 
+	/*
+	 * Notice that in Dawson Hotel, floors 1 to 5 have 8 normal rooms available, floor 6 and 7 have 4 suites each, 
+	 * and floor 8 has 1 penthouse. Other hotels may have different configurations.
+	 * */
 	public boolean isValid(int roomNumber) throws IllegalArgumentException {
 		try {
 
@@ -26,8 +30,26 @@ public class DawsonRoom implements Room {
 				roomNumber = roomNumber / 10;
 			}
 			int floor = roomArr[0];
-			if (floor < 1 || floor > 8)
-				throw new IllegalArgumentException("The floor can only be between 1 and 8");
+			
+			switch(this.roomType)
+			{
+			case NORMAL:
+				if (floor < 1 || floor > 5)
+					throw new IllegalArgumentException("Normal rooms are from floors 1 to 5");
+				break;
+			case SUITE:
+				if (floor < 6 || floor > 7)
+					throw new IllegalArgumentException("Suites are from floors 6 and 7");
+				break;
+			case PENTHOUSE:
+				if (floor != 8)
+					throw new IllegalArgumentException("Penhouses are only on the 8th Floor");
+				break;
+			default:
+				System.out.println("Checking room number format...");
+			
+			}
+		
 			if (roomArr[1] != 0)
 				throw new IllegalArgumentException("The room number can only start with 0");
 			if (roomArr[2] < 1 || roomArr[2] > 8)
