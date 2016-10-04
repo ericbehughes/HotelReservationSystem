@@ -43,16 +43,22 @@ public class DawsonReservation implements Reservation {
 	}
 
 
-	@Override
-	public LocalDate getCheckInDate() throws DateTimeException {
+	public void setCheckInDate() {
 		this.checkIn= LocalDate.of(inYear, inMonth, inDay);
+	}
+	
+	
+	public LocalDate getCheckInDate() throws DateTimeException {
 		return checkIn;
 	}
 
 
-	@Override
-	public LocalDate getCheckOutDate() throws DateTimeException {
+	
+	public void setCheckOutDate(){
 		this.checkOut = LocalDate.of(outYear, outMonth, outDay);
+	}
+	
+	public LocalDate getCheckOutDate() throws DateTimeException {
 		return checkOut;
 	}
 
