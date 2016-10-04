@@ -15,7 +15,7 @@ public class DawsonReservation implements Reservation {
 	
 	//constructor
 	public DawsonReservation(Customer customer, Room room, int inYear, int inMonth, int inDay, int outYear,
-			int outMonth, int outDay) {
+			int outMonth, int outDay) {	
 		super();
 		this.customer = (DawsonCustomer)customer;
 		this.room = room;
@@ -132,19 +132,12 @@ public class DawsonReservation implements Reservation {
 		return true;
 	}
 
-
 	@Override
 	public String toString() {
-
 		return customer.getEmail() + "*" + inYear + "*" + inMonth
 				+ "*" + inDay + "*" + outYear + "*" + outMonth + "*" + outDay
-				+ "*" + room;
-
-//		return "DawsonReservation [email=" + customer.getEmail() + ", inYear=" + inYear + ", inMonth=" + inMonth
-//				+ ", inDay=" + inDay + ", outYear=" + outYear + ", outMonth=" + outMonth + ", outDay=" + outDay
-//				+ ", Room Number=" + room + "]";
+				+ "*" + room.getNumber();
 	}
-
 
 	@Override
 	public int compareTo(Reservation o) {
