@@ -11,6 +11,7 @@ public class DawsonReservation implements Reservation {
 	private final Room roomNumber;
 	private int inYear, inMonth, inDay;
 	private int outYear, outMonth, outDay;
+	private LocalDate checkIn,checkOut; 
 	
 	//constructor
 	public DawsonReservation(Customer customer, Room roomNumber, int inYear, int inMonth, int inDay, int outYear,
@@ -29,43 +30,55 @@ public class DawsonReservation implements Reservation {
 
 	@Override
 	public int compareTo(Reservation o) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result=0;
+		if(o == null){
+			throw new NullPointerException();
+		}
+		if(this.getCheckInDate().equals(o.getCheckInDate())){
+			if(this.getRoom().equals(o.getRoom())){
+				result= 0; //returns 0 if the two objects are the same
+			}
+			if(this.getRoom().getRoomNumber() > o.getRoom().getRoomNumber()){
+				result= -1;
+			} else {
+				result= 1; 
+			}
+		}
+		if(this.getCheckInDate().isBefore(o.getCheckInDate())){
+			result= -1; 
+		}
+		return result;
 	}
 
 
 	@Override
 	public Customer getCustomer() {
-		// TODO Auto-generated method stub
 		return new DawsonCustomer(this.customer);
 	}
 
 
 	@Override
 	public Room getRoom() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.roomNumber;
 	}
 
 
 	@Override
 	public LocalDate getCheckInDate() throws DateTimeException {
-		LocalDate checkIn= LocalDate.of(inYear, inMonth, inDay);
+		this.checkIn= LocalDate.of(inYear, inMonth, inDay);
 		return checkIn;
 	}
 
 
 	@Override
-	public LocalDate getCheckOutDate() {
-		LocalDate checkOut = LocalDate.of(outYear, outMonth, outDay);
+	public LocalDate getCheckOutDate() throws DateTimeException {
+		this.checkOut = LocalDate.of(outYear, outMonth, outDay);
 		return checkOut;
 	}
 
 
 	@Override
 	public int getNumberDays() {
-		// TODO Auto-generated method stub
-		//to be continued
 		LocalDate checkIn = this.getCheckInDate();
 		LocalDate checkOut = this.getCheckOutDate();
 		if (checkIn.isAfter(checkOut)){
@@ -76,9 +89,8 @@ public class DawsonReservation implements Reservation {
 
 	}
 
-
 	@Override
-	public int hashCode() {
+	public final int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((customer == null) ? 0 : customer.hashCode());
@@ -94,7 +106,7 @@ public class DawsonReservation implements Reservation {
 
 
 	@Override
-	public boolean equals(Object obj) {
+	public final boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
 		}
@@ -143,9 +155,9 @@ public class DawsonReservation implements Reservation {
 
 	@Override
 	public String toString() {
-		return "DawsonReservation [email=" + customer.getEmail() + ", inYear=" + inYear + ", inMonth=" + inMonth
-				+ ", inDay=" + inDay + ", outYear=" + outYear + ", outMonth=" + outMonth + ", outDay=" + outDay
-				+ ", Room Number=" + roomNumber + "]";
+		return customer.getEmail() + "*" + inYear + "*" + inMonth
+				+ "*" + inDay + "*" + outYear + "*" + outMonth + "*" + outDay
+				+ "*" + roomNumber;
 	}
 	
 }
