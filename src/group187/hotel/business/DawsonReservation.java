@@ -7,7 +7,7 @@ import dw317.hotel.business.interfaces.*;
 
 public class DawsonReservation implements Reservation {
 	private static final long serialVersionUID = 42031768871L;
-	private final DawsonCustomer customer; 
+	private final Customer customer; 
 	private final Room room;
 	private int inYear, inMonth, inDay;
 	private int outYear, outMonth, outDay;
@@ -17,7 +17,7 @@ public class DawsonReservation implements Reservation {
 	public DawsonReservation(Customer customer, Room room, int inYear, int inMonth, int inDay, int outYear,
 			int outMonth, int outDay) {	
 		super();
-		this.customer = (DawsonCustomer)customer;
+		this.customer = customer;
 		this.room = room;
 		this.inYear = inYear;
 		this.inMonth = inMonth;
@@ -33,7 +33,7 @@ public class DawsonReservation implements Reservation {
 
 	@Override
 	public Customer getCustomer() {
-		return new DawsonCustomer(this.customer);
+		return new DawsonCustomer((DawsonCustomer) this.customer);
 	}
 
 
