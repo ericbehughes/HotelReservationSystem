@@ -32,7 +32,7 @@ public class DawsonCustomer implements Customer {
 	@Override
 	public int compareTo(Customer o) {
 		if (o == null)
-			throw new NullPointerException();
+			throw new NullPointerException("The customer object in the parameter list is null");
 		// handle if same host id
 		if (this.email.getHost().equalsIgnoreCase(o.getEmail().getHost())){
 				if (this.email.getUserId().equalsIgnoreCase(o.getEmail().getUserId())){

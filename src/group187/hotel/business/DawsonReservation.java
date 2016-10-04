@@ -149,7 +149,7 @@ public class DawsonReservation implements Reservation {
 	public int compareTo(Reservation o) {
 		// check for null
 		if (o == null)
-			throw new NullPointerException();
+			throw new NullPointerException("The reservation object in the parameter list is null");
 		if (this == o)
 			return 0;
 		// check floor 
