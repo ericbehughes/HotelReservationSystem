@@ -9,7 +9,7 @@ public class DawsonRoomTest {
 		// TODO Auto-generated method stub
 			DawsonRoom room1 = new DawsonRoom(302, RoomType.NORMAL);
 			
-			boolean bool = room1.isValid(room1.getRoomNumber());
+			
 			
 			
 	}

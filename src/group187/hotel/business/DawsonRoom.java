@@ -20,7 +20,7 @@ public class DawsonRoom implements Room {
 	 * Notice that in Dawson Hotel, floors 1 to 5 have 8 normal rooms available, floor 6 and 7 have 4 suites each, 
 	 * and floor 8 has 1 penthouse. Other hotels may have different configurations.
 	 * */
-	public boolean isValid(int roomNumber) throws IllegalArgumentException {
+	private boolean isValid(int roomNumber) throws IllegalArgumentException {
 		try {
 
 			int[] roomArr = new int[3];

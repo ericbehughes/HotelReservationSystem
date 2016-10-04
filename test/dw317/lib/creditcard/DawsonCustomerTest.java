@@ -14,7 +14,7 @@ public class DawsonCustomerTest {
 		Name name = new Name("eric","hughes");
 		DawsonCustomer customer1 = new DawsonCustomer(name.getFirstName(), name.getLastName(), email1);
 		Optional <CreditCard> cardTest1 = Optional.of(new Amex("374616906032009"));
-		customer1.setCreditCard(null);
+		customer1.setCreditCard(cardTest1);
 		System.out.println(customer1.toString());
 		customer1.setCreditCard(null);
 		customer1.getCreditCard();
