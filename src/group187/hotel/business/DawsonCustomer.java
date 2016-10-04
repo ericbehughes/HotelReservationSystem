@@ -24,6 +24,7 @@ public class DawsonCustomer implements Customer {
 		this.email = new Email(email);//
 		this.name = new Name(firstN, lastN);
 	}
+	
 	public DawsonCustomer(DawsonCustomer e){
 		this.email = new Email(e.email);//
 		this.name = new Name(e.getName().getFirstName(), e.getName().getLastName());
