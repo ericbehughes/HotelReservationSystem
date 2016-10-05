@@ -28,7 +28,7 @@ public class DawsonReservationTest {
 		String[] customerInfo = new String[8];
 		LocalDate checkInDate, checkOutDate;
 		
-		// Set all variables
+		//-----START SET VARIABLE INFO-----\\
 		System.out.print("-----Setting customer info... ");
 		customerInfo = getCustomerReservationInfo(2, "Reservation");
 		System.out.println("[OK]");
@@ -58,19 +58,39 @@ public class DawsonReservationTest {
 		System.out.println("Room number:\t" + roomNumber);
 		
 		customerInfo = getCustomerReservationInfo(2, "Customer");
+		
+		System.out.println("-----Setting name...");
 		firstName = customerInfo[1];
 		lastName = customerInfo[2];
+		System.out.println("First name:\t " + firstName);
+		System.out.println("Last name:\t " + lastName);
+		//-----END SET VARIABLE INFO-----\\
+		
+		// Create object with pertinent info
 		emailObj = new Email(email);
 		room = new DawsonRoom(roomNumber, RoomType.NORMAL);
 		customer = new DawsonCustomer(firstName, lastName, emailObj);
-		
-		// Create object with pertinent info
 		DawsonReservation reservationTest = new DawsonReservation(customer, room, inYear, inMonth,
 				inDate, outYear, outMonth, outDate);
 		
 		// Test methods
+		reservationTest.setCheckInDate();
+		reservationTest.setCheckOutDate();
+		
+		
 		checkInDate = reservationTest.getCheckInDate();
-		//System.out.println(checkInDate);
+		System.out.println("-----START METHOD TEST:\tgetCheckinDate()-----");
+		System.out.println("Check in date:\t" + checkInDate);
+		
+		checkOutDate = reservationTest.getCheckOutDate();
+		System.out.println("-----START METHOD TEST:\tgetCheckOutDate()-----");
+		System.out.println("Check out date:\t" + checkOutDate);
+		System.out.println("-----START METHOD TEST:\tgetNumberDays()-----");
+		System.out.println("Number of days:\t" + reservationTest.getNumberDays());
+		System.out.println("-----START METHOD TEST:\thashCode()-----");
+		int hashCode = reservationTest.hashCode();
+		System.out.println("Hash code:\t" + hashCode);
+		
 	}
 	
 	public static String[] getCustomerReservationInfo(int lineNumber, String type) {
