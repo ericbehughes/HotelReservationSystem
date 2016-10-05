@@ -17,10 +17,10 @@ public class DawsonReservation implements Reservation {
 		super();
 		this.customer = customer;
 		this.room = room;
-		this.checkIn= LocalDate.of(inYear, inMonth, inDay);
-		this.checkOut = LocalDate.of(outYear, outMonth, outDay);
-		if (!this.checkIn.isBefore(this.checkOut))
+		if (!LocalDate.of(inYear, inMonth, inDay).isBefore(LocalDate.of(outYear, outMonth, outDay)))
 			throw new IllegalArgumentException();
+		this.checkIn = LocalDate.of(inYear, inMonth, inDay);
+		this.checkOut = LocalDate.of(outYear, outMonth, outDay);
 	}
 
 
@@ -57,12 +57,12 @@ public class DawsonReservation implements Reservation {
 
 	}
 
-
+//email*checkinYr*checkinMonth*checkinDay* checkoutYr*checkoutMonth*checkoutDay*roomnumber
 
 	@Override
 	public String toString() {
-		return customer.getEmail() + "*" 
-				+ "*" + room.getNumber();
+		return customer.getEmail().toString() + "*" + this.getCheckInDate().toString() + "*" + this.getCheckOutDate().toString()
+				+ "*" + room.toString();
 	}
 
 	@Override
@@ -116,35 +116,30 @@ public class DawsonReservation implements Reservation {
 
 
 	@Override
+	//fixed the compareTo method
 	public int compareTo(Reservation o) {
-		// check for null
-		if (o == null)
-			throw new NullPointerException("The reservation object in the parameter list is null");
-		if (this == o)
-			return 0;
-		// check floor 
-		if (this.room.getFloor() < o.getRoom().getFloor())
-			return -1;
-		else if (this.room.getFloor() > o.getRoom().getFloor())
-			return 1;
-		// if floors are same
-		else if (this.room.getFloor() == o.getRoom().getFloor()){
-			if (this.room.getNumber() < o.getRoom().getNumber())
-				return -1;
-			else if (this.room.getNumber() > o.getRoom().getNumber())
-				return 1;
-			// if room numbers are same
-			else if (this.room.getNumber() == o.getRoom().getNumber())
-				if (this.getCheckInDate().isBefore(o.getCheckInDate()) )
-					return 1;
-				else if (this.getCheckInDate().isAfter(o.getCheckInDate()))
-					return -1;
-				else 
-					return 0;
+		int result=0;
+		if(o == null){
+			throw new NullPointerException();
 		}
-		
-		return 0;
-
+			if(this.getRoom().getRoomNumber() == (o.getRoom().getRoomNumber())){
+				if(this.getCheckInDate().toString().equals(o.getCheckInDate().toString())){
+				result= 0; //returns 0 if the two objects are the same
+			}  			
+			if(this.getCheckInDate().isBefore(o.getCheckInDate())){
+				result= 1; 
+			}
+			else if(this.getCheckInDate().isAfter(o.getCheckInDate())){
+				result= -1;
+			}	
+		}
+			if(this.getRoom().getRoomNumber() > (o.getRoom().getRoomNumber())){
+				result= -1;
+			} 
+			else if(this.getRoom().getRoomNumber() < (o.getRoom().getRoomNumber())){
+				result= 1; 
+			}
+		return result;
 	}
 	
 }

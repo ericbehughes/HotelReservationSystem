@@ -9,6 +9,7 @@ import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.Optional;
 
 import dw317.hotel.business.RoomType;
 import dw317.hotel.business.interfaces.*;
@@ -23,6 +24,7 @@ public class DawsonReservationTest {
 		DawsonCustomer customer;
 		Email emailObj;
 		DawsonRoom room;
+		Optional <CreditCard> cardTest1 = Optional.of(new Amex("374616906032009"));
 		int inYear, inMonth, inDate, outYear, outMonth, outDate, roomNumber;
 		String email, firstName, lastName;
 		String[] customerInfo = new String[8];
@@ -69,13 +71,10 @@ public class DawsonReservationTest {
 		// Create object with pertinent info
 		emailObj = new Email(email);
 		room = new DawsonRoom(roomNumber, RoomType.NORMAL);
-		customer = new DawsonCustomer(firstName, lastName, emailObj);
+		customer = new DawsonCustomer(firstName, lastName, emailObj,cardTest1);
 		DawsonReservation reservationTest = new DawsonReservation(customer, room, inYear, inMonth,
 				inDate, outYear, outMonth, outDate);
 		
-		// Test methods
-		reservationTest.setCheckInDate();
-		reservationTest.setCheckOutDate();
 		
 		
 		checkInDate = reservationTest.getCheckInDate();
@@ -95,10 +94,8 @@ public class DawsonReservationTest {
 	
 	public static String[] getCustomerReservationInfo(int lineNumber, String type) {
 		// Create necessary variables
-		String reservationFile = "C:\\Users\\Z\\git\\HotelReservationSystem\\"
-						+ "datafiles\\reservation187.txt";
-		String customerFile = "C:\\Users\\Z\\git\\HotelReservationSystem\\"
-				+ "datafiles\\customer187.txt";
+		String reservationFile = "C:\\Users\\ehugh\\git\\HotelReservationSystem\\datafiles\\reservation187.txt";
+		String customerFile = "C:\\Users\\ehugh\\git\\HotelReservationSystem\\datafiles\\customer187.txt";
 		String[] ReservationInfo = new String[8];
 		String[] customerInfo = new String[5];
 		Boolean reservation = false, customer = false;
