@@ -9,8 +9,6 @@ public class DawsonReservation implements Reservation {
 	private static final long serialVersionUID = 42031768871L;
 	private final Customer customer; 
 	private final Room room;
-	private int inYear, inMonth, inDay;
-	private int outYear, outMonth, outDay;
 	private LocalDate checkIn,checkOut; 
 	
 	//constructor
@@ -19,16 +17,7 @@ public class DawsonReservation implements Reservation {
 		super();
 		this.customer = customer;
 		this.room = room;
-		this.inYear = inYear;
-		this.inMonth = inMonth;
-		this.inDay = inDay;
-		this.outYear = outYear;
-		this.outMonth = outMonth;
-		this.outDay = outDay;
 	}
-
-
-
 
 
 	@Override
