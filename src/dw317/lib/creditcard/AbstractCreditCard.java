@@ -61,9 +61,7 @@ public abstract class AbstractCreditCard implements CreditCard{
 		return cardtype;
 	}
 	
-	/**
-	 * @return Concatenated string of card type and numbers
-	 */
+	@Override
 	public String toString(){
 		return this.getType() + "*" + this.getNumber();
 	}

@@ -76,7 +76,6 @@ public class DawsonReservationTest {
 				inDate, outYear, outMonth, outDate);
 		
 		
-		
 		checkInDate = reservationTest.getCheckInDate();
 		System.out.println("-----START METHOD TEST:\tgetCheckinDate()-----");
 		System.out.println("Check in date:\t" + checkInDate);
@@ -88,6 +87,8 @@ public class DawsonReservationTest {
 		System.out.println("Number of days:\t" + reservationTest.getNumberDays());
 		System.out.println("-----START METHOD TEST:\thashCode()-----");
 		int hashCode = reservationTest.hashCode();
+		System.out.println(customer.toString());
+		System.out.println(reservationTest.toString());
 		System.out.println("Hash code:\t" + hashCode);
 		
 	}

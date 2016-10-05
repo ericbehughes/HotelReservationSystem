@@ -22,6 +22,7 @@ public interface CreditCard extends Serializable {
        
        public enum CardType {
                MASTERCARD, VISA, AMEX;
+    	   		
                public String toString() {
                       return this.name().toLowerCase();
                }
