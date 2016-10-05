@@ -10,14 +10,37 @@ public abstract class AbstractCreditCard implements CreditCard{
 		this.number = number;
 	}
 	
-	/*
-	 * Still needs to be worked on. Must check to see that two Cards are identical
-	 * (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
-	public boolean equals(Object object) {
-		return true; // changed line 19 to show you how to fetchsss
+	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((number == null) ? 0 : number.hashCode());
+		return result;
 	}
+
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof AbstractCreditCard))
+			return false;
+		AbstractCreditCard other = (AbstractCreditCard) obj;
+		if (number == null) {
+			if (other.number != null)
+				return false;
+		} else if (!number.equals(other.number))
+			return false;
+		return true;
+	}
+
+
+
 	/**
 	 * @return number - The numbers of the credit card
 	 */
