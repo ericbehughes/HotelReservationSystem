@@ -15,7 +15,7 @@ public class DawsonCustomer implements Customer {
 	
 	@Override
 	public String toString() {
-			if (card != null) 
+			if (card.isPresent()) //
 			return  email + "*" + this.name.getFirstName() + "*" + this.name.getLastName() + "*" + card.get().getType() + "*" + card.get().getNumber();
 		return  email + "*" + this.name.getFirstName() + "*" + this.name.getLastName() + "*";
 	}
@@ -24,7 +24,6 @@ public class DawsonCustomer implements Customer {
 		this.email = new Email(email);//
 		this.name = new Name(firstN, lastN);
 	}
-	
 	public DawsonCustomer(DawsonCustomer e){
 		this.email = new Email(e.email);//
 		this.name = new Name(e.getName().getFirstName(), e.getName().getLastName());
