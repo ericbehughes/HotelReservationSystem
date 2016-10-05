@@ -17,6 +17,10 @@ public class DawsonReservation implements Reservation {
 		super();
 		this.customer = customer;
 		this.room = room;
+		this.checkIn= LocalDate.of(inYear, inMonth, inDay);
+		this.checkOut = LocalDate.of(outYear, outMonth, outDay);
+		if (!this.checkIn.isBefore(this.checkOut))
+			throw new IllegalArgumentException();
 	}
 
 
@@ -31,21 +35,10 @@ public class DawsonReservation implements Reservation {
 		return this.room;
 	}
 
-
-	public void setCheckInDate() {
-		this.checkIn= LocalDate.of(inYear, inMonth, inDay);
-	}
-	
-	
 	public LocalDate getCheckInDate() throws DateTimeException {
 		return checkIn;
 	}
 
-
-	
-	public void setCheckOutDate(){
-		this.checkOut = LocalDate.of(outYear, outMonth, outDay);
-	}
 	
 	public LocalDate getCheckOutDate() throws DateTimeException {
 		return checkOut;
@@ -64,75 +57,63 @@ public class DawsonReservation implements Reservation {
 
 	}
 
-	@Override
-	public final int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((customer == null) ? 0 : customer.hashCode());
-		result = prime * result + inDay;
-		result = prime * result + inMonth;
-		result = prime * result + inYear;
-		result = prime * result + outDay;
-		result = prime * result + outMonth;
-		result = prime * result + outYear;
-		result = prime * result + ((room == null) ? 0 : room.hashCode());
-		return result;
-	}
 
-
-	@Override
-	public final boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (obj == null) {
-			return false;
-		}
-		if (!(obj instanceof DawsonReservation)) {
-			return false;
-		}
-		DawsonReservation other = (DawsonReservation) obj;
-		if (customer == null) {
-			if (other.customer != null) {
-				return false;
-			}
-		} else if (!customer.equals(other.customer)) {
-			return false;
-		}
-		if (inDay != other.inDay) {
-			return false;
-		}
-		if (inMonth != other.inMonth) {
-			return false;
-		}
-		if (inYear != other.inYear) {
-			return false;
-		}
-		if (outDay != other.outDay) {
-			return false;
-		}
-		if (outMonth != other.outMonth) {
-			return false;
-		}
-		if (outYear != other.outYear) {
-			return false;
-		}
-		if (room == null) {
-			if (other.room != null) {
-				return false;
-			}
-		} else if (!room.equals(other.room)) {
-			return false;
-		}
-		return true;
-	}
 
 	@Override
 	public String toString() {
-		return customer.getEmail() + "*" + inYear + "*" + inMonth
-				+ "*" + inDay + "*" + outYear + "*" + outMonth + "*" + outDay
+		return customer.getEmail() + "*" 
 				+ "*" + room.getNumber();
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+	
+		result = prime * result + ((room == null) ? 0 : room.hashCode());
+		result = prime * result + ((checkIn == null) ? 0 : checkIn.hashCode());
+		result = prime * result + ((checkOut == null) ? 0 : checkOut.hashCode());
+		result = prime * result + ((customer == null) ? 0 : customer.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof DawsonReservation))
+			return false;
+		DawsonReservation other = (DawsonReservation) obj;
+		
+		if (customer == null) {
+			if (other.customer != null)
+				return false;
+		} else if (!customer.equals(other.customer))
+			return false;
+		if (room == null) {
+			if (other.room != null)
+				return false;
+		} else if (!room.equals(other.room))
+			return false;
+		if (checkIn == null) {
+			if (other.checkIn != null)
+				return false;
+		} else if (!checkIn.equals(other.checkIn))
+			return false;
+		if (checkOut == null) {
+			if (other.checkOut != null)
+				return false;
+		} else if (!checkOut.equals(other.checkOut))
+			return false;
+	
+		return true;
+	}
+
+
+
+
 
 	@Override
 	public int compareTo(Reservation o) {

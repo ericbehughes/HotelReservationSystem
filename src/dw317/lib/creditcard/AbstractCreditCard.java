@@ -7,38 +7,44 @@ public abstract class AbstractCreditCard implements CreditCard{
 	
 	public AbstractCreditCard(CardType cardtype, String number) throws IllegalArgumentException{
 		this.cardtype = cardtype;
-		this.number = number;
+		this.number = validateLuhnAlgorithm(number);
 	}
-	
 	
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((cardtype == null) ? 0 : cardtype.hashCode());
 		result = prime * result + ((number == null) ? 0 : number.hashCode());
 		return result;
 	}
 
 
-
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (!(obj instanceof AbstractCreditCard))
+		}
+		if (!(obj instanceof AbstractCreditCard)) {
 			return false;
+		}
 		AbstractCreditCard other = (AbstractCreditCard) obj;
-		if (number == null) {
-			if (other.number != null)
-				return false;
-		} else if (!number.equals(other.number))
+		if (cardtype != other.cardtype) {
 			return false;
+		}
+		if (number == null) {
+			if (other.number != null) {
+				return false;
+			}
+		} else if (!number.equals(other.number)) {
+			return false;
+		}
 		return true;
 	}
-
 
 
 	/**

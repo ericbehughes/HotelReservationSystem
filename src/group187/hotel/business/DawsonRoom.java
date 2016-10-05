@@ -120,7 +120,6 @@ public class DawsonRoom implements Room {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + roomNumber;
-		result = prime * result + ((roomType == null) ? 0 : roomType.hashCode());
 		return result;
 	}
 
@@ -134,8 +133,6 @@ public class DawsonRoom implements Room {
 			return false;
 		DawsonRoom other = (DawsonRoom) obj;
 		if (roomNumber != other.roomNumber)
-			return false;
-		if (roomType != other.roomType)
 			return false;
 		return true;
 	}
