@@ -1,13 +1,32 @@
+/*
+ * 
+ */
 package group187.hotel.business;
 
 import dw317.hotel.business.RoomType;
 import dw317.hotel.business.interfaces.Room;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DawsonRoom.
+ */
 public class DawsonRoom implements Room {
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 42031768871L;
+	
+	/** The room number. */
 	private final int roomNumber;
+	
+	/** The room type. */
 	private final RoomType roomType;
 
+	/**
+	 * Instantiates a new dawson room.
+	 *
+	 * @param roomNumber the room number
+	 * @param roomType the room type
+	 */
 	public DawsonRoom(int roomNumber, RoomType roomType) {
 		this.roomType = roomType;
 		if (!isValid(roomNumber))
@@ -16,6 +35,13 @@ public class DawsonRoom implements Room {
 		
 	}
 
+	/**
+	 * Checks if is valid.
+	 *
+	 * @param roomNumber the room number
+	 * @return true, if is valid
+	 * @throws IllegalArgumentException the illegal argument exception
+	 */
 	/*
 	 * Notice that in Dawson Hotel, floors 1 to 5 have 8 normal rooms available, floor 6 and 7 have 4 suites each, 
 	 * and floor 8 has 1 penthouse. Other hotels may have different configurations.
@@ -67,21 +93,33 @@ public class DawsonRoom implements Room {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see dw317.hotel.business.interfaces.Room#getFloor()
+	 */
 	@Override
 	public int getFloor() {
 		return ((this.roomNumber / 100));
 	}
 
+	/* (non-Javadoc)
+	 * @see dw317.hotel.business.interfaces.Room#getNumber()
+	 */
 	@Override
 	public int getNumber() {
 		return (roomNumber % 10);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return (this.roomNumber + "*" + this.roomType);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Comparable#compareTo(java.lang.Object)
+	 */
 	@Override
 	public int compareTo(Room o) {
 
@@ -105,16 +143,25 @@ public class DawsonRoom implements Room {
 		return 0;
 	}
 
+	/* (non-Javadoc)
+	 * @see dw317.hotel.business.interfaces.Room#getRoomType()
+	 */
 	@Override
 	public RoomType getRoomType() {
 		return this.roomType;
 	}
 
+	/* (non-Javadoc)
+	 * @see dw317.hotel.business.interfaces.Room#getRoomNumber()
+	 */
 	@Override
 	public int getRoomNumber() {
 		return this.roomNumber;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -123,6 +170,9 @@ public class DawsonRoom implements Room {
 		return result;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

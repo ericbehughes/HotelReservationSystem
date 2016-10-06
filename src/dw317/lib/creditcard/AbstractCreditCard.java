@@ -1,16 +1,36 @@
 package dw317.lib.creditcard;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AbstractCreditCard.
+ */
 public abstract class AbstractCreditCard implements CreditCard{
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 42031768871L;
+	
+	/** The cardtype. */
 	private final CardType cardtype;
+	
+	/** The number. */
 	private final String number;
 	
+	/**
+	 * Instantiates a new abstract credit card.
+	 *
+	 * @param cardtype the cardtype
+	 * @param number the number
+	 * @throws IllegalArgumentException the illegal argument exception
+	 */
 	public AbstractCreditCard(CardType cardtype, String number) throws IllegalArgumentException{
 		this.cardtype = cardtype;
 		this.number = validateLuhnAlgorithm(number);
 	}
 	
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -21,6 +41,9 @@ public abstract class AbstractCreditCard implements CreditCard{
 	}
 
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -48,6 +71,8 @@ public abstract class AbstractCreditCard implements CreditCard{
 
 
 	/**
+	 * Gets the number.
+	 *
 	 * @return number - The numbers of the credit card
 	 */
 	public String getNumber(){
@@ -55,17 +80,29 @@ public abstract class AbstractCreditCard implements CreditCard{
 	}
 	
 	/**
+	 * Gets the type.
+	 *
 	 * @return cardtype - The type of credit card
 	 */
 	public CardType getType(){
 		return cardtype;
 	}
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString(){
 		return this.getType() + "*" + this.getNumber();
 	}
 	
+	/**
+	 * Validate luhn algorithm.
+	 *
+	 * @param cardNumber the card number
+	 * @return the string
+	 * @throws IllegalArgumentException the illegal argument exception
+	 */
 	private String validateLuhnAlgorithm(String cardNumber) throws IllegalArgumentException
 	{
 		int cardSize = cardNumber.length(), total = 0;

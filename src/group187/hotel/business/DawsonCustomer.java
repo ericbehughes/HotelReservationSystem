@@ -7,25 +7,42 @@ import dw317.lib.*;
 import dw317.lib.creditcard.CreditCard;
 import dw317.lib.Name;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DawsonCustomer.
+ */
 public class DawsonCustomer implements Customer {
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 42031768871L;
+	
+	/** The name. */
 	private final Name name; 
+	
+	/** The email. */
 	private final Email email;
+	
+	/** The card. */
 	protected Optional<CreditCard> card;
 	
 	/**
-	 * @param firstN
-	 * @param lastN
-	 * @param email
-	 * @param card
+	 * Instantiates a new dawson customer.
+	 *
+	 * @param firstN the first N
+	 * @param lastN the last N
+	 * @param email the email
+	 * @param card the card
 	 */
 	public DawsonCustomer(String firstN, String lastN, Email email, Optional<CreditCard> card){
 		this.email = new Email(email);//
 		this.name = new Name(firstN, lastN);
 		this.card = card;
 	}
+	
 	/**
-	 * @param e
+	 * Instantiates a new dawson customer.
+	 *
+	 * @param e the e
 	 */
 	public DawsonCustomer(DawsonCustomer e){
 		this.email = new Email(e.email);//

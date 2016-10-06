@@ -1,8 +1,20 @@
 package dw317.lib.creditcard;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MasterCard.
+ */
 public class MasterCard extends AbstractCreditCard{
+	
+	/** The Constant serializeVersionUID. */
 	private static final long serializeVersionUID = 42031768871L;
 	
+	/**
+	 * Instantiates a new master card.
+	 *
+	 * @param number the number
+	 * @throws IllegalArgumentException the illegal argument exception
+	 */
 	public MasterCard(String number) throws IllegalArgumentException {
 		super(CardType.MASTERCARD, validateNumber(number));
 	}
@@ -24,10 +36,10 @@ public class MasterCard extends AbstractCreditCard{
 	 * Validates the number to check if it's a valid credit card number. The validation scheme
 	 * is that the first number must be a 5, and then follow up with any number from 1 - 5, and the number
 	 * must be 16 digits long.
-	 * 
-	 * @param number
+	 *
+	 * @param number the number
 	 * @return The same number value if it passes the validation
-	 * @throws IllegalArgumentException
+	 * @throws IllegalArgumentException the illegal argument exception
 	 */
 	private static String validateNumber(String number) throws IllegalArgumentException {
 		if(number.length() == 16 && checkTwoFirstNumbers(number))
