@@ -1,4 +1,4 @@
-package group187.hotel.business;
+package group187.reserv;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
