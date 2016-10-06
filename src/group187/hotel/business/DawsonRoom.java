@@ -25,7 +25,7 @@ public class DawsonRoom implements Room {
 
 			int[] roomArr = new int[3];
 			int length = (int) Math.log10(roomNumber) + 1; // Calculates the number of digits in the int
-			   if (length > 3) // If the digits are > 3, the room number is in the wrong format 
+			   if (length != 3 ) // If the digits != 3, the room number is in the wrong format 
 			    return false;
 			// Converts the int to an array for easier digit extraction
 			for (int i = 2; i >= 0; i--) {
