@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package group187.reserv;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -19,9 +22,19 @@ import dw317.lib.creditcard.CreditCard;
 import group187.hotel.business.DawsonCustomer;
 import group187.hotel.business.DawsonReservation;
 import group187.hotel.business.DawsonRoom;
+// TODO: Auto-generated Javadoc
+
+/**
+ * The Class DawsonReservationTest.
+ */
 public class DawsonReservationTest {
 
 	
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 		// Create all necessary variables
 		DawsonCustomer customer;
@@ -96,6 +109,13 @@ public class DawsonReservationTest {
 		
 	}
 	
+	/**
+	 * Gets the customer reservation info.
+	 *
+	 * @param lineNumber the line number
+	 * @param type the type
+	 * @return the customer reservation info
+	 */
 	public static String[] getCustomerReservationInfo(int lineNumber, String type) {
 		// Create necessary variables
 		String reservationFile = "H:\\git\\HotelReservationSystem\\datafiles\\reservation187.txt";

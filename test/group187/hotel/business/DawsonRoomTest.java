@@ -1,10 +1,22 @@
+/*
+ * 
+ */
 package group187.hotel.business;
 
 import dw317.hotel.business.RoomType;
 import group187.hotel.business.DawsonRoom;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DawsonRoomTest.
+ */
 public class DawsonRoomTest {
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		int roomTest1 = 402;

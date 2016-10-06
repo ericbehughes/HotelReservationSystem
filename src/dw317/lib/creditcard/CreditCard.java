@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package dw317.lib.creditcard;
 import java.io.Serializable;
 // TODO: Auto-generated Javadoc

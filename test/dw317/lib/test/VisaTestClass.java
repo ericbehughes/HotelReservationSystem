@@ -1,9 +1,21 @@
+/*
+ * 
+ */
 package dw317.lib.test;
 
 import dw317.lib.creditcard.Visa;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class VisaTestClass.
+ */
 public class VisaTestClass {
 	
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 		
 try {

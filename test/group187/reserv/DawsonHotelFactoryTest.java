@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package group187.reserv;
 
 
@@ -15,8 +18,17 @@ import group187.hotel.business.DawsonHotelFactory;
 import group187.hotel.business.DawsonReservation;
 import group187.hotel.business.DawsonRoom;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DawsonHotelFactoryTest.
+ */
 public class DawsonHotelFactoryTest {
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 		
 		try {

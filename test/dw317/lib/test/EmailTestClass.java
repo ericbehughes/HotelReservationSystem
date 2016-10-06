@@ -1,9 +1,21 @@
+/*
+ * 
+ */
 package dw317.lib.test;
 
 import dw317.lib.Email;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class EmailTestClass.
+ */
 public class EmailTestClass {
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 		
 		

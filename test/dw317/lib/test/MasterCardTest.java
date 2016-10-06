@@ -1,9 +1,21 @@
+/*
+ * 
+ */
 package dw317.lib.test;
 
 import dw317.lib.creditcard.MasterCard;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MasterCardTest.
+ */
 public class MasterCardTest {
 	
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 		
 		//This should return false

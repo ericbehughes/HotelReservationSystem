@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package dw317.hotel.business;
 
 // TODO: Auto-generated Javadoc
