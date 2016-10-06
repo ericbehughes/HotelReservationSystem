@@ -34,7 +34,7 @@ public class DawsonReservationTest {
 		System.out.print("-----Setting customer info... ");
 		customerInfo = getCustomerReservationInfo(2, "Reservation");
 		System.out.println("[OK]");
-		
+		//
 		System.out.println("-----Setting Email info... ");
 		email = customerInfo[0];
 		System.out.println("Email:\t" + email);
