@@ -39,7 +39,7 @@ public class DawsonCustomer implements Customer {
 	public DawsonCustomer(String firstN, String lastN, Email email, Optional<CreditCard> card){
 		this.email = new Email(email);//
 		this.name = new Name(firstN, lastN);
-		this.card = card;//
+		this.card = card;
 	}
 	
 	/**
