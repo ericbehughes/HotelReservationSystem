@@ -44,7 +44,7 @@ public class CreditCardTest {
 			CreditCard mastercard2 = CreditCard.getInstance(mastercard.getType(), mastercard.getNumber());
 			System.out.println("This is an instance of MasterCard: " + (mastercard2 instanceof MasterCard));
 			//Create an invalid MasterCard Object 
-			CreditCard mastercard3 = new MasterCard("5424890008827073");
+			CreditCard mastercard3 = new MasterCard("5424890008gg827073");
 		}
 	catch (IllegalArgumentException e){
 			System.out.println("The card type entered is not of specified type");
