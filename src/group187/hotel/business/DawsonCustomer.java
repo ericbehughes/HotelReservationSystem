@@ -13,16 +13,28 @@ public class DawsonCustomer implements Customer {
 	private final Email email;
 	protected Optional<CreditCard> card;
 	
+	/**
+	 * @param firstN
+	 * @param lastN
+	 * @param email
+	 * @param card
+	 */
 	public DawsonCustomer(String firstN, String lastN, Email email, Optional<CreditCard> card){
 		this.email = new Email(email);//
 		this.name = new Name(firstN, lastN);
 		this.card = card;
 	}
+	/**
+	 * @param e
+	 */
 	public DawsonCustomer(DawsonCustomer e){
 		this.email = new Email(e.email);//
 		this.name = new Name(e.getName().getFirstName(), e.getName().getLastName());
 	}
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 			if (card.isPresent()) //
@@ -30,6 +42,9 @@ public class DawsonCustomer implements Customer {
 		return  email + "*" + this.name.toString();
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -38,6 +53,9 @@ public class DawsonCustomer implements Customer {
 		return result;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -57,6 +75,9 @@ public class DawsonCustomer implements Customer {
 	}
 
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Comparable#compareTo(java.lang.Object)
+	 */
 	@Override
 	public int compareTo(Customer o) {
 		if (o == null)
@@ -79,11 +100,17 @@ public class DawsonCustomer implements Customer {
 	}
 
 	// does not return deep copy as address is immutable
+	/* (non-Javadoc)
+	 * @see dw317.hotel.business.interfaces.Customer#getEmail()
+	 */
 	@Override
 	public Email getEmail() {
 		return this.email;
 	}
 	// returns deep copy with new keyword
+	/* (non-Javadoc)
+	 * @see dw317.hotel.business.interfaces.Customer#getName()
+	 */
 	@Override
 	public Name getName() {		
 		return new Name(this.name.getFirstName(),this.name.getLastName());
@@ -91,11 +118,17 @@ public class DawsonCustomer implements Customer {
 	}
 
 
+	/* (non-Javadoc)
+	 * @see dw317.hotel.business.interfaces.Customer#getCreditCard()
+	 */
 	@Override
 	public Optional<CreditCard> getCreditCard() {
 		return this.card;
 	}
 
+	/* (non-Javadoc)
+	 * @see dw317.hotel.business.interfaces.Customer#setCreditCard(java.util.Optional)
+	 */
 	@Override
 	public void setCreditCard(Optional<CreditCard> card) {
 		 this.card = card;

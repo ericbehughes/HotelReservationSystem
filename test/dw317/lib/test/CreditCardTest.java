@@ -5,6 +5,14 @@ import dw317.lib.creditcard.CreditCard;
 import dw317.lib.creditcard.MasterCard;
 import dw317.lib.creditcard.Visa;
 
+/**
+ * @author 1232983
+ *
+ */
+/**
+ * @author 1232983
+ *
+ */
 public class CreditCardTest {
 
 	public static void main(String[] args) {
