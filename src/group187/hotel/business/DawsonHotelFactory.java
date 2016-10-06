@@ -32,4 +32,18 @@ public enum DawsonHotelFactory implements HotelFactory {
 				int outYear, int outMonth, int outDay) {
 			return new DawsonReservation(aCustomer, aRoom, inYear, inMonth, inDay, outYear, outMonth, outDay);
 		}
+		
+		@Override
+		public Reservation getReservationInstance(Reservation toCopy) {
+			return new DawsonReservation(toCopy.getCustomer(),
+			toCopy.getRoom(),
+			toCopy.getCheckInDate().getYear(),
+			toCopy.getCheckInDate().getMonthValue(),
+			toCopy.getCheckInDate().getDayOfMonth(),
+			toCopy.getCheckOutDate().getYear(),
+			toCopy.getCheckOutDate().getMonthValue(),
+			toCopy.getCheckOutDate().getDayOfMonth());
+		}
+		
+		
 }
