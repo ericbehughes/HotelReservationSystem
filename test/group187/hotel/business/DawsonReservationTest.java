@@ -1,4 +1,4 @@
-package dw317.lib.creditcard;
+package group187.hotel.business;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -14,11 +14,14 @@ import java.util.Optional;
 import dw317.hotel.business.RoomType;
 import dw317.hotel.business.interfaces.*;
 import dw317.lib.Email;
+import dw317.lib.creditcard.Amex;
+import dw317.lib.creditcard.CreditCard;
 import group187.hotel.business.DawsonCustomer;
 import group187.hotel.business.DawsonReservation;
 import group187.hotel.business.DawsonRoom;
 public class DawsonReservationTest {
 
+	
 	public static void main(String[] args) {
 		// Create all necessary variables
 		DawsonCustomer customer;
@@ -95,8 +98,8 @@ public class DawsonReservationTest {
 	
 	public static String[] getCustomerReservationInfo(int lineNumber, String type) {
 		// Create necessary variables
-		String reservationFile = "C:\\Users\\ehugh\\git\\HotelReservationSystem\\datafiles\\reservation187.txt";
-		String customerFile = "C:\\Users\\ehugh\\git\\HotelReservationSystem\\datafiles\\customer187.txt";
+		String reservationFile = "H:\\git\\HotelReservationSystem\\datafiles\\reservation187.txt";
+		String customerFile = "H:\\git\\HotelReservationSystem\\datafiles\\customer187.txt";
 		String[] ReservationInfo = new String[8];
 		String[] customerInfo = new String[5];
 		Boolean reservation = false, customer = false;

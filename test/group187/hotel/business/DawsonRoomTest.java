@@ -1,4 +1,4 @@
-package dw317.lib.creditcard;
+package group187.hotel.business;
 
 import dw317.hotel.business.RoomType;
 import group187.hotel.business.DawsonRoom;
@@ -7,7 +7,7 @@ public class DawsonRoomTest {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int roomTest1 = 4444;
+		int roomTest1 = 402;
 			DawsonRoom room1 = new DawsonRoom(roomTest1, RoomType.NORMAL);
 			/*
 			 * Notice that in Dawson Hotel, floors 1 to 5 have 8 normal rooms available, floor 6 and 7 have 4 suites each, 
@@ -17,7 +17,7 @@ public class DawsonRoomTest {
 			// returns 
 			
 			
-			int roomTest2 = 54;
+			int roomTest2 = 502;
 			DawsonRoom room2 = new DawsonRoom(roomTest2, RoomType.NORMAL);
 			
 			int roomTest3 = 704;

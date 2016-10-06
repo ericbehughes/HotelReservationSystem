@@ -1,4 +1,9 @@
-package dw317.lib.creditcard;
+package dw317.lib.test;
+
+import dw317.lib.creditcard.Amex;
+import dw317.lib.creditcard.CreditCard;
+import dw317.lib.creditcard.MasterCard;
+import dw317.lib.creditcard.Visa;
 
 public class CreditCardTest {
 
