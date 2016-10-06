@@ -3,10 +3,10 @@
  */
 package dw317.lib.test;
 
-// TODO: Auto-generated Javadoc
-/**
- * The Class EmailTest.
- */
+
+import dw317.lib.Email;
+
+
 public class EmailTest {
 
 	/**
@@ -15,8 +15,29 @@ public class EmailTest {
 	 * @param args the arguments
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		
+		
+		Email email1 = new Email("zhu@-abc.com");
+		Email email2 = new Email("ahu@abc.com");
+		
+		String str1 = "zhu";
+		String str2 = "abc";
+		
+		int result2 = str1.compareToIgnoreCase(str2);
+		
+		
+		
+		int result = email1.compareTo(email2);
+		
+		email1 = new Email("zhu@abc.com");
+		email2 = new Email("A@bc.com");
+		
+		result = email1.compareTo(email2);
+		
+		email1 = new Email("zhu@ba.com");
+		email2 = new Email("A@bc.com");
+		
+		result = email1.compareTo(email2);
+		
 	}
-
 }
