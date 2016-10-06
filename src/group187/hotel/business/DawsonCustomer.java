@@ -19,7 +19,7 @@ public class DawsonCustomer implements Customer {
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 42031768871L;
 	
-	/** The name.f */
+	/** The name.ff */
 	private final Name name; 
 	
 	/** The email. */
