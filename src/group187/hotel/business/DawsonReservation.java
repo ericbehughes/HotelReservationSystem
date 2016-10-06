@@ -1,34 +1,228 @@
+/*
+ * 
+ */
 package group187.hotel.business;
+<<<<<<< HEAD
 import java.time.LocalDate;
+=======
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+>>>>>>> branch 'Development' of https://github.com/xavier-berthiaume/HotelReservationSystem.git
 
 import dw317.hotel.business.interfaces.*;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DawsonReservation.
+ */
 public class DawsonReservation implements Reservation {
-	private static final long serialVersionUID = 42031768871L;
-	private final Customer customer; 
-	private final Room roomNumber;
-	private int inYear, inMonth, inDay;
-	private int outYear, outMonth, outDay;
 	
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 42031768871L;
+	
+	/** The customer. */
+	private final Customer customer; 
+	
+	/** The room. */
+	private final Room room;
+	
+	/** The check in and checkout dates. */
+	private LocalDate checkIn,checkOut; 
+	
+	/**
+	 * Instantiates a new dawson reservation.
+	 *
+	 * @param customer the customer
+	 * @param room the room
+	 * @param inYear the in year
+	 * @param inMonth the in month
+	 * @param inDay the in day
+	 * @param outYear the out year
+	 * @param outMonth the out month
+	 * @param outDay the out day
+	 */
 	//constructor
-	public DawsonReservation(Customer customer, Room roomNumber, int inYear, int inMonth, int inDay, int outYear,
-			int outMonth, int outDay) {
+	public DawsonReservation(Customer customer, Room room, int inYear, int inMonth, int inDay, int outYear,
+			int outMonth, int outDay) {	
 		super();
 		this.customer = customer;
-		this.roomNumber = roomNumber;
-		this.inYear = inYear;
-		this.inMonth = inMonth;
-		this.inDay = inDay;
-		this.outYear = outYear;
-		this.outMonth = outMonth;
-		this.outDay = outDay;
+		this.room = room;
+		if (validateDateFormat(inYear,inMonth,inDay) && validateDateFormat(outYear,outMonth,outDay)){
+			if (LocalDate.of(inYear, inMonth, inDay).isBefore(LocalDate.of(outYear, outMonth, outDay))){
+				this.checkIn = LocalDate.of(inYear, inMonth, inDay);
+				this.checkOut = LocalDate.of(outYear, outMonth, outDay);
+			}
+		}
+		else
+			throw new IllegalArgumentException("The time(s) is/are in the wrong format");
+			
+		
+		
+		
+	}
+
+	/**
+	 * Validate date format.
+	 *
+	 * @param year the year
+	 * @param month the month
+	 * @param day the day
+	 * @return true, if successful
+	 */
+	private boolean validateDateFormat(int year, int month, int day) {
+		
+		if (year > 100 && year < 2020)
+			if (month > 0 && month < 13)
+				if (day > 0 && day < 32)
+					return true;
+		return false;
 	}
 
 
+	/* (non-Javadoc)
+	 * @see dw317.hotel.business.interfaces.Reservation#getCustomer()
+	 */
 	@Override
+	public Customer getCustomer() {
+		return new DawsonCustomer((DawsonCustomer) this.customer);
+	}
+
+
+	/* (non-Javadoc)
+	 * @see dw317.hotel.business.interfaces.Reservation#getRoom()
+	 */
+	@Override
+	public Room getRoom() {
+		return this.room;
+	}
+
+	/* (non-Javadoc)
+	 * @see dw317.hotel.business.interfaces.Reservation#getCheckInDate()
+	 */
+	public LocalDate getCheckInDate() throws DateTimeException {
+		return checkIn;
+	}
+
+	
+	/* (non-Javadoc)
+	 * @see dw317.hotel.business.interfaces.Reservation#getCheckOutDate()
+	 */
+	public LocalDate getCheckOutDate() throws DateTimeException {
+		return checkOut;
+	}
+
+
+	/* (non-Javadoc)
+	 * @see dw317.hotel.business.interfaces.Reservation#getNumberDays()
+	 */
+	@Override
+	public int getNumberDays() {
+		LocalDate checkIn = this.getCheckInDate();
+		LocalDate checkOut = this.getCheckOutDate();
+		if (checkIn.isAfter(checkOut)){
+			throw new IllegalArgumentException("The check in date is after the check out date");
+		}
+		long days = checkIn.until(checkOut, ChronoUnit.DAYS);
+		return (int)days;
+
+	}
+
+//email*checkinYr*checkinMonth*checkinDay* checkoutYr*checkoutMonth*checkoutDay*roomnumber
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+ 	 */
+	@Override
+	public String toString() {
+		return customer.getEmail().toString() + "*" + this.getCheckInDate().toString() + "*" + this.getCheckOutDate().toString()
+				+ "*" + room.toString();
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+	
+		result = prime * result + ((room == null) ? 0 : room.hashCode());
+		result = prime * result + ((checkIn == null) ? 0 : checkIn.hashCode());
+		result = prime * result + ((checkOut == null) ? 0 : checkOut.hashCode());
+		result = prime * result + ((customer == null) ? 0 : customer.hashCode());
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof DawsonReservation))
+			return false;
+		DawsonReservation other = (DawsonReservation) obj;
+		
+		if (customer == null) {
+			if (other.customer != null)
+				return false;
+		} else if (!customer.equals(other.customer))
+			return false;
+		if (room == null) {
+			if (other.room != null)
+				return false;
+		} else if (!room.equals(other.room))
+			return false;
+		if (checkIn == null) {
+			if (other.checkIn != null)
+				return false;
+		} else if (!checkIn.equals(other.checkIn))
+			return false;
+		if (checkOut == null) {
+			if (other.checkOut != null)
+				return false;
+		} else if (!checkOut.equals(other.checkOut))
+			return false;
+	
+		return true;
+	}
+
+
+
+
+
+	/* (non-Javadoc)
+	 * @see java.lang.Comparable#compareTo(java.lang.Object)
+	 */
+	@Override
+	//fixed the compareTo method
 	public int compareTo(Reservation o) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result=0;
+		if(o == null){
+			throw new NullPointerException();
+		}
+			if(this.getRoom().getRoomNumber() == (o.getRoom().getRoomNumber())){
+				if(this.getCheckInDate().toString().equals(o.getCheckInDate().toString())){
+				result= 0; //returns 0 if the two objects are the same
+			}  			
+			if(this.getCheckInDate().isBefore(o.getCheckInDate())){
+				result= 1; 
+			}
+			else if(this.getCheckInDate().isAfter(o.getCheckInDate())){
+				result= -1;
+			}	
+		}
+			if(this.getRoom().getRoomNumber() > (o.getRoom().getRoomNumber())){
+				result= -1;
+			} 
+			else if(this.getRoom().getRoomNumber() < (o.getRoom().getRoomNumber())){
+				result= 1; 
+			}
+		return result;
 	}
 
 

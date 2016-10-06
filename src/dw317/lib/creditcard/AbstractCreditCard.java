@@ -1,24 +1,81 @@
+/*
+ * 
+ */
 package dw317.lib.creditcard;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AbstractCreditCard.
+ */
 public abstract class AbstractCreditCard implements CreditCard{
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 42031768871L;
+	
+	/** The cardtype. */
 	private final CardType cardtype;
+	
+	/** The number. */
 	private final String number;
 	
+	/**
+	 * Instantiates a new abstract credit card.
+	 *
+	 * @param cardtype the cardtype
+	 * @param number the number
+	 * @throws IllegalArgumentException the illegal argument exception
+	 */
 	public AbstractCreditCard(CardType cardtype, String number) throws IllegalArgumentException{
 		this.cardtype = cardtype;
-		this.number = number;
+		this.number = validateLuhnAlgorithm(number);
 	}
 	
-	/*
-	 * Still needs to be worked on. Must check to see that two Cards are identical
-	 * (non-Javadoc)
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((cardtype == null) ? 0 : cardtype.hashCode());
+		result = prime * result + ((number == null) ? 0 : number.hashCode());
+		return result;
+	}
+
+
+	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
-	public boolean equals(Object object) {
-		return true; // changed line 19 to show you how to fetchsss
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof AbstractCreditCard)) {
+			return false;
+		}
+		AbstractCreditCard other = (AbstractCreditCard) obj;
+		if (cardtype != other.cardtype) {
+			return false;
+		}
+		if (number == null) {
+			if (other.number != null) {
+				return false;
+			}
+		} else if (!number.equals(other.number)) {
+			return false;
+		}
+		return true;
 	}
+
+
 	/**
+	 * Gets the number.
+	 *
 	 * @return number - The numbers of the credit card
 	 */
 	public String getNumber(){
@@ -26,19 +83,29 @@ public abstract class AbstractCreditCard implements CreditCard{
 	}
 	
 	/**
+	 * Gets the type.
+	 *
 	 * @return cardtype - The type of credit card
 	 */
 	public CardType getType(){
 		return cardtype;
 	}
 	
-	/**
-	 * @return Concatenated string of card type and numbers
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
 	 */
+	@Override
 	public String toString(){
 		return this.getType() + "*" + this.getNumber();
 	}
 	
+	/**
+	 * Validates the credit card number that is passed as a parameter according to the luhn algorithm.
+	 *
+	 * @param cardNumber the card number
+	 * @return the string
+	 * @throws IllegalArgumentException the illegal argument exception
+	 */
 	private String validateLuhnAlgorithm(String cardNumber) throws IllegalArgumentException
 	{
 		int cardSize = cardNumber.length(), total = 0;

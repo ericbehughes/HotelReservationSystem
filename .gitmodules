@@ -1,0 +1,6 @@
+[submodule "moduleTestFolder"]
+	path = moduleTestFolder
+	url = C:\\Users\\ehugh\\git\\HotelReservationSystem\\.git
+[submodule "gjhkl"]
+	path = gjhkl
+	url = C:\\Users\\ehugh\\git\\HotelReservationSystem\\.git
