@@ -1,4 +1,6 @@
 package group187.hotel.business;
+import java.util.Optional;
+
 import dw317.hotel.business.RoomType;
 import dw317.hotel.business.interfaces.Customer;
 import dw317.hotel.business.interfaces.HotelFactory;
@@ -11,8 +13,8 @@ public enum DawsonHotelFactory implements HotelFactory {
 		DAWSON;
 
 		@Override
-		public Customer getCustomerInstance(String firstName, String lastName, Email email) {
-			return new DawsonCustomer(firstName, lastName, email);
+		public Customer getCustomerInstance(String firstName, String lastName, Email email, Optional<CreditCard> card) {
+			return new DawsonCustomer(firstName, lastName, email,card);
 		}
 
 		@Override

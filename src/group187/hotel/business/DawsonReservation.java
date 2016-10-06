@@ -17,10 +17,24 @@ public class DawsonReservation implements Reservation {
 		super();
 		this.customer = customer;
 		this.room = room;
-		if (!LocalDate.of(inYear, inMonth, inDay).isBefore(LocalDate.of(outYear, outMonth, outDay)))
-			throw new IllegalArgumentException();
-		this.checkIn = LocalDate.of(inYear, inMonth, inDay);
-		this.checkOut = LocalDate.of(outYear, outMonth, outDay);
+		if (validateDateFormat(inYear,inMonth,inDay) && validateDateFormat(outYear,outMonth,outDay))
+			if (LocalDate.of(inYear, inMonth, inDay).isBefore(LocalDate.of(outYear, outMonth, outDay))){
+				this.checkIn = LocalDate.of(inYear, inMonth, inDay);
+				this.checkOut = LocalDate.of(outYear, outMonth, outDay);
+			}
+			else
+				throw new IllegalArgumentException("invalid date format");
+				
+		
+	}
+
+	private boolean validateDateFormat(int year, int month, int day) {
+		
+		if (year > 100 && year < 2020)
+			if (month > 0 && month < 13)
+				if (day > 0 && day < 32)
+					return true;
+		return false;
 	}
 
 
