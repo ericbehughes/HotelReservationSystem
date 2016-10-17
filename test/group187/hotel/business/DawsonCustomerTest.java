@@ -20,7 +20,8 @@ public class DawsonCustomerTest {
 	/**
 	 * The main method.
 	 *
-	 * @param args the arguments
+	 * @param args
+	 *            the arguments
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -34,24 +35,21 @@ public class DawsonCustomerTest {
 			System.out.println(customer1.toString());
 			customer1.setCreditCard(null);
 			customer1.getCreditCard();
-	
-			
+
 			Email email2 = new Email("fhse@asdfscom");
-			Name name2 = new Name("something","something");
-			Optional <CreditCard> cardTest2 = Optional.of(new Amex("374616906032009"));
-			DawsonCustomer customer2 = new DawsonCustomer(name2.getFirstName(), name2.getLastName(), email2,cardTest2);
+			Name name2 = new Name("something", "something");
+			Optional<CreditCard> cardTest2 = Optional.of(new Amex("374616906032009"));
+			DawsonCustomer customer2 = new DawsonCustomer(name2.getFirstName(), name2.getLastName(), email2, cardTest2);
 			customer2.setCreditCard(cardTest2);
 			System.out.println(customer2.toString());
 			customer2.compareTo(customer1);
-			
+
 			customer1.equals(customer1);
 			customer1.equals(customer1);
 		} catch (IllegalArgumentException iae) {
 			iae.getMessage();
 		}
-		
-		
-		
+
 	}
 
 }

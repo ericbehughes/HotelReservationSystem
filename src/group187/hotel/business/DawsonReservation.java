@@ -2,14 +2,9 @@
  * 
  */
 package group187.hotel.business;
-<<<<<<< HEAD
 import java.time.LocalDate;
-=======
 import java.time.DateTimeException;
-import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
->>>>>>> branch 'Development' of https://github.com/xavier-berthiaume/HotelReservationSystem.git
-
 import dw317.hotel.business.interfaces.*;
 
 // TODO: Auto-generated Javadoc
@@ -226,38 +221,5 @@ public class DawsonReservation implements Reservation {
 	}
 
 
-	@Override
-	public Customer getCustomer() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-
-	@Override
-	public Room getRoom() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	@Override
-	public LocalDate getCheckInDate() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	@Override
-	public LocalDate getCheckOutDate() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	@Override
-	public int getNumberDays() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	
 }

@@ -2,6 +2,7 @@
  * 
  */
 package group187.reserv;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -29,24 +30,24 @@ import group187.hotel.business.DawsonRoom;
  */
 public class DawsonReservationTest {
 
-	
 	/**
 	 * The main method.
 	 *
-	 * @param args the arguments
+	 * @param args
+	 *            the arguments
 	 */
 	public static void main(String[] args) {
 		// Create all necessary variables
 		DawsonCustomer customer;
 		Email emailObj;
 		DawsonRoom room;
-		Optional <CreditCard> cardTest1 = Optional.of(new Amex("374616906032009"));
+		Optional<CreditCard> cardTest1 = Optional.of(new Amex("374616906032009"));
 		int inYear, inMonth, inDate, outYear, outMonth, outDate, roomNumber;
 		String email, firstName, lastName;
 		String[] customerInfo = new String[8];
 		LocalDate checkInDate, checkOutDate;
-		
-		//-----START SET VARIABLE INFO-----\\
+
+		// -----START SET VARIABLE INFO-----\\
 		System.out.print("-----Setting customer info... ");
 		customerInfo = getCustomerReservationInfo(2, "Reservation");
 		System.out.println("[OK]");
@@ -54,7 +55,7 @@ public class DawsonReservationTest {
 		System.out.println("-----Setting Email info... ");
 		email = customerInfo[0];
 		System.out.println("Email:\t" + email);
-		
+
 		System.out.println("-----Setting check in info... ");
 		inYear = Integer.parseInt(customerInfo[1]);
 		inMonth = Integer.parseInt(customerInfo[2]);
@@ -62,7 +63,7 @@ public class DawsonReservationTest {
 		System.out.println("Check in year:\t" + inYear);
 		System.out.println("Check in month:\t" + inMonth);
 		System.out.println("Check in date:\t" + inDate);
-		
+
 		System.out.println("-----Setting check out info... ");
 		outYear = Integer.parseInt(customerInfo[4]);
 		outMonth = Integer.parseInt(customerInfo[5]);
@@ -74,28 +75,27 @@ public class DawsonReservationTest {
 		System.out.println("-----Setting room number...");
 		roomNumber = Integer.parseInt(customerInfo[7]);
 		System.out.println("Room number:\t" + roomNumber);
-		
+
 		customerInfo = getCustomerReservationInfo(2, "Customer");
-		
+
 		System.out.println("-----Setting name...");
 		firstName = customerInfo[1];
 		lastName = customerInfo[2];
 		System.out.println("First name:\t " + firstName);
 		System.out.println("Last name:\t " + lastName);
-		//-----END SET VARIABLE INFO-----\\
-		
+		// -----END SET VARIABLE INFO-----\\
+
 		// Create object with pertinent info
 		emailObj = new Email(email);
 		room = new DawsonRoom(roomNumber, RoomType.NORMAL);
-		customer = new DawsonCustomer(firstName, lastName, emailObj,cardTest1);
-		DawsonReservation reservationTest = new DawsonReservation(customer, room, inYear, inMonth,
-				inDate, outYear, outMonth, outDate);
-		
-		
+		customer = new DawsonCustomer(firstName, lastName, emailObj, cardTest1);
+		DawsonReservation reservationTest = new DawsonReservation(customer, room, inYear, inMonth, inDate, outYear,
+				outMonth, outDate);
+
 		checkInDate = reservationTest.getCheckInDate();
 		System.out.println("-----START METHOD TEST:\tgetCheckinDate()-----");
 		System.out.println("Check in date:\t" + checkInDate);
-		
+
 		checkOutDate = reservationTest.getCheckOutDate();
 		System.out.println("-----START METHOD TEST:\tgetCheckOutDate()-----");
 		System.out.println("Check out date:\t" + checkOutDate);
@@ -106,14 +106,16 @@ public class DawsonReservationTest {
 		System.out.println(customer.toString());
 		System.out.println(reservationTest.toString());
 		System.out.println("Hash code:\t" + hashCode);
-		
+
 	}
-	
+
 	/**
 	 * Gets the customer reservation info.
 	 *
-	 * @param lineNumber the line number
-	 * @param type the type
+	 * @param lineNumber
+	 *            the line number
+	 * @param type
+	 *            the type
 	 * @return the customer reservation info
 	 */
 	public static String[] getCustomerReservationInfo(int lineNumber, String type) {
@@ -123,40 +125,38 @@ public class DawsonReservationTest {
 		String[] ReservationInfo = new String[8];
 		String[] customerInfo = new String[5];
 		Boolean reservation = false, customer = false;
-		
+
 		// Set arrays with customer/reservation info
 		try {
-				// Set reservation array
-				if (type.equals("Reservation")){
-					reservation = true;
-					BufferedReader br = new BufferedReader(new FileReader(reservationFile));
-					String line = Files.readAllLines(Paths.get(reservationFile)).get(lineNumber);
-					customerInfo = line.split("\\*");
-				}
-				
-				// Set customer array
-				else if (type.equals("Customer")){
-					customer = true;
-					BufferedReader br = new BufferedReader(new FileReader(customerFile));
-					String line = Files.readAllLines(Paths.get(customerFile)).get(lineNumber);
-					customerInfo = line.split("\\*");
-				}
-		}
-		catch (FileNotFoundException f){
+			// Set reservation array
+			if (type.equals("Reservation")) {
+				reservation = true;
+				BufferedReader br = new BufferedReader(new FileReader(reservationFile));
+				String line = Files.readAllLines(Paths.get(reservationFile)).get(lineNumber);
+				customerInfo = line.split("\\*");
+			}
+
+			// Set customer array
+			else if (type.equals("Customer")) {
+				customer = true;
+				BufferedReader br = new BufferedReader(new FileReader(customerFile));
+				String line = Files.readAllLines(Paths.get(customerFile)).get(lineNumber);
+				customerInfo = line.split("\\*");
+			}
+		} catch (FileNotFoundException f) {
+			if (reservation)
+				System.out.println("The specified file: " + reservationFile + " has not been found");
+			else
+				System.out.println("The specified file: " + customerFile + " has not been found");
+		} catch (IOException e) {
 			if (reservation)
 				System.out.println("The specified file: " + reservationFile + " has not been found");
 			else
 				System.out.println("The specified file: " + customerFile + " has not been found");
 		}
-		catch (IOException e){
-			if (reservation)
-				System.out.println("The specified file: " + reservationFile + " has not been found");
-			else
-				System.out.println("The specified file: " + customerFile + " has not been found");
-		}
-		
+
 		return customerInfo;
-		
+
 	}
 
 }

@@ -6,14 +6,10 @@ package group187.hotel.business;
 import java.util.Optional;
 
 import dw317.hotel.business.interfaces.Customer;
-<<<<<<< HEAD
 import dw317.lib.Email;
 import dw317.lib.Name;
-=======
-import dw317.lib.*;
->>>>>>> branch 'Development' of https://github.com/xavier-berthiaume/HotelReservationSystem.git
 import dw317.lib.creditcard.CreditCard;
-import dw317.lib.Name;
+
 
 // TODO: Auto-generated Javadoc
 /**
@@ -152,24 +148,10 @@ public class DawsonCustomer implements Customer {
 	}
 
 	@Override
-	public Name getName() {
+	public void setCreditCard(Optional<CreditCard> card) {
 		// TODO Auto-generated method stub
-		return null;
+		
 	}
 
-	@Override
-	public void setCreditCard(Optional<CreditCard> card) {
-		// TODO Auto-generated method stub
-		
-	}
-	/* (non-Javadoc)
-	 * @see dw317.hotel.business.interfaces.Customer#setCreditCard(java.util.Optional)
-	 */
-	@Override
-	public void setCreditCard(Optional<CreditCard> card) {
-		 this.card = card;
-		
-		
-	}
 
 }

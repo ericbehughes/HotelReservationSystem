@@ -2,6 +2,7 @@
  * 
  */
 package dw317.hotel.business.interfaces;
+
 import java.io.Serializable;
 import dw317.hotel.business.RoomType;
 
@@ -10,7 +11,7 @@ import dw317.hotel.business.RoomType;
  * The Interface Room.
  */
 public interface Room extends Comparable<Room>, Serializable {
-	
+
 	/**
 	 * Gets the room type.
 	 *
@@ -24,14 +25,14 @@ public interface Room extends Comparable<Room>, Serializable {
 	 * @return the room number
 	 */
 	public int getRoomNumber();
-	
+
 	/**
 	 * Gets the floor.
 	 *
 	 * @return the floor
 	 */
 	public int getFloor();
-	
+
 	/**
 	 * Gets the number.
 	 *
