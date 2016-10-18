@@ -55,8 +55,6 @@ public class HotelFileLoader {
 
 	}
 			
-
-	 
 	 //The Customer array returned by the above method must be an array whose size is equal
 	 //to its capacity (i.e. the array must be full to capacity).
 	// Email*First name*Last name*Card type*Card number \\
