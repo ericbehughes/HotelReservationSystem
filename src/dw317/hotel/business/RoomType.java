@@ -26,16 +26,4 @@ public enum RoomType {
 		return this.name().toLowerCase();
 	}
 	
-	public static RoomType checkRoomType(String inputFromFile)
-	{
-		RoomType roomType = RoomType.NORMAL;
-		if (inputFromFile.equalsIgnoreCase(RoomType.NORMAL.toString()))
-			roomType=RoomType.NORMAL;
-		else if (inputFromFile.equalsIgnoreCase(RoomType.SUITE.toString()))
-			roomType=RoomType.SUITE;
-		else if (inputFromFile.equalsIgnoreCase(RoomType.PENTHOUSE.toString()))
-			roomType=RoomType.PENTHOUSE;
-		
-		return roomType;
-	}
 }

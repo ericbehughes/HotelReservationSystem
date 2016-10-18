@@ -1,4 +1,3 @@
-// Email*First name*Last name*Card type*Card number \\
 eurocomislyfe@outlook.com*Ed*Marsh*MasterCard*5337813027531960
 daisy671@gmail.com*Irene*Harris*MasterCard*5428984957517541
 pepethefrog@outlook.com*Stephen*Flores*MasterCard*5372375186446410

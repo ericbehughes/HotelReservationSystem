@@ -11,11 +11,18 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 import dw317.hotel.business.RoomType;
 import dw317.hotel.business.interfaces.Customer;
 import dw317.hotel.business.interfaces.Room;
+import dw317.lib.Email;
+import dw317.lib.Name;
+import dw317.lib.creditcard.Amex;
+import dw317.lib.creditcard.CreditCard;
+import dw317.lib.creditcard.CreditCard.CardType;
+import group187.hotel.business.DawsonCustomer;
 import group187.hotel.business.DawsonRoom;
 
 /**
@@ -36,41 +43,45 @@ public class HotelFileLoader {
 			String[] array = str.split("\\*");
 			for (int i = 0; i < array.length-1; i+=2) {
 				String roomNumber = array[i];
-				RoomType roomType = RoomType.checkRoomType(array[i + 1]);
+				RoomType roomType = RoomType.valueOf(array[i+1].toUpperCase());
 				DawsonRoom room = new DawsonRoom(Integer.parseInt(roomNumber), roomType);
 				list.add(room);
 			}
 		}
 
 		Room[] rooms = list.toArray(new Room[0]);
-
+		in.close();
 		return rooms;
 
 	}
 			
-			
-			
-			
-			
-			/*
-			 * Notice that in Dawson Hotel, floors 1 to 5 have 8 normal rooms
-			 * available, floor 6 and 7 have 4 suites each, and floor 8 has 1
-			 * penthouse. Other hotels may have different configurations.
-			 */
 
-//			Boolean reservation = false, customer = false;
-//					BufferedReader br = new BufferedReader(new FileReader(reservationFile));
-//					String line = Files.readAllLines(Paths.get(reservationFile)).get(lineNumber);
-//					customerInfo = line.split("\\*");
-			
 	 
 	 //The Customer array returned by the above method must be an array whose size is equal
 	 //to its capacity (i.e. the array must be full to capacity).
+	// Email*First name*Last name*Card type*Card number \\
+	public static Customer[] getCustomerListFromSequentialFile(String filename) throws IOException {
+		BufferedReader in = new BufferedReader(new FileReader(filename));
+		String str;
+		List<Customer> list = new ArrayList<Customer>();
+		while ((str = in.readLine()) != null) {
+			String[] array = str.split("\\*");
+			for (int i = 0; i < array.length - 4; i += 4) {
+				Email email = new Email(array[i]);
+				Name name = new Name(array[i + 1], array[i + 2]);
+				Optional<CreditCard> card = Optional.of(CreditCard.getInstance(
+						CardType.valueOf(array[i+3].toUpperCase()), array[i + 4]));
+				DawsonCustomer customer = new DawsonCustomer(name.getFirstName(), name.getLastName(), email, card);
+				list.add(customer);
+			}
+		}
 
-	 public static Customer[] getCustomerListFromSequentialFile(String filename) throws IOException
-	 {
-		 return null;
+		Customer[] customers = list.toArray(new Customer[0]);
+		in.close();
+		return customers;
 	 }
+	 
+	 
 
 	
 	
