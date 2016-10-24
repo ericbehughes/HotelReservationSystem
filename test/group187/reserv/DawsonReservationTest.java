@@ -134,6 +134,7 @@ public class DawsonReservationTest {
 				BufferedReader br = new BufferedReader(new FileReader(reservationFile));
 				String line = Files.readAllLines(Paths.get(reservationFile)).get(lineNumber);
 				customerInfo = line.split("\\*");
+				br.close();
 			}
 
 			// Set customer array
@@ -142,6 +143,7 @@ public class DawsonReservationTest {
 				BufferedReader br = new BufferedReader(new FileReader(customerFile));
 				String line = Files.readAllLines(Paths.get(customerFile)).get(lineNumber);
 				customerInfo = line.split("\\*");
+				br.close();
 			}
 		} catch (FileNotFoundException f) {
 			if (reservation)
@@ -154,7 +156,7 @@ public class DawsonReservationTest {
 			else
 				System.out.println("The specified file: " + customerFile + " has not been found");
 		}
-
+		
 		return customerInfo;
 
 	}
