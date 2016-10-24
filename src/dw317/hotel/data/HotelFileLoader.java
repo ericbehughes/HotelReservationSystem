@@ -37,7 +37,7 @@ public class HotelFileLoader {
 	{
 		BufferedReader in = new BufferedReader(new FileReader(filename));
 		String str;
-
+		
 		List<Room> list = new ArrayList<Room>();
 		while ((str = in.readLine()) != null) {
 			String[] array = str.split("\\*");
