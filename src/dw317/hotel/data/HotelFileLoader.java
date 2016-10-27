@@ -4,22 +4,17 @@
 package dw317.hotel.data;
 
 import java.io.BufferedReader;
-import java.io.File;
+
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Scanner;
-
 import dw317.hotel.business.RoomType;
 import dw317.hotel.business.interfaces.Customer;
 import dw317.hotel.business.interfaces.Room;
 import dw317.lib.Email;
 import dw317.lib.Name;
-import dw317.lib.creditcard.Amex;
 import dw317.lib.creditcard.CreditCard;
 import dw317.lib.creditcard.CreditCard.CardType;
 import group187.hotel.business.DawsonCustomer;
@@ -33,11 +28,11 @@ public class HotelFileLoader {
 	
 	//The Room array returned by the above method must be an array whose size is equal to
 	//its capacity (i.e. the array must be full to capacity).
-	 public static  Room[] getRoomListFromSequentialFile(String filename) throws IOException
+	 public static  Room[] getRoomListFromSequentialFile(String filePath) throws IOException
 	{
-		BufferedReader in = new BufferedReader(new FileReader(filename));
+		BufferedReader in = new BufferedReader(new FileReader(filePath));
 		String str;
-		
+	
 		List<Room> list = new ArrayList<Room>();
 		while ((str = in.readLine()) != null) {
 			String[] array = str.split("\\*");
