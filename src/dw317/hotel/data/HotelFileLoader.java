@@ -74,9 +74,6 @@ public class HotelFileLoader {
 				} catch (IllegalArgumentException iae) {
 					
 				}
-				
-				
-			
 		}
 
 		Customer[] customers = list.toArray(new Customer[0]);
