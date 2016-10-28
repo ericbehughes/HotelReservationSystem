@@ -13,6 +13,7 @@ import java.util.Objects;
 import java.util.Optional;
 import dw317.hotel.business.RoomType;
 import dw317.hotel.business.interfaces.Customer;
+import dw317.hotel.business.interfaces.Reservation;
 import dw317.hotel.business.interfaces.Room;
 import dw317.lib.Email;
 import dw317.lib.Name;
@@ -87,6 +88,13 @@ public class HotelFileLoader {
 		in.close();
 		return customers;
 	 }
+	
+//	public static Reservation[] getReservationListFromSequentialFile(String filename,Customer[] customerList,Room[] roomList)
+//	throws IOException, IllegalArgumentException
+//	{
+//		
+//	}
+
 	 
 	 
 
