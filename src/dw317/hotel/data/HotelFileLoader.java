@@ -68,10 +68,14 @@ public class HotelFileLoader {
 			Optional<CreditCard> card;
 			int i = 0; 
 				try {
-					 card = Optional.of(CreditCard.getInstance(
-								CardType.valueOf(array[i+3].toUpperCase()), array[i + 4]));
+					
 					Email email = new Email(array[i]);
 					Name name = new Name(array[i + 1], array[i + 2]);
+					if (array.length != 5)
+						card = null;
+					else
+						card = Optional.of(CreditCard.getInstance(
+								CardType.valueOf(array[i+3].toUpperCase()), array[i + 4]));
 					DawsonCustomer customer = new DawsonCustomer(name.getFirstName(), name.getLastName(), email, card);
 					list.add(customer);
 				} catch (IllegalArgumentException iae) {
@@ -80,7 +84,7 @@ public class HotelFileLoader {
 				
 				catch (IndexOutOfBoundsException iob)
 				{
-					card = null;
+					continue;
 				}
 		}
 

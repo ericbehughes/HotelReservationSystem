@@ -23,6 +23,7 @@ public class FileLoaderTest {
 					try{
 							Customer[] customerArray = HotelFileLoader.getCustomerListFromSequentialFile(currentCustomerFilePath);
 							ListUtilities.saveListToTextFile(customerArray, allCustomers);
+							System.out.println(ListUtilities.recordCount);
 						}catch (IllegalArgumentException iae)
 							{
 							System.out.println(iae.getMessage());
@@ -42,8 +43,8 @@ public class FileLoaderTest {
 				// save reservation records to big reservation file
 				for (int count = 1; count <=  10; count++){
 					currentRoomFilePath = "datafiles/unsorted/reservations/reservations" + count + ".txt";
-					DawsonRoom[] roomArray = HotelFileLoader.getRoomListFromSequentialFile(currentRoomFilePath)
-					ListUtilities.saveListToTextFile(customerArray, reservations);
+					//DawsonRoom[] roomArray = HotelFileLoader.getRoomListFromSequentialFile(currentRoomFilePath)
+				//	ListUtilities.saveListToTextFile(customerArray, reservations);
 				}
 			} catch (IOException ie) {
 				// TODO Auto-generated catch block
