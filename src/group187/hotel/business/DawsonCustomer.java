@@ -41,6 +41,7 @@ public class DawsonCustomer implements Customer {
 		this.email = new Email(email);//
 		this.name = new Name(firstN, lastN);
 		this.card = card;
+		
 	}
 	
 	/**
@@ -58,9 +59,9 @@ public class DawsonCustomer implements Customer {
 	 */
 	@Override
 	public String toString() {
-			if (card.isPresent()) //
+			if (card != null) //
 			return  email.toString() + "*" + this.name.toString() +"*"+ this.card.get().toString();
-		return  email + "*" + this.name.toString();
+		return  email.toString() + "*" + this.name.toString();
 	}
 
 	/* (non-Javadoc)

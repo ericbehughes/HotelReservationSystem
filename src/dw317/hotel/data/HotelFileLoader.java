@@ -59,14 +59,24 @@ public class HotelFileLoader {
 		List<Customer> list = new ArrayList<Customer>();
 		while ((str = in.readLine()) != null) {
 			String[] array = str.split("\\*");
-			for (int i = 0; i < array.length - 4; i += 4) {
-				Email email = new Email(array[i]);
-				Name name = new Name(array[i + 1], array[i + 2]);
-				Optional<CreditCard> card = Optional.of(CreditCard.getInstance(
-						CardType.valueOf(array[i+3].toUpperCase()), array[i + 4]));
-				DawsonCustomer customer = new DawsonCustomer(name.getFirstName(), name.getLastName(), email, card);
-				list.add(customer);
-			}
+			int i = 0; 
+				try {
+					Optional<CreditCard> card;
+					if (array.length != 5)
+						card = null;
+					else 
+						card = Optional.of(CreditCard.getInstance(
+								CardType.valueOf(array[i+3].toUpperCase()), array[i + 4]));
+					Email email = new Email(array[i]);
+					Name name = new Name(array[i + 1], array[i + 2]);
+					DawsonCustomer customer = new DawsonCustomer(name.getFirstName(), name.getLastName(), email, card);
+					list.add(customer);
+				} catch (IllegalArgumentException iae) {
+					
+				}
+				
+				
+			
 		}
 
 		Customer[] customers = list.toArray(new Customer[0]);
