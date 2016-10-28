@@ -113,7 +113,7 @@ public class HotelFileLoader {
 			if (str.isEmpty())
 				continue;
 			String [] array = str.split("\\*");
-			for (int i =0; i < array.length - 7; i+=8) {
+			int i = 0;
 				Email email = new Email(array[i]);
 				Customer customer = search(customerList, email);
 				if (customer == null) {
@@ -131,7 +131,7 @@ public class HotelFileLoader {
 				}
 				DawsonReservation reservation = new DawsonReservation(customer,room,inYear,inMonth,inDay,outYear,outMonth,outDay);
 				list.add(reservation);
-			}
+			
 		}
 		Reservation [] reservation = list.toArray(new Reservation[0]);
 		in.close();

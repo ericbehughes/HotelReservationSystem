@@ -27,7 +27,7 @@ public class FileLoaderTest {
 									new File("datafiles/unsorted/customers/customers" + count + ".txt"));
 							//save list to big AllCustomers.txt file
 							ListUtilities.saveListToTextFile(customerArray, allCustomers);
-							System.out.println(ListUtilities.recordCount);
+							
 						}catch (IllegalArgumentException iae)
 							{
 							System.out.println(iae.getMessage());
@@ -38,6 +38,7 @@ public class FileLoaderTest {
 					ie.printStackTrace();
 			
 			}
+			System.out.println("record count for customers " + ListUtilities.recordCount);
 
 		System.out.println("customers done");
 	
@@ -62,14 +63,15 @@ public class FileLoaderTest {
 					//save reservation to BIG reservation file
 					ListUtilities.saveListToTextFile(reservationsArray,allReservations );
 				} catch (IllegalArgumentException iae) {
-					System.out.println(iae.getMessage());
+					
 				}
 			
 			}
 		} catch (IOException ie) {
 			// TODO Auto-generated catch block
-			ie.getMessage();
+		
 		}
+		System.out.println("record count for reservations " + ListUtilities.recordCount);
 
 		System.out.println("rooms done");
 	
