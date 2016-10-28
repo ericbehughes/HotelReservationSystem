@@ -110,6 +110,8 @@ public class HotelFileLoader {
 		int outYear; int outMonth; int outDay;
 		List<Reservation> list = new ArrayList<Reservation>();
 		while ((str = in.readLine()) != null) {
+			if (str.isEmpty())
+				continue;
 			String [] array = str.split("\\*");
 			for (int i =0; i < array.length - 7; i+=8) {
 				Email email = new Email(array[i]);
@@ -135,30 +137,20 @@ public class HotelFileLoader {
 		in.close();
 		return reservation;
 	}
-	 
+	 //super_woman669@hotmail.com*Andreea*Galchenyuk*mastercard*5388941127716138
 	private static Customer search(Customer[] customerList, Email email) {
 		// This method will use the email field in order to find the associated customer
-		// If the customer can not be found, an Illegal Argument Exception will be throwned 
+		// If the customer can not be found, an Illegal Argument Exception will be thrown
 		DawsonCustomer customer = null;
 		Optional<CreditCard> card = null;
 		for(int i =0; i < customerList.length; i++){
-			if(customerList[i].equals(email)){
-				Name name = new Name(customerList[i+1].toString(), customerList[i+2].toString());
-				//This checks to see if the value at the next index is information related to a credit card or not
-				switch(customerList[i+3].toString().toUpperCase()){
-				case "VISA":
-				case "MASTERCARD":
-				case "AMEX":
-				card = Optional.of(CreditCard.getInstance(CardType.valueOf(customerList[i+3].toString()), customerList[i+4].toString()));
-				break;
-				default: 
-					card = null;
-				}
-				customer = new DawsonCustomer(name.getFirstName(),name.getLastName(), email, card);
-				break;
+			if(customerList[i].getEmail().equals(email)){
+				Name name = new Name(customerList[i].getName());
+				customer = new DawsonCustomer(name.getFirstName(),name.getLastName(), email, customerList[i].getCreditCard());
+				return customer;
 			}
 		}
-		return customer;
+		throw new IllegalArgumentException("Customer cannot be found");
 	}
 
 	private static Room search(Room[] roomList, int room) {
