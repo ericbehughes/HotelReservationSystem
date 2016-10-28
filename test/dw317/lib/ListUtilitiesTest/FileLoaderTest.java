@@ -14,15 +14,18 @@ public class FileLoaderTest {
 
 	@SuppressWarnings("rawtypes")
 	public static void main(String[] args) {
-			String currentCustomerFilePath;
+			
+		// TEST getCustomerListFromSequentialFile
 			try {
 				File allCustomers = new File("datafiles/unsorted/customers/AllCustomers.txt");
 				allCustomers.createNewFile();
 				// save customer records to big customer file
 				for (int count = 1; count <= 10; count++){
-					currentCustomerFilePath = "datafiles/unsorted/customers/customers" + count + ".txt";
 					try{
-							Customer[] customerArray = HotelFileLoader.getCustomerListFromSequentialFile(currentCustomerFilePath);
+						//create list per customer text file
+							Customer[] customerArray = HotelFileLoader.getCustomerListFromSequentialFile(
+									new File("datafiles/unsorted/customers/customers" + count + ".txt"));
+							//save list to big AllCustomers.txt file
 							ListUtilities.saveListToTextFile(customerArray, allCustomers);
 							System.out.println(ListUtilities.recordCount);
 						}catch (IllegalArgumentException iae)
@@ -37,35 +40,39 @@ public class FileLoaderTest {
 			}
 
 		System.out.println("customers done");
-		String currentReservationFilePath;
+	
 		try {
-			File allCustomers = new File("datafiles/unsorted/customers/AllCustomers.txt");
-			allCustomers.createNewFile();
-			Customer[] allCustomerObjects = HotelFileLoader.getCustomerListFromSequentialFile(allCustomers.getPath());
-			File rooms = new File("datafiles/rooms.txt");
-			Room[] allRooms = HotelFileLoader.getRoomListFromSequentialFile(rooms.getPath());
-			rooms.createNewFile();
-			File reservations = new File("datafiles/unsorted/reservations/AllReservations.txt");
-			reservations.createNewFile();
+			//create giant list with all customers
+			Customer[] allCustomerObjects = HotelFileLoader.getCustomerListFromSequentialFile(
+					new File("datafiles/unsorted/customers/AllCustomers.txt"));
+			
+			// create roomsList
+			File roomsFile = new File("datafiles/rooms.txt");
+			roomsFile.createNewFile();
+			Room[] allRooms = HotelFileLoader.getRoomListFromSequentialFile(roomsFile);
+			// create a file from customer and rooms list
+			File allReservations = new File("datafiles/unsorted/reservations/AllReservations.txt");
+			allReservations.createNewFile();
 			// save reservation records to big reservation file
 			for (int count = 1; count <= 10; count++) {
-				currentReservationFilePath = "datafiles/unsorted/reservations/reservations" + count + ".txt";
 				try {
-					Reservation[] reservationArray = HotelFileLoader.getReservationListFromSequentialFile(
-							currentReservationFilePath, allCustomerObjects, allRooms);
-					ListUtilities.saveListToTextFile(reservationArray, reservations);
+					//create reservations array for each reservation file while using BIG customerArray and roomArray
+					Reservation[] reservationsArray = HotelFileLoader.getReservationListFromSequentialFile(
+							new File("datafiles/unsorted/reservations/reservations" + count + ".txt"), allCustomerObjects, allRooms);
+					//save reservation to BIG reservation file
+					ListUtilities.saveListToTextFile(reservationsArray,allReservations );
 				} catch (IllegalArgumentException iae) {
 					System.out.println(iae.getMessage());
 				}
-
+			
 			}
 		} catch (IOException ie) {
 			// TODO Auto-generated catch block
-			ie.printStackTrace();
-
+			ie.getMessage();
 		}
 
 		System.out.println("rooms done");
+	
 
 	}
 	

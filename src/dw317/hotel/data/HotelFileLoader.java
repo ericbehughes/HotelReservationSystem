@@ -3,7 +3,7 @@
  */
 package dw317.hotel.data;
 import java.io.BufferedReader;
-
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -32,9 +32,9 @@ public class HotelFileLoader {
 	
 	//The Room array returned by the above method must be an array whose size is equal to
 	//its capacity (i.e. the array must be full to capacity).
-	 public static  Room[] getRoomListFromSequentialFile(String filePath) throws IOException
+	 public static  Room[] getRoomListFromSequentialFile(File file) throws IOException
 	{
-		BufferedReader in = new BufferedReader(new FileReader(filePath));
+		BufferedReader in = new BufferedReader(new FileReader(file));
 		String str;
 	
 		List<Room> list = new ArrayList<Room>();
@@ -59,8 +59,8 @@ public class HotelFileLoader {
 	 //The Customer array returned by the above method must be an array whose size is equal
 	 //to its capacity (i.e. the array must be full to capacity).
 	// Email*First name*Last name*Card type*Card number \\
-	public static Customer[] getCustomerListFromSequentialFile(String filename) throws IOException {
-		BufferedReader in = new BufferedReader(new FileReader(filename));
+	public static Customer[] getCustomerListFromSequentialFile(File file) throws IOException {
+		BufferedReader in = new BufferedReader(new FileReader(file));
 		String str;
 		List<Customer> list = new ArrayList<Customer>();
 		while ((str = in.readLine()) != null) {
@@ -102,9 +102,9 @@ public class HotelFileLoader {
 //	}
 
 	 
-	public static Reservation[] getReservationListFromSequentialFile (String filename, Customer[] customerList, Room[] roomList)
+	public static Reservation[] getReservationListFromSequentialFile (File file, Customer[] customerList, Room[] roomList)
     throws IOException, IllegalArgumentException {
-		BufferedReader in = new BufferedReader(new FileReader(filename));
+		BufferedReader in = new BufferedReader(new FileReader(file));
 		String str;
 		int inYear; int inMonth; int inDay;
 		int outYear; int outMonth; int outDay;
