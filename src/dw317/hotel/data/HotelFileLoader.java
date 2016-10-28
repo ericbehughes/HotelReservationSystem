@@ -9,6 +9,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import dw317.hotel.business.RoomType;
 import dw317.hotel.business.interfaces.Customer;
@@ -35,6 +36,8 @@ public class HotelFileLoader {
 	
 		List<Room> list = new ArrayList<Room>();
 		while ((str = in.readLine()) != null) {
+			if (str.isEmpty())
+				continue;
 			String[] array = str.split("\\*");
 			for (int i = 0; i < array.length-1; i+=2) {
 				String roomNumber = array[i];
@@ -58,14 +61,13 @@ public class HotelFileLoader {
 		String str;
 		List<Customer> list = new ArrayList<Customer>();
 		while ((str = in.readLine()) != null) {
+			if (str.isEmpty())
+				continue;
 			String[] array = str.split("\\*");
+			Optional<CreditCard> card;
 			int i = 0; 
 				try {
-					Optional<CreditCard> card;
-					if (array.length != 5)
-						card = null;
-					else 
-						card = Optional.of(CreditCard.getInstance(
+					 card = Optional.of(CreditCard.getInstance(
 								CardType.valueOf(array[i+3].toUpperCase()), array[i + 4]));
 					Email email = new Email(array[i]);
 					Name name = new Name(array[i + 1], array[i + 2]);
@@ -73,6 +75,11 @@ public class HotelFileLoader {
 					list.add(customer);
 				} catch (IllegalArgumentException iae) {
 					
+				}
+				
+				catch (IndexOutOfBoundsException iob)
+				{
+					card = null;
 				}
 		}
 
