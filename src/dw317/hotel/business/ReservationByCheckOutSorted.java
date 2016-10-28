@@ -9,6 +9,10 @@ public class ReservationByCheckOutSorted implements Comparator<Reservation>{
 	//This method will compare two reservation based on their checkout dates
 	public int compare(Reservation r1, Reservation r2){
 		int result = 0;
+		//Check to see if the two reservation's are equal
+		if(r1.equals(r2)) {
+			result = 0;
+		}
 		//If Two Reservation have the same checkout dates
 		//The default comparison is used
 		if(r1.getCheckOutDate().isEqual(r2.getCheckOutDate())){
