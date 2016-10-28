@@ -36,35 +36,37 @@ public class FileLoaderTest {
 			
 			}
 
-			System.out.println("customers done");
-			String currentReservationFilePath;
-			try {
-				File allCustomers = new File("datafiles/unsorted/customers/AllCustomers.txt");
-				allCustomers.createNewFile();
-				Customer[] custarray = HotelFileLoader.getCustomerListFromSequentialFile(allCustomers.getPath());
-				File rooms = new File("datafiles/rooms.txt");
-				Room[] roomarray = HotelFileLoader.getRoomListFromSequentialFile(rooms.getPath());
-				rooms.createNewFile();
-				File reservations = new File("datafiles/unsorted/reservations/AllReservations.txt");
-				reservations.createNewFile();
-				// save reservation records to big reservation file
-				for (int count = 1; count <=  10; count++){
-					currentReservationFilePath = "datafiles/unsorted/reservations/reservations" + count + ".txt";
-					Reservation[] reservationArray = HotelFileLoader.getReservationListFromSequentialFile
-							(currentReservationFilePath, custarray, roomarray);
+		System.out.println("customers done");
+		String currentReservationFilePath;
+		try {
+			File allCustomers = new File("datafiles/unsorted/customers/AllCustomers.txt");
+			allCustomers.createNewFile();
+			Customer[] allCustomerObjects = HotelFileLoader.getCustomerListFromSequentialFile(allCustomers.getPath());
+			File rooms = new File("datafiles/rooms.txt");
+			Room[] allRooms = HotelFileLoader.getRoomListFromSequentialFile(rooms.getPath());
+			rooms.createNewFile();
+			File reservations = new File("datafiles/unsorted/reservations/AllReservations.txt");
+			reservations.createNewFile();
+			// save reservation records to big reservation file
+			for (int count = 1; count <= 10; count++) {
+				currentReservationFilePath = "datafiles/unsorted/reservations/reservations" + count + ".txt";
+				try {
+					Reservation[] reservationArray = HotelFileLoader.getReservationListFromSequentialFile(
+							currentReservationFilePath, allCustomerObjects, allRooms);
 					ListUtilities.saveListToTextFile(reservationArray, reservations);
-					
-					
+				} catch (IllegalArgumentException iae) {
+					System.out.println(iae.getMessage());
 				}
-			} catch (IOException ie) {
-				// TODO Auto-generated catch block
-				ie.printStackTrace();
-		
-		}
-			
-			System.out.println("rooms done");
 
-	
+			}
+		} catch (IOException ie) {
+			// TODO Auto-generated catch block
+			ie.printStackTrace();
+
+		}
+
+		System.out.println("rooms done");
+
 	}
 	
 }

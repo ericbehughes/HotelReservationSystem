@@ -142,7 +142,6 @@ public class HotelFileLoader {
 		// This method will use the email field in order to find the associated customer
 		// If the customer can not be found, an Illegal Argument Exception will be thrown
 		DawsonCustomer customer = null;
-		Optional<CreditCard> card = null;
 		for(int i =0; i < customerList.length; i++){
 			if(customerList[i].getEmail().equals(email)){
 				Name name = new Name(customerList[i].getName());
@@ -158,12 +157,17 @@ public class HotelFileLoader {
 		// If the room can not be found, an Illegal Argument Exception will be throwned
 		DawsonRoom roomMatch= null;
 		for(int i =0; i < roomList.length; i++ ){ 
-			if (roomList[i].equals(room)){
-				roomMatch = new DawsonRoom(roomList[i].getRoomNumber(),roomList[i+1].getRoomType());
-				break;
+			if (roomList[i].getRoomNumber() == room){
+				try{
+				roomMatch = new DawsonRoom(roomList[i].getRoomNumber(),roomList[i].getRoomType());
+				return roomMatch;
+				}catch (IllegalArgumentException iae) {
+					System.out.println("Invalid room type");
+				}
 			}
 		}
-		return roomMatch;
+		throw new IllegalArgumentException("no room");
+		
 	}
 
 
