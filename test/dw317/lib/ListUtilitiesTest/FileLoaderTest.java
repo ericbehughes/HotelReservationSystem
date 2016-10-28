@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.IOException;
 
 import dw317.hotel.business.interfaces.Customer;
+import dw317.hotel.business.interfaces.Reservation;
 import dw317.hotel.business.interfaces.Room;
 import dw317.hotel.data.HotelFileLoader;
 import group187.hotel.business.DawsonReservation;
@@ -23,6 +24,7 @@ public class FileLoaderTest {
 					try{
 							Customer[] customerArray = HotelFileLoader.getCustomerListFromSequentialFile(currentCustomerFilePath);
 							ListUtilities.saveListToTextFile(customerArray, allCustomers);
+							System.out.println(ListUtilities.recordCount);
 						}catch (IllegalArgumentException iae)
 							{
 							System.out.println(iae.getMessage());
@@ -34,26 +36,37 @@ public class FileLoaderTest {
 			
 			}
 
-			System.out.println("customers done");
-			String currentRoomFilePath;
-			try {
-				File reservations = new File("datafiles/unsorted/customers/AllReservations.txt");
-				reservations.createNewFile();
-				// save reservation records to big reservation file
-				for (int count = 1; count <=  10; count++){
-					currentRoomFilePath = "datafiles/unsorted/reservations/reservations" + count + ".txt";
-					DawsonRoom[] roomArray = HotelFileLoader.getRoomListFromSequentialFile(currentRoomFilePath)
-					ListUtilities.saveListToTextFile(customerArray, reservations);
+		System.out.println("customers done");
+		String currentReservationFilePath;
+		try {
+			File allCustomers = new File("datafiles/unsorted/customers/AllCustomers.txt");
+			allCustomers.createNewFile();
+			Customer[] allCustomerObjects = HotelFileLoader.getCustomerListFromSequentialFile(allCustomers.getPath());
+			File rooms = new File("datafiles/rooms.txt");
+			Room[] allRooms = HotelFileLoader.getRoomListFromSequentialFile(rooms.getPath());
+			rooms.createNewFile();
+			File reservations = new File("datafiles/unsorted/reservations/AllReservations.txt");
+			reservations.createNewFile();
+			// save reservation records to big reservation file
+			for (int count = 1; count <= 10; count++) {
+				currentReservationFilePath = "datafiles/unsorted/reservations/reservations" + count + ".txt";
+				try {
+					Reservation[] reservationArray = HotelFileLoader.getReservationListFromSequentialFile(
+							currentReservationFilePath, allCustomerObjects, allRooms);
+					ListUtilities.saveListToTextFile(reservationArray, reservations);
+				} catch (IllegalArgumentException iae) {
+					System.out.println(iae.getMessage());
 				}
-			} catch (IOException ie) {
-				// TODO Auto-generated catch block
-				ie.printStackTrace();
-		
-		}
-			
-			System.out.println("rooms done");
 
-	
+			}
+		} catch (IOException ie) {
+			// TODO Auto-generated catch block
+			ie.printStackTrace();
+
+		}
+
+		System.out.println("rooms done");
+
 	}
 	
 }

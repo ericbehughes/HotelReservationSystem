@@ -18,22 +18,18 @@ public class EmailTest {
 		Email email1 = new Email("zhu@-abc.com");
 		Email email2 = new Email("ahu@abc.com");
 
-		String str1 = "zhu";
-		String str2 = "abc";
-
-		int result2 = str1.compareToIgnoreCase(str2);
-
-		int result = email1.compareTo(email2);
+		String email1234 = "jaya.haha.gotcha*Jaya*Thebest**";
+		String email21234 = "jaya@ha@gotcha*Jaya*Theworst**";
 
 		email1 = new Email("zhu@abc.com");
 		email2 = new Email("A@bc.com");
 
-		result = email1.compareTo(email2);
+		//result = email1.compareTo(email2);
 
 		email1 = new Email("zhu@ba.com");
 		email2 = new Email("A@bc.com");
 
-		result = email1.compareTo(email2);
+		//result = email1.compareTo(email2);
 
 	}
 }
