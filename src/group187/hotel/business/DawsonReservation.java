@@ -194,31 +194,23 @@ public class DawsonReservation implements Reservation {
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)
 	 */
 	@Override
-	//fixed the compareTo method
+	//Fixed the compareTo method
 	public int compareTo(Reservation o) {
-		int result=0;
-		if(o == null){
-			throw new NullPointerException();
-		}
-			if(this.getRoom().getRoomNumber() == (o.getRoom().getRoomNumber())){
-				if(this.getCheckInDate().toString().equals(o.getCheckInDate().toString())){
-				result= 0; //returns 0 if the two objects are the same
-			}  			
-			if(this.getCheckInDate().isBefore(o.getCheckInDate())){
-				result= 1; 
+			int result=0;
+				if(o == null){
+					throw new NullPointerException();
+				}
+				if(this.room.compareTo(o.getRoom()) > 0)
+					result = 1;
+				if(this.room.compareTo(o.getRoom()) == 0){
+					if(this.getCheckInDate().isBefore(o.getCheckInDate()))
+						result = 1;
+					if(this.getCheckInDate() == o.getCheckInDate())
+						result= 0;
+				}
+			result= -1;	
+			return result;
 			}
-			else if(this.getCheckInDate().isAfter(o.getCheckInDate())){
-				result= -1;
-			}	
-		}
-			if(this.getRoom().getRoomNumber() > (o.getRoom().getRoomNumber())){
-				result= -1;
-			} 
-			else if(this.getRoom().getRoomNumber() < (o.getRoom().getRoomNumber())){
-				result= 1; 
-			}
-		return result;
-	}
 
 
 
