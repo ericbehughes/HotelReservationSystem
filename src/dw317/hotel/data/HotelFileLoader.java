@@ -23,7 +23,7 @@ import group187.hotel.business.DawsonReservation;
 import group187.hotel.business.DawsonRoom;
 
 /**
- * The Class HotelFileLoade
+ * The Class HotelFileLoader
  */
 public class HotelFileLoader {
 	
@@ -173,8 +173,7 @@ public class HotelFileLoader {
 		
 	}
 
-
-	}
+}
 
 	
 	

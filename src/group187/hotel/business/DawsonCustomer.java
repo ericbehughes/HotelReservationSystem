@@ -1,6 +1,3 @@
-/*
- * 
- */
 package group187.hotel.business;
 
 import java.util.Optional;
@@ -38,7 +35,7 @@ public class DawsonCustomer implements Customer {
 	 * @param card the card
 	 */
 	public DawsonCustomer(String firstN, String lastN, Email email, Optional<CreditCard> card){
-		this.email = new Email(email);//
+		this.email = new Email(email);
 		this.name = new Name(firstN, lastN);
 		this.card = card;
 		
