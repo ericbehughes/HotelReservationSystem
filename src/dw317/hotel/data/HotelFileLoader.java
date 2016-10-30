@@ -21,6 +21,7 @@ import dw317.lib.creditcard.CreditCard.CardType;
 import group187.hotel.business.DawsonCustomer;
 import group187.hotel.business.DawsonReservation;
 import group187.hotel.business.DawsonRoom;
+import group187.util.ListUtilities;
 
 /**
  * The Class HotelFileLoader
@@ -44,12 +45,26 @@ public class HotelFileLoader {
 			if (str.isEmpty())
 				continue;
 			String[] array = str.split("\\*");
+			try{
 			for (int i = 0; i < array.length-1; i+=2) {
 				String roomNumber = array[i];
 				RoomType roomType = RoomType.valueOf(array[i+1].toUpperCase());
 				DawsonRoom room = new DawsonRoom(Integer.parseInt(roomNumber), roomType);
 				list.add(room);
+				}
+			}catch(IllegalArgumentException iae) {
+				System.out.println("cant build customer object hotel file illegal argumentt");
+				
 			}
+			
+			catch (NullPointerException npe){
+				System.out.println("cant build customer object hotel file null pointer");
+			}
+			
+			catch (IndexOutOfBoundsException iob){
+				continue;
+			}
+			
 		}
 
 		Room[] rooms = list.toArray(new Room[0]);
@@ -83,7 +98,13 @@ public class HotelFileLoader {
 					DawsonCustomer customer = new DawsonCustomer(name.getFirstName(), name.getLastName(), email, card);
 					list.add(customer);
 				} catch (IllegalArgumentException iae) {
+					System.out.println("cant build customer object hotel file illegal argumentt");
 					
+				}
+				
+				catch (NullPointerException npe)
+				{
+					System.out.println("cant build customer object hotel file null pointer");
 				}
 				
 				catch (IndexOutOfBoundsException iob)
@@ -96,12 +117,6 @@ public class HotelFileLoader {
 		in.close();
 		return customers;
 	 }
-	
-//	public static Reservation[] getReservationListFromSequentialFile(String filename,Customer[] customerList,Room[] roomList)
-//	throws IOException, IllegalArgumentException
-//	{
-//		
-//	}
 
 	 
 	public static Reservation[] getReservationListFromSequentialFile (File file, Customer[] customerList, Room[] roomList)
@@ -116,26 +131,28 @@ public class HotelFileLoader {
 				continue;
 			String [] array = str.split("\\*");
 			int i = 0;
-				Email email = new Email(array[i]);
-				Customer customer = search(customerList, email);
-				if (customer == null) {
-					throw new IllegalArgumentException("The customer has no credit card");
+				
+				try{
+					Email email = new Email(array[i]);
+					Customer customer = search(customerList, email);
+					inYear = Integer.parseInt(array[i+1]);
+					inMonth = Integer.parseInt(array[i+2]);
+					inDay = Integer.parseInt(array[i+3]);
+					outYear = Integer.parseInt(array[i+4]);
+					outMonth = Integer.parseInt(array[i+5]);
+					outDay = Integer.parseInt(array[i+6]);
+					Room room = search(roomList,Integer.parseInt(array[i+7]));
+					DawsonReservation reservation = new DawsonReservation(customer,room,inYear,inMonth,inDay,outYear,outMonth,outDay);
+					list.add(reservation);
+				}catch (IllegalArgumentException iae){
+					System.out.println("cant create customer from search");
+				}catch (NullPointerException npe){
+					System.out.println("null pointer exception getreservationlistfromfile");
 				}
-				inYear = Integer.parseInt(array[i+1]);
-				inMonth = Integer.parseInt(array[i+2]);
-				inDay = Integer.parseInt(array[i+3]);
-				outYear = Integer.parseInt(array[i+4]);
-				outMonth = Integer.parseInt(array[i+5]);
-				outDay = Integer.parseInt(array[i+6]);
-				Room room = search(roomList,Integer.parseInt(array[i+7]));
-				if (room == null) {
-					throw new IllegalArgumentException("The room cannot be found");
-				}
-				DawsonReservation reservation = new DawsonReservation(customer,room,inYear,inMonth,inDay,outYear,outMonth,outDay);
-				list.add(reservation);
-				successfullreservationcount++;
 			
-		}
+			}// end of while
+				
+				successfullreservationcount++;
 		Reservation [] reservation = list.toArray(new Reservation[0]);
 		in.close();
 		return reservation;
@@ -147,12 +164,18 @@ public class HotelFileLoader {
 		DawsonCustomer customer = null;
 		for(int i =0; i < customerList.length; i++){
 			if(customerList[i].getEmail().equals(email)){
+				try{
 				Name name = new Name(customerList[i].getName());
 				customer = new DawsonCustomer(name.getFirstName(),name.getLastName(), email, customerList[i].getCreditCard());
 				return customer;
+				}catch (IllegalArgumentException iae) {
+					System.out.println("name or customer cant be made in search");
+				}
+				
 			}
 		}
-		throw new IllegalArgumentException("Customer cannot be found during search");
+		return customer;
+		
 	}
 
 	private static Room search(Room[] roomList, int room) {
@@ -169,7 +192,7 @@ public class HotelFileLoader {
 				}
 			}
 		}
-		throw new IllegalArgumentException("no room");
+		return roomMatch;
 		
 	}
 
