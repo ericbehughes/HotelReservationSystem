@@ -43,7 +43,13 @@ public class NameTest {
 		// Initialize variables (variables are incorrect format)
 		firstName = "L";
 		lastName = "1-*&^#36734";
-
+		System.out.println("l"+Name.isValidString("l", 2));
+		System.out.println("1-*&^#36734"+Name.isValidString("1-*&^#36734", 2));
+		System.out.println(Name.isValidString("Dav1D", 2));
+		System.out.println(Name.isValidString("Petawwwaaaa", 2));
+		System.out.println(Name.isValidString("kdhjg2y3tr7i", 2));
+		System.out.println(Name.isValidString("eric_joe?", 2));
+		System.out.println(Name.isValidString("jOe", 2));
 		// Create object to test bad var's
 		try {
 			name = new Name(firstName, lastName);
