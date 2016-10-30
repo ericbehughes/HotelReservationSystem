@@ -18,7 +18,7 @@ public class EmailTest {
 
 		Email email1 = new Email("zhu@abc.com");
 		Email email2 = new Email("ahu@abc.com");
-		System.out.println(Name.isValidString("zhu@abc.", 1));
+		System.out.println(Name.isValidString("syndicatdesetudiants@dawsoncollege.qc.ca", 1));
 		System.out.println(Name.isValidString("ahu@abc.com", 1));
 		System.out.println(Name.isValidString("jaya.h@@aha.gotcha*Jaya*Thebest**", 1));
 		System.out.println(Name.isValidString("jaya@ha@gotcha*Jaya*Theworst**", 1));
