@@ -53,7 +53,7 @@ public class HotelFileLoader {
 				list.add(room);
 				}
 			}catch(IllegalArgumentException iae) {
-				System.out.println("cant build customer object hotel file illegal argumentt");
+				System.out.println("cant build room object hotel file illegal argumentt");
 				
 			}
 			
@@ -98,8 +98,11 @@ public class HotelFileLoader {
 					DawsonCustomer customer = new DawsonCustomer(name.getFirstName(), name.getLastName(), email, card);
 					list.add(customer);
 				} catch (IllegalArgumentException iae) {
-					System.out.println("cant build customer object hotel file illegal argumentt");
-					
+					System.out.println("cant build customer object hotel file illegal argumentt   ");
+					for (String arr: array)
+						System.out.print(arr.toString());
+					System.out.println(iae.getMessage());
+				
 				}
 				
 				catch (NullPointerException npe)

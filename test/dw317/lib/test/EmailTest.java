@@ -22,6 +22,8 @@ public class EmailTest {
 		System.out.println(Name.isValidString("ahu@abc.com", 1));
 		System.out.println(Name.isValidString("jaya.h@@aha.gotcha*Jaya*Thebest**", 1));
 		System.out.println(Name.isValidString("jaya@ha@gotcha*Jaya*Theworst**", 1));
+		System.out.println("Is 'JAVA2NOVICE9@gmail.yo.com' a valid email address? "
+                +Name.isValidString("JAVA2NOVICE@gmail.yo.com", 1));
 
 	
 		System.out.println(email1.compareTo(email2));
