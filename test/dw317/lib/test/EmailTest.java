@@ -4,6 +4,7 @@
 package dw317.lib.test;
 
 import dw317.lib.Email;
+import dw317.lib.Name;
 
 public class EmailTest {
 
@@ -15,20 +16,19 @@ public class EmailTest {
 	 */
 	public static void main(String[] args) {
 
-		Email email1 = new Email("zhu@-abc.com");
+		Email email1 = new Email("zhu@abc.com");
 		Email email2 = new Email("ahu@abc.com");
+		System.out.println(Name.isValidString("zhu@abc.", 1));
+		System.out.println(Name.isValidString("ahu@abc.com", 1));
+		System.out.println(Name.isValidString("jaya.h@@aha.gotcha*Jaya*Thebest**", 1));
+		System.out.println(Name.isValidString("jaya@ha@gotcha*Jaya*Theworst**", 1));
 
-		String email1234 = "jaya.haha.gotcha*Jaya*Thebest**";
-		String email21234 = "jaya@ha@gotcha*Jaya*Theworst**";
+	
+		System.out.println(email1.compareTo(email2));
 
-		email1 = new Email("zhu@abc.com");
-		email2 = new Email("A@bc.com");
-
-		//result = email1.compareTo(email2);
-
-		email1 = new Email("zhu@ba.com");
-		email2 = new Email("A@bc.com");
-
+		email1 = new Email("jaya.haha.gotcha*Jaya*Thebest**");
+		email2 = new Email("jaya@ha@gotcha*Jaya*Theworst**");
+		
 		//result = email1.compareTo(email2);
 
 	}
