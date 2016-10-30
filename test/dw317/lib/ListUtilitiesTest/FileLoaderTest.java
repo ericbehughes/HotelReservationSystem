@@ -39,7 +39,7 @@ public class FileLoaderTest {
 			
 			}
 			System.out.println("record count for customers " + ListUtilities.recordCount);
-
+			ListUtilities.recordCount = 0;
 		System.out.println("customers done");
 	
 		try {
@@ -73,7 +73,7 @@ public class FileLoaderTest {
 			// TODO Auto-generated catch block
 		
 		}
-		System.out.println("record count for reservations " + HotelFileLoader.successfullreservationcount);
+		System.out.println("record count for reservations " + ListUtilities.recordCount);
 
 		
 	
