@@ -64,6 +64,7 @@ public class FileLoaderTest {
 					//save reservation to BIG reservation file
 					ListUtilities.saveListToTextFile(reservationsArray,allReservations );
 				} catch (IllegalArgumentException iae) {
+					iae.printStackTrace();
 					System.out.println(iae.getMessage());
 				}
 			
