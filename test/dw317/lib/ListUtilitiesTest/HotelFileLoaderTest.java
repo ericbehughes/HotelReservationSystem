@@ -10,7 +10,7 @@ import group187.hotel.business.DawsonReservation;
 import group187.hotel.business.DawsonRoom;
 import group187.util.ListUtilities;
 
-public class FileLoaderTest {
+public class HotelFileLoaderTest {
 
 	@SuppressWarnings("rawtypes")
 	public static void main(String[] args) {
