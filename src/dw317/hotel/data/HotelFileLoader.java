@@ -98,10 +98,10 @@ public class HotelFileLoader {
 					DawsonCustomer customer = new DawsonCustomer(name.getFirstName(), name.getLastName(), email, card);
 					list.add(customer);
 				} catch (IllegalArgumentException iae) {
-					System.out.println("cant build customer object hotel file illegal argumentt   ");
+					System.out.println("cant build customer object in hotel file loader illegal argument for record  ");
 					for (String arr: array)
-						System.out.print(arr.toString());
-					System.out.println(iae.getMessage());
+						System.out.print(arr.toString()+" \n");
+					System.out.println("\n"+iae.getMessage()+"\n\n");
 				
 				}
 				
@@ -150,17 +150,23 @@ public class HotelFileLoader {
 					DawsonReservation reservation = new DawsonReservation(customer,room,inYear,inMonth,inDay,outYear,outMonth,outDay);
 					list.add(reservation);
 					}
-				}catch (IllegalArgumentException iae){
-					System.out.println(iae.getMessage());
-				}catch (NullPointerException npe){
-					System.out.println("null pointer exception getreservationlistfromfile");
+				}catch (IllegalArgumentException iae) {
+					System.out.println("cant build customer object in hotel file loader illegal argument for record  ");
+					for (String arr: array)
+						System.out.print(arr.toString()+" \n");
+					System.out.println(iae.getMessage()+"\n\n");
+				
+				}
+				
+				catch (NullPointerException npe)
+				{
+					System.out.println("cant build customer object hotel file null pointer");
 				}
 			
 			}// end of while
 				
 				successfullreservationcount++;
 		Reservation [] reservation = list.toArray(new Reservation[list.size()]);
-		System.out.println(reservation.toString());
 		in.close();
 		return reservation;
 	}
