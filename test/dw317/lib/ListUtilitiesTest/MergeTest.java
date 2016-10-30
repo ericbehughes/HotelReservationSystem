@@ -32,16 +32,13 @@ public class MergeTest {
 			else
 				return list3;
 			
-			((Reservation)list1[l1counter]).compareTo((Reservation) list1[l1counter]);
-			((Customer)list1[0]).compareTo((Customer) list1[0]);
-			
 			for (int i =0; i < list1.length + list2.length; i++)
 			{
 				if (l1counter != list1.length && l2counter != list2.length)
 				{
 					if (isReservation){
 						if (((Reservation)list1[l1counter]).compareTo((Reservation) list1[l1counter]) == 0)
-							ListUtilities.saveListToTextFile(list1[1].split("\\*"), file);
+							ListUtilities.saveListToTextFile(((Reservation)list1[l1counter]).toString().split("\\*"), file);
 						if (((Reservation)list1[l1counter]).compareTo((Reservation) list1[l1counter]) < 0){
 							list3[i] = list1[l1counter];
 							l1counter++;
@@ -55,7 +52,7 @@ public class MergeTest {
 					
 					else if (isCustomer){
 						if (((Customer)list1[l1counter]).compareTo((Customer) list1[l1counter]) == 0)
-							ListUtilities.saveListToTextFile(list1[1].split("\\*"), file);
+							ListUtilities.saveListToTextFile(list1[1].toString().split("\\*"), file);
 						if (((Customer)list1[l1counter]).compareTo((Customer) list1[l1counter]) < 0){
 							list3[i] = list1[l1counter];
 							l1counter++;
