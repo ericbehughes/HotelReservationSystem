@@ -27,6 +27,8 @@ import group187.hotel.business.DawsonRoom;
  */
 public class HotelFileLoader {
 	
+	public static int successfullreservationcount = 0;
+	
 	//The private constructor prevents any form of instantionation
 	private HotelFileLoader(){}
 	
@@ -117,7 +119,7 @@ public class HotelFileLoader {
 				Email email = new Email(array[i]);
 				Customer customer = search(customerList, email);
 				if (customer == null) {
-					throw new IllegalArgumentException("The customer cannot be found");
+					throw new IllegalArgumentException("The customer has no credit card");
 				}
 				inYear = Integer.parseInt(array[i+1]);
 				inMonth = Integer.parseInt(array[i+2]);
@@ -131,6 +133,7 @@ public class HotelFileLoader {
 				}
 				DawsonReservation reservation = new DawsonReservation(customer,room,inYear,inMonth,inDay,outYear,outMonth,outDay);
 				list.add(reservation);
+				successfullreservationcount++;
 			
 		}
 		Reservation [] reservation = list.toArray(new Reservation[0]);
@@ -149,7 +152,7 @@ public class HotelFileLoader {
 				return customer;
 			}
 		}
-		throw new IllegalArgumentException("Customer cannot be found");
+		throw new IllegalArgumentException("Customer cannot be found during search");
 	}
 
 	private static Room search(Room[] roomList, int room) {

@@ -51,6 +51,7 @@ public class FileLoaderTest {
 			File roomsFile = new File("datafiles/rooms.txt");
 			roomsFile.createNewFile();
 			Room[] allRooms = HotelFileLoader.getRoomListFromSequentialFile(roomsFile);
+			System.out.println("rooms done");
 			// create a file from customer and rooms list
 			File allReservations = new File("datafiles/unsorted/reservations/AllReservations.txt");
 			allReservations.createNewFile();
@@ -63,7 +64,7 @@ public class FileLoaderTest {
 					//save reservation to BIG reservation file
 					ListUtilities.saveListToTextFile(reservationsArray,allReservations );
 				} catch (IllegalArgumentException iae) {
-					
+					System.out.println(iae.getMessage());
 				}
 			
 			}
@@ -71,9 +72,9 @@ public class FileLoaderTest {
 			// TODO Auto-generated catch block
 		
 		}
-		System.out.println("record count for reservations " + ListUtilities.recordCount);
+		System.out.println("record count for reservations " + HotelFileLoader.successfullreservationcount);
 
-		System.out.println("rooms done");
+		
 	
 
 	}
