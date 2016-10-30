@@ -41,13 +41,19 @@ public class DawsonReservation implements Reservation {
 	public DawsonReservation(Customer customer, Room room, int inYear, int inMonth, int inDay, int outYear,
 			int outMonth, int outDay) {	
 		super();
-		this.customer = customer;
-		this.room = room;
+		if (customer != null && room != null){
+			this.customer = customer;
+			this.room = room;
+		}
+		else
+			throw new IllegalArgumentException("customer or room is null");
+			
 		if (validateDateFormat(inYear,inMonth,inDay) && validateDateFormat(outYear,outMonth,outDay)){
 			if (LocalDate.of(inYear, inMonth, inDay).isBefore(LocalDate.of(outYear, outMonth, outDay))){
 				this.checkIn = LocalDate.of(inYear, inMonth, inDay);
 				this.checkOut = LocalDate.of(outYear, outMonth, outDay);
-			}
+			}else
+				throw new IllegalArgumentException("The time(s) is/are in the wrong format");
 		}
 		else
 			throw new IllegalArgumentException("The time(s) is/are in the wrong format");

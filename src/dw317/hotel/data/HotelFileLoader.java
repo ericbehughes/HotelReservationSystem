@@ -135,9 +135,11 @@ public class HotelFileLoader {
 			String [] array = str.split("\\*");
 			int i = 0;
 				
-				try{
+			try{
 					Email email = new Email(array[i]);
 					Customer customer = search(customerList, email);
+					if (customer != null)
+						if (customer.getCreditCard() != null){
 					inYear = Integer.parseInt(array[i+1]);
 					inMonth = Integer.parseInt(array[i+2]);
 					inDay = Integer.parseInt(array[i+3]);
@@ -147,8 +149,9 @@ public class HotelFileLoader {
 					Room room = search(roomList,Integer.parseInt(array[i+7]));
 					DawsonReservation reservation = new DawsonReservation(customer,room,inYear,inMonth,inDay,outYear,outMonth,outDay);
 					list.add(reservation);
+					}
 				}catch (IllegalArgumentException iae){
-					System.out.println("cant create customer from search");
+					System.out.println(iae.getMessage());
 				}catch (NullPointerException npe){
 					System.out.println("null pointer exception getreservationlistfromfile");
 				}
@@ -156,7 +159,8 @@ public class HotelFileLoader {
 			}// end of while
 				
 				successfullreservationcount++;
-		Reservation [] reservation = list.toArray(new Reservation[0]);
+		Reservation [] reservation = list.toArray(new Reservation[list.size()]);
+		System.out.println(reservation.toString());
 		in.close();
 		return reservation;
 	}
@@ -173,6 +177,9 @@ public class HotelFileLoader {
 				return customer;
 				}catch (IllegalArgumentException iae) {
 					System.out.println("name or customer cant be made in search");
+				}
+				catch (NullPointerException npe) {
+					System.out.println("null pointer in customer search");
 				}
 				
 			}

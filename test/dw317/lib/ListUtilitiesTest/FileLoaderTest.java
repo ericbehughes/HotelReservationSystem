@@ -62,10 +62,17 @@ public class FileLoaderTest {
 					Reservation[] reservationsArray = HotelFileLoader.getReservationListFromSequentialFile(
 							new File("datafiles/unsorted/reservations/reservations" + count + ".txt"), allCustomerObjects, allRooms);
 					//save reservation to BIG reservation file
+					for(Comparable arr: reservationsArray)
+						System.out.println(arr.toString());
 					ListUtilities.saveListToTextFile(reservationsArray,allReservations );
+					
 				} catch (IllegalArgumentException iae) {
 					iae.printStackTrace();
 					System.out.println(iae.getMessage());
+				}
+				catch (NullPointerException npe) {
+					npe.printStackTrace();
+					System.out.println(npe.getMessage());
 				}
 			
 			}
