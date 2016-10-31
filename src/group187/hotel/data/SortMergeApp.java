@@ -88,9 +88,11 @@ public class SortMergeApp {
 				ListUtilities.sort(customerArray);
 				
 				
-				File duplicates = new File("datafiles/duplicates/duplicates.txt");
+				File customerDuplicatesFile = new File("datafiles/duplicates/customerDuplicates.txt");
+				File reservationDuplicatesFile = new File("datafiles/duplicates/reservationDuplicates.txt");
 				try {
-					duplicates.createNewFile();
+					customerDuplicatesFile.createNewFile();
+					reservationDuplicatesFile.createNewFile();
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -111,7 +113,7 @@ public class SortMergeApp {
 					}
 						
 					ListUtilities.sort(array2);
-					Customer[] array = (Customer[]) ListUtilities.merge(array1, array2, duplicates);
+					Customer[] array = (Customer[]) ListUtilities.merge(array1, array2, customerDuplicatesFile);
 					System.out.println("Merged array\n");
 					
 					for (Customer arr : array){
