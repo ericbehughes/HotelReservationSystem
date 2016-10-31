@@ -2,6 +2,7 @@ package group187.hotel.data;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 
 import dw317.hotel.business.interfaces.Customer;
 import dw317.hotel.business.interfaces.Reservation;
@@ -112,6 +113,7 @@ public class SortMergeApp {
 					ListUtilities.sort(array2);
 					Customer[] array = (Customer[]) ListUtilities.merge(array1, array2, duplicates);
 					System.out.println("Merged array\n");
+					
 					for (Customer arr : array){
 						
 						System.out.println(arr.toString());
