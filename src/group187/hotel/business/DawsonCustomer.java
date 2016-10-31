@@ -102,20 +102,7 @@ public class DawsonCustomer implements Customer {
 		if (o == null)
 			throw new NullPointerException("The customer object in the parameter list is null");
 		// handle if same host id
-		if (this.email.getHost().equalsIgnoreCase(o.getEmail().getHost())){
-				if (this.email.getUserId().equalsIgnoreCase(o.getEmail().getUserId())){
-					return 0; //same everything
-				// same host but different userID
-				}
-				else if (this.email.getUserId().compareToIgnoreCase(o.getEmail().getUserId()) > 0)
-					return -1;
-				else if (this.email.getUserId().compareToIgnoreCase(o.getEmail().getUserId()) < 0)
-					return 1;
-		}
-		//handle for different hosts
-		else if (this.email.getHost().compareToIgnoreCase(o.getEmail().getHost())> 0)
-			return -1;
-		return 1;
+		return this.getEmail().compareTo(o.getEmail());
 	}
 
 	// does not return deep copy as address is immutable
