@@ -1,6 +1,8 @@
 package dw317.lib.ListUtilitiesTest;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.lang.reflect.Array;
 
 import dw317.hotel.business.interfaces.Customer;
@@ -10,7 +12,7 @@ import group187.util.ListUtilities;
 public class MergeTest {
 
 	@SuppressWarnings("unchecked")
-	public static Comparable[] main(String[] args) {
+	public static Comparable[] main(String[] args) throws FileNotFoundException {
 		 @SuppressWarnings("rawtypes")
 		Comparable[] list1 = {5, 7, 8, 77, 88, 111},
 			      list2 = {2, 3, 5, 7, 10, 55},
@@ -21,7 +23,12 @@ public class MergeTest {
 			boolean isReservation = false;
 			boolean isCustomer = false;
 			File duplicates = new File("datafiles/duplicates/mergeduplicates.txt");
-			duplicates.createNewFile();
+			try {
+				duplicates.createNewFile();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			
 			if (list1[0] != null){
 				if (list1[0] instanceof Reservation)
@@ -38,7 +45,7 @@ public class MergeTest {
 				{
 					if (isReservation){
 						if (((Reservation)list1[l1counter]).compareTo((Reservation) list1[l1counter]) == 0)
-							ListUtilities.saveListToTextFile(((Reservation)list1[l1counter]).toString().split("\\*"), file);
+							ListUtilities.saveListToTextFile(((Reservation)list1[l1counter]).toString().split("\\*"), duplicates);
 						if (((Reservation)list1[l1counter]).compareTo((Reservation) list1[l1counter]) < 0){
 							list3[i] = list1[l1counter];
 							l1counter++;
@@ -52,7 +59,12 @@ public class MergeTest {
 					
 					else if (isCustomer){
 						if (((Customer)list1[l1counter]).compareTo((Customer) list1[l1counter]) == 0)
-							ListUtilities.saveListToTextFile(list1[1].toString().split("\\*"), file);
+							try {
+								ListUtilities.saveListToTextFile(list1[1].toString().split("\\*"), duplicates);
+							} catch (FileNotFoundException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
 						if (((Customer)list1[l1counter]).compareTo((Customer) list1[l1counter]) < 0){
 							list3[i] = list1[l1counter];
 							l1counter++;
@@ -79,9 +91,7 @@ public class MergeTest {
 				}
 			}
 				
-	 			for (Comparable arr : list3)
-	 				System.out.println(arr.toString());
-	 			System.out.println(duplicates);
+	 			return list3;
 	}
 
 	}
