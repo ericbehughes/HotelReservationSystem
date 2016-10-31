@@ -1,10 +1,10 @@
 package group187.hotel.business;
 import java.util.Comparator;
-
 import dw317.hotel.business.RoomType;
 import dw317.hotel.business.interfaces.Reservation;
 import dw317.lib.Email;
-import dw317.hotel.business.ReservationByCustSorted;
+import group187.hotel.business.ReservationByCustSorted;
+
 public class ReservationByCustSortedTest{
 	
 	public static void main(String[] args) {
@@ -23,6 +23,7 @@ public class ReservationByCustSortedTest{
 		
 		ReservationByCustSorted resTest = new ReservationByCustSorted();
 		System.out.println(resTest.compare(r1, r2));
+		System.out.println(resTest.compare(r1, r1));
 		
 	}
 

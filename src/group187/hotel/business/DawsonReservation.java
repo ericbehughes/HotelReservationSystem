@@ -202,20 +202,18 @@ public class DawsonReservation implements Reservation {
 	@Override
 	//Fixed the compareTo method
 	public int compareTo(Reservation o) {
-			int result=0;
 				if(o == null){
 					throw new NullPointerException();
 				}
 				if(this.room.compareTo(o.getRoom()) > 0)
-					result = 1;
+					return 1;
 				if(this.room.compareTo(o.getRoom()) == 0){
 					if(this.getCheckInDate().isBefore(o.getCheckInDate()))
-						result = 1;
+						return 1;
 					if(this.getCheckInDate() == o.getCheckInDate())
-						result= 0;
+						return 0;
 				}
-			result= -1;	
-			return result;
+			return -1;	
 			}
 
 
