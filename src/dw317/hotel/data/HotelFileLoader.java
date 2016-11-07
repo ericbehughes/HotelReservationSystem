@@ -8,8 +8,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
+
 import dw317.hotel.business.RoomType;
 import dw317.hotel.business.interfaces.Customer;
 import dw317.hotel.business.interfaces.Reservation;
@@ -21,7 +21,6 @@ import dw317.lib.creditcard.CreditCard.CardType;
 import group187.hotel.business.DawsonCustomer;
 import group187.hotel.business.DawsonReservation;
 import group187.hotel.business.DawsonRoom;
-import group187.util.ListUtilities;
 
 /**
  * The Class HotelFileLoader
