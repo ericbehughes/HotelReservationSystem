@@ -1,5 +1,6 @@
 package group187.hotel.data;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,8 +38,11 @@ public class SequentialTextFileList implements ListPersistenceObject{
 	public List<Room> getRoomDatabase() {
 		Room[] rooms;
 		try{
+			
+			File roomFile = new File(roomFilename);
+			roomFile.createNewFile();
 			rooms = 
-			HotelFileLoader.getRoomListFromSequentialFile(roomFilename);
+			HotelFileLoader.getRoomListFromSequentialFile(roomFile);
 		}
 		catch (IOException e) {
 			return new ArrayList<Room>();
@@ -61,8 +65,10 @@ public class SequentialTextFileList implements ListPersistenceObject{
 	public List<Customer> getCustomerDatabase() {
 		Customer[] custs;
 		try{
+			File customerFile = new File(customerFilename);
+			customerFile.createNewFile();
 			custs = 
-			HotelFileLoader.getCustomerListFromSequentialFile(customerFilename);
+			HotelFileLoader.getCustomerListFromSequentialFile(customerFile);
 		}
 		catch (IOException e) {
 			return new ArrayList<Customer>();
@@ -88,12 +94,21 @@ public class SequentialTextFileList implements ListPersistenceObject{
 		Reservation[] reservs;
 
 		try{
+			// Create the room file
+			File roomFile = new File(roomFilename);
+			roomFile.createNewFile();
 			rooms = 
-			HotelFileLoader.getRoomListFromSequentialFile(roomFilename);
+			HotelFileLoader.getRoomListFromSequentialFile(roomFile);
+			// Create the customer file
+			File customerFile = new File(customerFilename);
+			customerFile.createNewFile();
 			custs = 
-			HotelFileLoader.getCustomerListFromSequentialFile(customerFilename);
+			HotelFileLoader.getCustomerListFromSequentialFile(customerFile);
+			// Create the reservation file
+			File reservationFile = new File(reservationFilename);
+			reservationFile.createNewFile();
 			reservs =
-			HotelFileLoader.getReservationListFromSequentialFile(reservationFilename, custs, rooms);					
+			HotelFileLoader.getReservationListFromSequentialFile(reservationFile, custs, rooms);					
 		}
 		catch (IOException e) {
 			return new ArrayList<Reservation>();
@@ -115,7 +130,10 @@ public class SequentialTextFileList implements ListPersistenceObject{
 		//For now we�ll use the existing saveListToTextFile utility method.
 		Customer[] custArray = 
 				custs.toArray(new Customer[custs.size()]);
-		ListUtilities.saveListToTextFile(custArray, customerFilename);
+		// Create the customer file
+		File customerFile = new File(customerFilename);
+		customerFile.createNewFile();
+		ListUtilities.saveListToTextFile(custArray, customerFile);
 	}
 
 	/**
@@ -126,6 +144,9 @@ public class SequentialTextFileList implements ListPersistenceObject{
 		//For now we�ll use the existing saveListToTextFile utility method.
 		Reservation[] resArray = 
 				reservs.toArray(new Reservation[reservs.size()]);
-		ListUtilities.saveListToTextFile(resArray, reservationFilename);	
+		// Create the reservation file
+		File reservationFile = new File(reservationFilename);
+		reservationFile.createNewFile();
+		ListUtilities.saveListToTextFile(resArray, reservationFile);	
 	}
 }
