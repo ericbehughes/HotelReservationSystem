@@ -41,12 +41,12 @@ public class RoomListDBTest {
 			if (!dir.exists()){  
 				dir.mkdirs();
 			}
-			ListUtilities.saveListToTextFile(rooms, 
-					"testfiles/testRooms.txt");
-			ListUtilities.saveListToTextFile(custs, 
-					"testfiles/testCustomers.txt");
-			ListUtilities.saveListToTextFile(reservs, 
-					"testfiles/testReservations.txt");
+		File testRooms = new File("testfiles/testRooms.txt");
+		File testCustomers = new File("testfiles/testCustomers.txt");
+		File testReservations = new File("testfiles/testReservations.txt");
+			ListUtilities.saveListToTextFile(rooms, testRooms);
+			ListUtilities.saveListToTextFile(custs, testCustomers);
+			ListUtilities.saveListToTextFile(reservs,testReservations );
 		}
 		catch(IOException io){
 			System.out.println
