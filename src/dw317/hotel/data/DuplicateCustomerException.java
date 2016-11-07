@@ -1,5 +1,7 @@
 package dw317.hotel.data;
 
+import dw317.lib.Email;
+
 /**
  * This exception signals that the provided customer email exists already.
  */
@@ -10,7 +12,8 @@ public class DuplicateCustomerException extends Exception {
 		super("The provided Email address already exists.");
 	}
 
-	public DuplicateCustomerException(String message) {
+	public DuplicateCustomerException(String message, Email email) {
 		super(message);
+		System.out.println("Email: " + email.toString());
 	}
 }
