@@ -1,9 +1,6 @@
 package group187.hotel.business;
-import java.util.Comparator;
 import dw317.hotel.business.RoomType;
-import dw317.hotel.business.interfaces.Reservation;
 import dw317.lib.Email;
-import group187.hotel.business.ReservationByCheckOutSorted;
 public class ReservationByCheckOutSortedTest {
 
 	public static void main(String[] args) {

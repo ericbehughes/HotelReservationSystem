@@ -2,7 +2,6 @@ package group187.hotel.data;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 
 import dw317.hotel.business.interfaces.Customer;
 import dw317.hotel.business.interfaces.Reservation;

@@ -6,13 +6,11 @@ import dw317.hotel.business.interfaces.Customer;
 import dw317.hotel.business.interfaces.Reservation;
 import dw317.hotel.business.interfaces.Room;
 import dw317.hotel.data.HotelFileLoader;
-import group187.hotel.business.DawsonReservation;
-import group187.hotel.business.DawsonRoom;
 import group187.util.ListUtilities;
 
 public class HotelFileLoaderTest {
 
-	@SuppressWarnings("rawtypes")
+	
 	public static void main(String[] args) {
 			
 		// TEST getCustomerListFromSequentialFile

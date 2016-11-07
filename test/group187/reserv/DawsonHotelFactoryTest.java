@@ -10,7 +10,6 @@ import dw317.lib.Email;
 import dw317.lib.Name;
 import dw317.lib.creditcard.Amex;
 import dw317.lib.creditcard.CreditCard;
-import dw317.lib.creditcard.MasterCard;
 import group187.hotel.business.DawsonCustomer;
 import group187.hotel.business.DawsonHotelFactory;
 import group187.hotel.business.DawsonReservation;
