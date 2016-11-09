@@ -12,6 +12,7 @@ import dw317.hotel.data.interfaces.CustomerDAO;
 import dw317.hotel.data.interfaces.ListPersistenceObject;
 import dw317.lib.Email;
 import dw317.lib.creditcard.CreditCard;
+import group187.util.ListUtilities;
 
 public class CustomerListDB implements CustomerDAO{
 	private List<Customer> database;
@@ -38,7 +39,10 @@ public class CustomerListDB implements CustomerDAO{
 	public void add(Customer cust) throws DuplicateCustomerException {
 		// Create a copy of the customer and add to the database
 		Customer custCopy = cust;
-		database.add(custCopy);
+		// Use bianry search to find proper index
+		int index = binarySearch(custCopy);
+		// Add customer
+		database.add(index, custCopy);
 		
 	}
 	
@@ -60,33 +64,27 @@ public class CustomerListDB implements CustomerDAO{
 	}
 	
 	private int binarySearch(Customer customer){
-		Customer custObj; // Customer var to hold objects from database
-		Email email = customer.getEmail(), // Email from customer passed through parameter
-			  emailObj; // Email var to hold objects from database
-		int index = -1, // Index where to add new customer, -1 if duplicate
-			startIndex = 0, // Start index where to start searching
+		int startIndex = 0, // Start index where to start searching
 		    endIndex = database.size(); // End index where to stop searching
-		Iterator iterator = database.iterator(); // Iterator object to iterate through list
-		while (iterator.hasNext()){
-			custObj = (Customer)iterator.next();
-			emailObj = custObj.getEmail();
 			while (endIndex >= startIndex){
 				int  midIndex = (endIndex+startIndex) / 2;
+				Email temp = database.get(midIndex).getEmail();
 				
-				if (database.get(midIndex).getEmail().equals(email))
-					return index;
+				if (temp.compareTo(customer.getEmail()) < 0){			
+					startIndex = midIndex+1;
+				}
+	
+				else if (temp.compareTo(customer.getEmail()) > 0){
+					endIndex = midIndex -1;
+				}
 				
-				else if (database.get(midIndex).getEmail().compareTo(email) < 0)
-					startIndex = midIndex + 1;
-				
-				else if (database.get(midIndex).getEmail().compareTo(email) > 0)
-					endIndex = midIndex - 1;
+				else if (temp.equals(customer.getEmail())){
+					return midIndex;
+				}
 				
 				
 			}
-			
- 		}
-		return -1;
-		
+			return startIndex;
+
 	}
 }
