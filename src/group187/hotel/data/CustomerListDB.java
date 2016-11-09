@@ -41,11 +41,13 @@ public class CustomerListDB implements CustomerDAO{
 		database.add(custCopy);
 		
 	}
+	
 	@Override
 	public void disconnect() throws IOException {
-		//
-		
+		listPersistenceObject.saveCustomerDatabase(database);
+		database = null;
 	}
+	
 	@Override
 	public Customer getCustomer(Email email) throws NonExistingCustomerException {
 		// TODO Auto-generated method stub
@@ -75,10 +77,10 @@ public class CustomerListDB implements CustomerDAO{
 					return index;
 				
 				else if (database.get(midIndex).getEmail().compareTo(email) < 0)
-					endIndex = midIndex;
+					startIndex = midIndex + 1;
 				
 				else if (database.get(midIndex).getEmail().compareTo(email) > 0)
-					startIndex = midIndex;
+					endIndex = midIndex - 1;
 				
 				
 			}
