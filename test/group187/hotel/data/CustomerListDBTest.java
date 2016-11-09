@@ -27,7 +27,7 @@ public class CustomerListDBTest {
 
 			customer1.setCreditCard(cardTest1);
 
-			Email email2 = new Email("fhse@apl.com");
+			Email email2 = new Email("fhse@caa.com");
 			Name name2 = new Name("something", "something");
 			Optional<CreditCard> cardTest2 = Optional.of(new Amex("374616906032009"));
 			DawsonCustomer customer2 = new DawsonCustomer(name2.getFirstName(), name2.getLastName(), email2, cardTest2);
@@ -57,22 +57,44 @@ public class CustomerListDBTest {
 		    endIndex = database.size(); // End index where to stop searching
 			while (endIndex >= startIndex){
 				int  midIndex = (endIndex+startIndex) / 2;
-				
-				if (database.get(midIndex).getEmail().compareTo(email) < 0){			
-					endIndex = midIndex;
-					startIndex++;
+				Email temp = database.get(midIndex).getEmail();
+				if (temp.compareTo(email) < 0){			
+					startIndex = midIndex+1;
 				}
 	
-				else if (database.get(midIndex).getEmail().compareTo(email) > 0){
-					startIndex = midIndex;
-					endIndex--;
+				else if (temp.compareTo(email) > 0){
+					endIndex = midIndex -1;
 				}
-			
-				if ((database.get(midIndex - 1).getEmail().compareTo(email) < 0) && (database.get(midIndex + 1).getEmail().compareTo(email) > 0))
-					System.out.println("The index where the customer should go is: " + midIndex);
+				
+//				if ((database.get(midIndex - 1).getEmail().compareTo(email) < 0) && (database.get(midIndex + 1).getEmail().compareTo(email) > 0))
+//					System.out.println("The index where the customer should go is: " + midIndex);
 				
 			}
-			
- 	}
+			System.out.println(startIndex);
 
+	}
 }
+			
+			/*private int binarySearch(List<Integer> list, Integer value) {
+		        int low = 0;
+		        int high = list.size() - 1;
+
+		        while (low <= high) {
+		            int mid = (low + high) / 2;
+		            Integer midVal = list.get(mid);
+		            int cmp = midVal.compareTo(value);
+
+		            if (cmp < 0)
+		                low = mid + 1;
+		            else if (cmp > 0)
+		                high = mid - 1;
+		            else
+		                return mid;
+		        }
+		        return low;
+		    }
+		    **/
+		
+			
+ 
+
