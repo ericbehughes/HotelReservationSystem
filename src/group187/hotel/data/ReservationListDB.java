@@ -44,12 +44,12 @@ public class ReservationListDB implements ReservationDAO {
 		// Check if reservation object is already in the list
 		for (int i = 0; i < database.size(); i++)
 			if (reserv.equals(database.get(i))){
-				throw new DuplicateReservationException("The reservation: " + reserv.toString() + " is already in the list")
-				found = true;
+				throw new DuplicateReservationException("The reservation: " + reserv.toString() + " is already in the list");
 			}
-		if (found == false){
-			Reservation reservationObj = reserv;
-		}
+		Reservation reservationObj = reserv; // Create a copy of the reserv object to add to the list
+		int index = binarySearch(reservationObj); // Get the index to add the reservation object in proper order
+		database.add(index, reservationObj); // Add the object at the proper index
+		
 	}
 	@Override
 	public void disconnect() throws IOException {
