@@ -97,16 +97,22 @@ public class ReservationListDB implements ReservationDAO {
 	}
 	@Override
 	public List<Room> getFreeRooms(LocalDate checkin, LocalDate checkout) {
-		LocalDate[] dates;
+		boolean found = false;
 		List<Room> reservedRooms = getReservedRooms(checkin, checkout),
 				   freeRooms = new ArrayList<>();
-		for (int i = 0; i < reservedRooms.size(); i++){
-			for (int j = 0; j < allRooms.size(); j++){
-				DawsonRoom roomTemp = (DawsonRoom)allRooms.get(j);
-				dates = getCheckInCheckOutForRoom(roomTemp);
-				LocalDate tempCheckIn = dates[0],
-						  tempCheckOut = dates[1];
+		for (int i = 0; i < allRooms.size(); i++){
+			DawsonRoom roomTemp = (DawsonRoom)allRooms.get(i);
+			for (int j = 0; j < reservedRooms.size(); j++){
+				DawsonRoom reservedTemp = (DawsonRoom)reservedRooms.get(j);
+					if (roomTemp.equals(reservedTemp)){
+						found = true;
+					}
 			}
+			if (!found){
+				freeRooms.add(roomTemp);
+			}
+			found = false;
+				
 		}
 		return null;
 	}
@@ -144,17 +150,17 @@ public class ReservationListDB implements ReservationDAO {
 				return midIndex;
 		}
 		return startIndex;
-	}		
+	}
 	
 	private LocalDate[] getCheckInCheckOutForRoom(Room room){
 		LocalDate[] dates = new LocalDate[2];
 		DawsonReservation reservObj;
-		DawsonRoom roomObj = (DawsonRoom)room;
+		DawsonRoom roomObj;
 		for (int i = 0; i < database.size(); i++){
 			reservObj = (DawsonReservation)database.get(i);
 			for (int j = 0; j < allRooms.size(); j++){
 				roomObj = (DawsonRoom)allRooms.get(j);
-				if (roomObj.equals(reservObj.getRoom())){
+				if (roomObj.equals(reservObj.getRoom()) && roomObj.equals(room)){
 					dates[0] = reservObj.getCheckInDate();
 					dates[1] = reservObj.getCheckOutDate();
 					return dates;
