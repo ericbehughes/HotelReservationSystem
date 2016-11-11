@@ -50,22 +50,39 @@ public class ReservationListDBTest {
 			//2017*12*28*2018*1*3*101
 			DawsonReservation r1 = new DawsonReservation(customer1, rm1, 2017, 12, 28, 2018, 1, 3);
 			
-			//DawsonReservation r2 = new DawsonReservation(customer2, rm2, 2015, 9, 1, 2016, 9, 9);
+			DawsonReservation r2 = new DawsonReservation(customer2, rm2, 2015, 9, 1, 2016, 9, 9);
 					
 			
 			SequentialTextFileList obj = new SequentialTextFileList(roomFilename, customerFilename, reservationFilename);
 			DawsonHotelFactory factory = DawsonHotelFactory.DAWSON;
 			CustomerListDB cDB = new CustomerListDB(obj, factory);
 			ReservationListDB reservdb = new ReservationListDB(obj, factory);
-			
 			try {
 				cDB.add(customer1);
-				reservdb.add(r1);
-				LocalDate checkin = r1.getCheckInDate();
-				LocalDate checkout = r1.getCheckOutDate();
+				//reservdb.add(r1);
+				reservdb.add(r2);
+				LocalDate checkin = r2.getCheckInDate();
+				LocalDate checkout = r2.getCheckOutDate();
+				List<Room> freeRooms = reservdb.getFreeRooms(checkin, checkout, RoomType.NORMAL);
 				cDB.toString();
+				System.out.println("");
+				System.out.println("");
+				System.out.println("");
+				System.out.println("");
+				System.out.println("--------------------------------");
+				System.out.println("Free rooms:");
+				for (Room room : freeRooms)
+					System.out.println(room.toString());
+				System.out.println("--------------------------------");
+				System.out.println("");
+				System.out.println("");
+				System.out.println("");
+				System.out.println("");
+			
 				for (Room r :reservdb.getReservedRooms(checkin, checkout))
 					System.out.println(r.toString());
+				
+				System.out.println(reservdb.toString());
 				
 			} catch (DuplicateReservationException | DuplicateCustomerException e) {
 				// TODO Auto-generated catch block

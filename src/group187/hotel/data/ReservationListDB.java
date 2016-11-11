@@ -117,6 +117,13 @@ public class ReservationListDB implements ReservationDAO {
 		return freeRooms;
 	}
 	@Override
+	public String toString() {
+		 System.out.println("Number of reservations in database: " + database.size() + "\n");
+		for (Reservation arr: database)
+			System.out.println(arr.toString());
+return "";
+	}
+	@Override
 	public List<Room> getFreeRooms(LocalDate checkin, LocalDate checkout, RoomType roomType) {
 		boolean found = false;
 		List<Room> reservedRooms = getReservedRooms(checkin, checkout),
@@ -142,8 +149,10 @@ public class ReservationListDB implements ReservationDAO {
 		LocalDate date;
 		date = LocalDate.now();
 		for (int i = 0; i < database.size(); i++){
-			if (database.get(i).getCheckOutDate().isBefore(date))
+			if (database.get(i).getCheckOutDate().isBefore(date)){
+				System.out.println("The checkout date: " +database.get(i).getCheckOutDate() + " is before the current date: " + date);
 				database.remove(i);
+			}
 		}
 		
 	}
