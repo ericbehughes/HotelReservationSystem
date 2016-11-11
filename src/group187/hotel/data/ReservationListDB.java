@@ -14,6 +14,7 @@ import dw317.hotel.data.NonExistingReservationException;
 import dw317.hotel.data.interfaces.ListPersistenceObject;
 import dw317.hotel.data.interfaces.ReservationDAO;
 import dw317.lib.Email;
+import group187.hotel.business.DawsonReservation;
 import group187.hotel.business.DawsonRoom;
 
 public class ReservationListDB implements ReservationDAO {
@@ -41,25 +42,15 @@ public class ReservationListDB implements ReservationDAO {
 
 	@Override
 	public void add(Reservation reserv) throws DuplicateReservationException {
-		boolean found = false;
-		// Check if reservation object is already in the list
 		for (int i = 0; i < database.size(); i++)
-			if (reserv.equals(database.get(i))){
+			if (reserv.equals(database.get(i)))
 				throw new DuplicateReservationException("The reservation: " + reserv.toString() + " is already in the list");
-
-			}
-
-			found = true;
-		if (found == false){
-			Reservation reservationObj = reserv;
+		
+		int index = binarySearch(reserv); // Find the index for the object to keep order
+		Reservation reservationObj = factory.getReservationInstance(reserv); // Create a copy of the object
+		database.add(index, reservationObj); // Add the copy
 		}
 
-		Reservation reservationObj = reserv; // Create a copy of the reserv object to add to the list
-		int index = binarySearch(reservationObj); // Get the index to add the reservation object in proper order
-		database.add(index, reservationObj); // Add the object at the proper index
-		
-
-	}
 	@Override
 	public void disconnect() throws IOException {
 		// TODO Auto-generated method stub
@@ -97,27 +88,24 @@ public class ReservationListDB implements ReservationDAO {
 	}
 	
 	private <T> int binarySearch(T o){
-		Reservation reservObj = null;
-		Room roomObj = null;
+		DawsonReservation reservObj = null;
 		if (o instanceof Reservation)
-			reservObj = (Reservation)o;
-		else if (o instanceof Room)
-			roomObj = (DawsonRoom)o.;
+			reservObj = (DawsonReservation)o;
 		else
-			throw new IllegalArgumentException("CustomerListDB - binarySearch(T o) - The object in the parameter must be either an Email or a Customer");
+			throw new IllegalArgumentException("ReservationListDB - binarySearch(T o) - The object in the parameter must be a Reservation");
 		
 		int startIndex = 0, // Start index where to start searching
 		endIndex = database.size(); // End index where to stop searching
 		while (endIndex >= startIndex){
 			int  midIndex = (endIndex+startIndex) / 2;
-			Email temp = database.get(midIndex).getEmail();
-			if (temp.compareTo(emailObj) < 0)			
+			DawsonReservation temp = (DawsonReservation)database.get(midIndex);
+			if (temp.compareTo(reservObj) < 0)			
 				startIndex = midIndex+1;
 				
-		else if (temp.compareTo(emailObj) > 0)
+		else if (temp.compareTo(reservObj) > 0)
 				endIndex = midIndex -1;
 
-			else if (temp.equals(emailObj))
+			else if (temp.equals(reservObj))
 				return midIndex;
 		}		
 		return startIndex;
