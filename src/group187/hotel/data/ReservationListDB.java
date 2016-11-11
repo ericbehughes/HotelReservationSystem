@@ -118,12 +118,33 @@ public class ReservationListDB implements ReservationDAO {
 	}
 	@Override
 	public List<Room> getFreeRooms(LocalDate checkin, LocalDate checkout, RoomType roomType) {
-		// TODO Auto-generated method stub
-		return null;
+		boolean found = false;
+		List<Room> reservedRooms = getReservedRooms(checkin, checkout),
+				   freeRooms = new ArrayList<>();
+		for (int i = 0; i < allRooms.size(); i++){
+			DawsonRoom roomTemp = (DawsonRoom)allRooms.get(i);
+			for (int j = 0; j < reservedRooms.size(); j++){
+				DawsonRoom reservedTemp = (DawsonRoom)reservedRooms.get(j);
+					if (roomTemp.equals(reservedTemp) && roomTemp.getRoomType().equals(roomType)){
+						found = true;
+					}
+			}
+			if (!found){
+				freeRooms.add(roomTemp);
+			}
+			found = false;
+				
+		}
+		return freeRooms;
 	}
 	@Override
 	public void clearAllPast() {
-		// TODO Auto-generated method stub
+		LocalDate date;
+		date = LocalDate.now();
+		for (int i = 0; i < database.size(); i++){
+			if (database.get(i).getCheckOutDate().isBefore(date))
+				database.remove(i);
+		}
 		
 	}
 	
