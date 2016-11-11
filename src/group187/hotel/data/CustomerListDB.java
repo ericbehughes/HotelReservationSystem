@@ -85,7 +85,7 @@ public class CustomerListDB implements CustomerDAO{
 		temp.setCreditCard(Optional.ofNullable(card)); // Sets the credit card
 		database.add(index, temp); // Updates the customer at index
 		database.remove(index+1); // Delete the old reference
-	}
+	}	
 	
 	private <T> int binarySearch(T o){
 		Email emailObj = null;
