@@ -16,6 +16,8 @@ import dw317.lib.creditcard.CreditCard;
 import group187.util.ListUtilities;
 
 public class CustomerListDB implements CustomerDAO{
+	
+
 	private List<Customer> database;
 	private final ListPersistenceObject listPersistenceObject;
 	private final HotelFactory factory;
@@ -34,6 +36,18 @@ public class CustomerListDB implements CustomerDAO{
 		this.factory = factory;
 		// Fill the database
 		database = listPersistenceObject.getCustomerDatabase();
+	}
+	/*
+	Number of customers in database: 8
+	raj@king.ru*Raj*Wong*visa*4556737586899855
+	joe.mancini@mail.me*Joe*Mancini**
+	*/
+	@Override
+	public String toString() {
+		return "Number of customers in database: " + database.size() + "\n"+
+				database.toString();
+		
+		
 	}
 	
 	@Override
