@@ -97,7 +97,17 @@ public class ReservationListDB implements ReservationDAO {
 	}
 	@Override
 	public List<Room> getFreeRooms(LocalDate checkin, LocalDate checkout) {
-		// TODO Auto-generated method stub
+		LocalDate[] dates;
+		List<Room> reservedRooms = getReservedRooms(checkin, checkout),
+				   freeRooms = new ArrayList<>();
+		for (int i = 0; i < reservedRooms.size(); i++){
+			for (int j = 0; j < allRooms.size(); j++){
+				DawsonRoom roomTemp = (DawsonRoom)allRooms.get(j);
+				dates = getCheckInCheckOutForRoom(roomTemp);
+				LocalDate tempCheckIn = dates[0],
+						  tempCheckOut = dates[1];
+			}
+		}
 		return null;
 	}
 	@Override
@@ -113,6 +123,7 @@ public class ReservationListDB implements ReservationDAO {
 	
 	private <T> int binarySearch(T o){
 		DawsonReservation reservObj = null;
+		DawsonRoom roomObj = null;
 		if (o instanceof Reservation)
 			reservObj = (DawsonReservation)o;
 		else
@@ -131,8 +142,26 @@ public class ReservationListDB implements ReservationDAO {
 
 			else if (temp.equals(reservObj))
 				return midIndex;
-		}		
+		}
 		return startIndex;
-	}			
+	}		
+	
+	private LocalDate[] getCheckInCheckOutForRoom(Room room){
+		LocalDate[] dates = new LocalDate[2];
+		DawsonReservation reservObj;
+		DawsonRoom roomObj = (DawsonRoom)room;
+		for (int i = 0; i < database.size(); i++){
+			reservObj = (DawsonReservation)database.get(i);
+			for (int j = 0; j < allRooms.size(); j++){
+				roomObj = (DawsonRoom)allRooms.get(j);
+				if (roomObj.equals(reservObj.getRoom())){
+					dates[0] = reservObj.getCheckInDate();
+					dates[1] = reservObj.getCheckOutDate();
+					return dates;
+				}
+			}
+		}
+		return null;
+	}	
 	
 }
