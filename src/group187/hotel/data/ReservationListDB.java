@@ -48,7 +48,7 @@ public class ReservationListDB implements ReservationDAO {
 			if (reserv.equals(database.get(i)))
 				throw new DuplicateReservationException("The reservation: " + reserv.toString() + " is already in the list");
 		if (factory == null)
-			throw new IllegalArgumentException("ReservationLisrtDB - factory cannot be null");
+			throw new IllegalArgumentException("ReservationListDB - factory cannot be null");
 		int index = binarySearch(reserv); // Find the index for the object to keep order
 		Reservation reservationObj = factory.getReservationInstance(reserv); // Create a copy of the object
 		database.add(index, reservationObj); // Add the copy
