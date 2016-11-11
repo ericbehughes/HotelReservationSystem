@@ -14,6 +14,7 @@ import dw317.hotel.data.NonExistingReservationException;
 import dw317.hotel.data.interfaces.ListPersistenceObject;
 import dw317.hotel.data.interfaces.ReservationDAO;
 import dw317.lib.Email;
+import group187.hotel.business.DawsonRoom;
 
 public class ReservationListDB implements ReservationDAO {
 	
@@ -95,29 +96,31 @@ public class ReservationListDB implements ReservationDAO {
 		
 	}
 	
-	private int binarySearch(Reservation resObj){
+	private <T> int binarySearch(T o){
+		Reservation reservObj = null;
+		Room roomObj = null;
+		if (o instanceof Reservation)
+			reservObj = (Reservation)o;
+		else if (o instanceof Room)
+			roomObj = (DawsonRoom)o.;
+		else
+			throw new IllegalArgumentException("CustomerListDB - binarySearch(T o) - The object in the parameter must be either an Email or a Customer");
+		
 		int startIndex = 0, // Start index where to start searching
-		    endIndex = database.size(); // End index where to stop searching
-			while (endIndex >= startIndex){
-				int  midIndex = (endIndex+startIndex) / 2;
-				Reservation temp = database.get(midIndex);
+		endIndex = database.size(); // End index where to stop searching
+		while (endIndex >= startIndex){
+			int  midIndex = (endIndex+startIndex) / 2;
+			Email temp = database.get(midIndex).getEmail();
+			if (temp.compareTo(emailObj) < 0)			
+				startIndex = midIndex+1;
 				
-				if (temp.compareTo(resObj) < 0){			
-					startIndex = midIndex+1;
-				}
-	
-				else if (temp.compareTo(resObj) > 0){
-					endIndex = midIndex -1;
-				}
-				
-				else if (temp.equals(resObj)){
-					return midIndex;
-				}
-				
-				
-			}
-			return startIndex;
+		else if (temp.compareTo(emailObj) > 0)
+				endIndex = midIndex -1;
 
-	}
+			else if (temp.equals(emailObj))
+				return midIndex;
+		}		
+		return startIndex;
+	}			
 	
 }
