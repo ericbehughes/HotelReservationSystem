@@ -81,7 +81,7 @@ public class CustomerListDB implements CustomerDAO{
 			while (endIndex >= startIndex){
 				int  midIndex = (endIndex+startIndex) / 2;
 				Email temp = database.get(midIndex).getEmail();
-				if ( o instance Email)
+				if ( o instanceof Email)
 				else if (o instance customer )
 				if (temp.compareTo(customer.getEmail()) < 0){			
 					startIndex = midIndex+1;
@@ -114,7 +114,7 @@ public class CustomerListDB implements CustomerDAO{
 						return midIndex;
 					}
 				}		
->>>>>>> branch 'Development' of https://github.com/xavier-berthiaume/HotelReservationSystem.git
+
 			return startIndex;
 	}
 
