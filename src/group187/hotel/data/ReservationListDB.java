@@ -44,9 +44,10 @@ public class ReservationListDB implements ReservationDAO {
 		// Check if reservation object is already in the list
 		for (int i = 0; i < database.size(); i++)
 			if (reserv.equals(database.get(i))){
-				throw new DuplicateReservationException("The reservation: " + reserv.toString() + " is already in the list")
-				found = true;
+				throw new DuplicateReservationException("The reservation: " + reserv.toString() + " is already in the list");
+				
 			}
+			found = true;
 		if (found == false){
 			Reservation reservationObj = reserv;
 		}

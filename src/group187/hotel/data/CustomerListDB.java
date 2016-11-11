@@ -54,8 +54,7 @@ public class CustomerListDB implements CustomerDAO{
 	
 	@Override
 	public Customer getCustomer(Email email) throws NonExistingCustomerException {
-		// TODO Auto-generated method stub
-		return null;
+		
 	}
 	@Override
 	public void update(Email email, CreditCard card) throws NonExistingCustomerException {
@@ -69,7 +68,8 @@ public class CustomerListDB implements CustomerDAO{
 			while (endIndex >= startIndex){
 				int  midIndex = (endIndex+startIndex) / 2;
 				Email temp = database.get(midIndex).getEmail();
-				
+				if ( o instance Email)
+				else if (o instance customer )
 				if (temp.compareTo(customer.getEmail()) < 0){			
 					startIndex = midIndex+1;
 				}
