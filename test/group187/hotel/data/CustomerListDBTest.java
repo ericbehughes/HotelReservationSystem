@@ -1,17 +1,21 @@
 package group187.hotel.data;
 
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
 import dw317.hotel.business.interfaces.Customer;
 import dw317.hotel.business.interfaces.HotelFactory;
+import dw317.hotel.data.DuplicateCustomerException;
 import dw317.hotel.data.interfaces.ListPersistenceObject;
 import dw317.lib.Email;
 import dw317.lib.Name;
 import dw317.lib.creditcard.Amex;
 import dw317.lib.creditcard.CreditCard;
 import group187.hotel.business.DawsonCustomer;
+import group187.hotel.business.DawsonHotelFactory;
+import group187.reserv.DawsonHotelFactoryTest;
 import group187.util.ListUtilities;
 
 public class CustomerListDBTest {
@@ -37,62 +41,32 @@ public class CustomerListDBTest {
 			String reservationFilename = "datafiles/database/reservations.txt";
 			
 			SequentialTextFileList obj = new SequentialTextFileList(roomFilename, customerFilename, reservationFilename);
-			for (Customer arr: obj.getCustomerDatabase())
-				System.out.println(arr.toString());
+			DawsonHotelFactory factory = DawsonHotelFactory.DAWSON;
+			CustomerListDB cDB = new CustomerListDB(obj, factory);
+			
+			try {
+				cDB.add(customer1);
+				System.out.println(cDB.toString());
+				
+				cDB.disconnect();
+			} catch (DuplicateCustomerException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+		
 			
 		
 	}
 	
-	@SuppressWarnings("rawtypes")
-	public static int binarySearch(Customer customer){
-		listPersistenceObject = new SequentialTextFileList("datafiles\\database\\rooms.txt" , "datafiles\\database\\customers.txt", "datafiles\\database\\reservations.txt");
-		database = listPersistenceObject.getCustomerDatabase();
-		database.toArray(new Comparable[database.size()]);
-		ListUtilities.sort(database.toArray(new Comparable[database.size()]));
-
-		Customer custObj; // Customer var to hold objects from database
-		Email email = customer.getEmail(), // Email from customer passed through parameter
-			  emailObj; // Email var to hold objects from database
-		int index = -1, // Index where to add new customer, -1 if duplicate
-			startIndex = 0, // Start index where to start searching
-		    endIndex = database.size(); // End index where to stop searching
-			while (endIndex >= startIndex){
-				int  midIndex = (endIndex+startIndex) / 2;
-				Email temp = database.get(midIndex).getEmail();
-				if (temp.compareTo(email) < 0){			
-					startIndex = midIndex+1;
-				}
 	
-				else if (temp.compareTo(email) > 0){
-					endIndex = midIndex -1;
-				}
-				
-				
-			}
-			return startIndex;
-
-	}
 }
 			
-			/*private int binarySearch(List<Integer> list, Integer value) {
-		        int low = 0;
-		        int high = list.size() - 1;
-
-		        while (low <= high) {
-		            int mid = (low + high) / 2;
-		            Integer midVal = list.get(mid);
-		            int cmp = midVal.compareTo(value);
-
-		            if (cmp < 0)
-		                low = mid + 1;
-		            else if (cmp > 0)
-		                high = mid - 1;
-		            else
-		                return mid;
-		        }
-		        return low;
-		    }
-		    **/
+		
 		
 			
  
