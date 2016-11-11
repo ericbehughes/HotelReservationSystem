@@ -32,12 +32,15 @@ public class CustomerListDBTest {
 			Optional<CreditCard> cardTest2 = Optional.of(new Amex("374616906032009"));
 			DawsonCustomer customer2 = new DawsonCustomer(name2.getFirstName(), name2.getLastName(), email2, cardTest2);
 			customer2.setCreditCard(cardTest2);
-
-			System.out.println("Running binary search");
-			int index = binarySearch(customer2);
-			System.out.println("Previous email: " + database.get(index - 1).getEmail().toString());
-			System.out.println("Current email: " + customer2.getEmail().toString());
-			System.out.println("Next email: " + database.get(index + 1).getEmail().toString());
+			String roomFilename = "datafiles/database/rooms.txt";
+			String customerFilename = "datafiles/database/customers.txt";
+			String reservationFilename = "datafiles/database/reservations.txt";
+			
+			SequentialTextFileList obj = new SequentialTextFileList(roomFilename, customerFilename, reservationFilename);
+			for (Customer arr: obj.getCustomerDatabase())
+				System.out.println(arr.toString());
+			
+		
 	}
 	
 	@SuppressWarnings("rawtypes")
@@ -64,8 +67,6 @@ public class CustomerListDBTest {
 					endIndex = midIndex -1;
 				}
 				
-//				if ((database.get(midIndex - 1).getEmail().compareTo(email) < 0) && (database.get(midIndex + 1).getEmail().compareTo(email) > 0))
-//					System.out.println("The index where the customer should go is: " + midIndex);
 				
 			}
 			return startIndex;

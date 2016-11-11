@@ -23,8 +23,8 @@ public class CustomerListDB implements CustomerDAO{
 		// Assign both vars
 		this.listPersistenceObject = listPersistenceObject;
 		this.factory = null;
-		// Fill the database
-		database = listPersistenceObject.getCustomerDatabase();
+		// Fill the database+
+		this.database = listPersistenceObject.getCustomerDatabase();
 	}
 	
 	public CustomerListDB (ListPersistenceObject listPersistenceObject, HotelFactory factory){

@@ -22,7 +22,9 @@ public class ReservationListDB implements ReservationDAO {
 	private final HotelFactory factory;
 	public ReservationListDB (ListPersistenceObject listPersistenceObject)
 	{
+		
 		this.listPersistenceObject = listPersistenceObject;
+		this.factory = null;
 	}
 	public ReservationListDB (ListPersistenceObject listPersistenceObject,
 	HotelFactory factory)
