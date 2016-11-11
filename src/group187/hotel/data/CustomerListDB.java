@@ -76,46 +76,23 @@ public class CustomerListDB implements CustomerDAO{
 			throw new IllegalArgumentException("CustomerListDB - binarySearch(T o) - The object in the parameter must be either an Email or a Customer");
 		
 		int startIndex = 0, // Start index where to start searching
-
-		    endIndex = database.size(); // End index where to stop searching
-			while (endIndex >= startIndex){
-				int  midIndex = (endIndex+startIndex) / 2;
-				Email temp = database.get(midIndex).getEmail();
-				if ( o instance Email)
-				else if (o instance customer )
-				if (temp.compareTo(customer.getEmail()) < 0){			
-					startIndex = midIndex+1;
-				}
-	
-				else if (temp.compareTo(customer.getEmail()) > 0){
-					endIndex = midIndex -1;
-				}
-				
-				else if (temp.equals(customer.getEmail())){
-					return midIndex;
-				}
-				
-				
+		endIndex = database.size(); // End index where to stop searching
+		while (endIndex >= startIndex){
+			int  midIndex = (endIndex+startIndex) / 2;
+			Email temp = database.get(midIndex).getEmail();
+			if (temp.compareTo(emailObj) < 0){			
+				startIndex = midIndex+1;
 			}
-
-			    endIndex = database.size(); // End index where to stop searching
-				while (endIndex >= startIndex){
-					int  midIndex = (endIndex+startIndex) / 2;
-					Email temp = database.get(midIndex).getEmail();
-					if (temp.compareTo(emailObj) < 0){			
-						startIndex = midIndex+1;
-					}
 			
-					else if (temp.compareTo(emailObj) > 0){
-						endIndex = midIndex -1;
-					}
+			else if (temp.compareTo(emailObj) > 0){
+				endIndex = midIndex -1;
+			}
 						
-					else if (temp.equals(emailObj)){
-						return midIndex;
-					}
-				}		
->>>>>>> branch 'Development' of https://github.com/xavier-berthiaume/HotelReservationSystem.git
-			return startIndex;
+			else if (temp.equals(emailObj)){
+				return midIndex;
+			}
+		}		
+		return startIndex;
 	}
 
 	
