@@ -114,7 +114,7 @@ public class ReservationListDB implements ReservationDAO {
 			found = false;
 				
 		}
-		return null;
+		return freeRooms;
 	}
 	@Override
 	public List<Room> getFreeRooms(LocalDate checkin, LocalDate checkout, RoomType roomType) {
