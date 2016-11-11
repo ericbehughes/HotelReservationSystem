@@ -2,6 +2,8 @@ package group187.hotel.data;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import dw317.hotel.business.RoomType;
@@ -45,7 +47,8 @@ public class ReservationListDB implements ReservationDAO {
 		for (int i = 0; i < database.size(); i++)
 			if (reserv.equals(database.get(i)))
 				throw new DuplicateReservationException("The reservation: " + reserv.toString() + " is already in the list");
-		
+		if (factory == null)
+			throw new IllegalArgumentException("ReservationLisrtDB - factory cannot be null");
 		int index = binarySearch(reserv); // Find the index for the object to keep order
 		Reservation reservationObj = factory.getReservationInstance(reserv); // Create a copy of the object
 		database.add(index, reservationObj); // Add the copy
@@ -53,23 +56,44 @@ public class ReservationListDB implements ReservationDAO {
 
 	@Override
 	public void disconnect() throws IOException {
-		// TODO Auto-generated method stub
-		
+		listPersistenceObject.saveReservationDatabase(database); // Save the database to the disk
+		database = null; // Make the database null
 	}
+		
 	@Override
 	public List<Reservation> getReservations(Customer cust) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Reservation> reservList = new ArrayList<>(); // Create the list of reservations
+		for (int i = 0; i < database.size(); i++){
+			DawsonReservation tempReserv = (DawsonReservation)database.get(i); // Get the reservation at index i
+			if (tempReserv.getCustomer().equals(cust)) // Check to see if the customer matches the parameter
+				reservList.add(tempReserv);	 // Add reservation to list
+		}
+		return reservList;
 	}
 	@Override
 	public void cancel(Reservation reserv) throws NonExistingReservationException {
-		// TODO Auto-generated method stub
-		
+		DawsonReservation reservCopy = (DawsonReservation)factory.getReservationInstance(reserv); // Create a copy of the reservation to be deleted
+		for (int i = 0; i < database.size(); i++){
+			DawsonReservation tempReserv = (DawsonReservation)database.get(i); // Get the reservation at index i
+			if (tempReserv.equals(reservCopy)) // Check to see if the reservation matches the one to be deleted
+				database.remove(i);	 // Delete the reservation from the database
+		}
 	}
 	@Override
 	public List<Room> getReservedRooms(LocalDate checkin, LocalDate checkout) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Room> reservedRooms = new ArrayList<>();
+		if (checkin.isAfter(checkout))
+			return reservedRooms;
+		for (int i = 0; i < allRooms.size(); i++){
+			DawsonReservation reservTemp = (DawsonReservation)database.get(i);
+			Room roomTemp = reservTemp.getRoom();
+			LocalDate tempCheckIn = reservTemp.getCheckInDate(),
+					  tempCheckOut = reservTemp.getCheckOutDate();
+			
+			if (tempCheckIn.equals(checkin) && tempCheckOut.equals(checkout))
+				reservedRooms.add(roomTemp);
+		}
+		return reservedRooms;
 	}
 	@Override
 	public List<Room> getFreeRooms(LocalDate checkin, LocalDate checkout) {
