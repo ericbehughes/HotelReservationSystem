@@ -54,8 +54,10 @@ public class CustomerListDB implements CustomerDAO{
 	
 	@Override
 	public Customer getCustomer(Email email) throws NonExistingCustomerException {
-		// TODO Auto-generated method stub
-		return null;
+		int customerIndex = binarySearch(email);
+		Customer custObj = database.get(customerIndex);
+		Customer custObjCopy = custObj;
+		return custObjCopy;
 	}
 	@Override
 	public void update(Email email, CreditCard card) throws NonExistingCustomerException {
@@ -63,28 +65,35 @@ public class CustomerListDB implements CustomerDAO{
 		
 	}
 	
-	private int binarySearch(Customer customer){
+	private <T> int binarySearch(T o){
+		Email emailObj = null;
+		if (o instanceof Email)
+			emailObj = (Email)o;
+		else if (o instanceof Customer)
+			emailObj = ((Customer) o).getEmail();
+		else
+			throw new IllegalArgumentException("CustomerListDB - binarySearch(T o) - The object in the parameter must be either an Email or a Customer");
+		
 		int startIndex = 0, // Start index where to start searching
-		    endIndex = database.size(); // End index where to stop searching
-			while (endIndex >= startIndex){
-				int  midIndex = (endIndex+startIndex) / 2;
-				Email temp = database.get(midIndex).getEmail();
-				
-				if (temp.compareTo(customer.getEmail()) < 0){			
-					startIndex = midIndex+1;
-				}
-	
-				else if (temp.compareTo(customer.getEmail()) > 0){
-					endIndex = midIndex -1;
-				}
-				
-				else if (temp.equals(customer.getEmail())){
-					return midIndex;
-				}
-				
-				
-			}
+			    endIndex = database.size(); // End index where to stop searching
+				while (endIndex >= startIndex){
+					int  midIndex = (endIndex+startIndex) / 2;
+					Email temp = database.get(midIndex).getEmail();
+					if (temp.compareTo(emailObj) < 0){			
+						startIndex = midIndex+1;
+					}
+			
+					else if (temp.compareTo(emailObj) > 0){
+						endIndex = midIndex -1;
+					}
+						
+					else if (temp.equals(emailObj)){
+						return midIndex;
+					}
+				}		
 			return startIndex;
-
 	}
+
+	
+	
 }
