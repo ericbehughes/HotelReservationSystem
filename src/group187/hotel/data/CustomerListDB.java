@@ -3,6 +3,7 @@ package group187.hotel.data;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 import dw317.hotel.business.interfaces.Customer;
 import dw317.hotel.business.interfaces.HotelFactory;
@@ -62,8 +63,14 @@ public class CustomerListDB implements CustomerDAO{
 	}
 	@Override
 	public void update(Email email, CreditCard card) throws NonExistingCustomerException {
-		// TODO Auto-generated method stub
-		
+		int index = binarySearch(email); // Search for existing customer or find index to keep order
+		if (index == 0) // 0 also gets returned if no customer is found in the database
+			if (!database.get(index).getEmail().equals(email)) // Check to see if the customer at index 0 is the intended one
+				throw new NonExistingCustomerException("The customer was not found in the database", email);
+		Customer temp = database.get(index); // Create a temp object of the customer we want to update
+		temp.setCreditCard(Optional.ofNullable(card)); // Sets the credit card
+		database.add(index, temp); // Updates the customer at index
+		database.remove(index+1); // Delete the old reference
 	}
 	
 	private <T> int binarySearch(T o){
