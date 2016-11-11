@@ -44,8 +44,10 @@ public class CustomerListDB implements CustomerDAO{
 	*/
 	@Override
 	public String toString() {
-		return "Number of customers in database: " + database.size() + "\n"+
-				database.toString();
+		System.out.println("Number of customers in database: " + database.size() + "\n");
+				for (Customer arr: database)
+					System.out.println(arr.toString());
+		return "";
 		
 		
 	}

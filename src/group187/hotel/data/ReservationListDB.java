@@ -91,7 +91,7 @@ public class ReservationListDB implements ReservationDAO {
 					  tempCheckOut = reservTemp.getCheckOutDate();
 			
 			if (tempCheckIn.equals(checkin) && tempCheckOut.equals(checkout))
-				reservedRooms.add(roomTemp);
+				reservedRooms.add(roomTemp); 
 		}
 		return reservedRooms;
 	}
