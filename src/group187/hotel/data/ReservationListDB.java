@@ -121,7 +121,7 @@ public class ReservationListDB implements ReservationDAO {
 		 System.out.println("Number of reservations in database: " + database.size() + "\n");
 		for (Reservation arr: database)
 			System.out.println(arr.toString());
-return "";
+			return "";
 	}
 	@Override
 	public List<Room> getFreeRooms(LocalDate checkin, LocalDate checkout, RoomType roomType) {
@@ -181,22 +181,6 @@ return "";
 		return startIndex;
 	}
 	
-	private LocalDate[] getCheckInCheckOutForRoom(Room room){
-		LocalDate[] dates = new LocalDate[2];
-		DawsonReservation reservObj;
-		DawsonRoom roomObj;
-		for (int i = 0; i < database.size(); i++){
-			reservObj = (DawsonReservation)database.get(i);
-			for (int j = 0; j < allRooms.size(); j++){
-				roomObj = (DawsonRoom)allRooms.get(j);
-				if (roomObj.equals(reservObj.getRoom()) && roomObj.equals(room)){
-					dates[0] = reservObj.getCheckInDate();
-					dates[1] = reservObj.getCheckOutDate();
-					return dates;
-				}
-			}
-		}
-		return null;
-	}	
+		
 	
 }
