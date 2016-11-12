@@ -76,7 +76,7 @@ public class SequentialTextFileList implements ListPersistenceObject{
 
 		// Create the adapter object that will be used as an argument to 
 		// instantiate an ArrayList instance.
-
+		ListUtilities.sort(custs);
 		List<Customer> listAdapter = java.util.Arrays.asList(custs);
 
 		// return a reference to an ArrayList instance.
@@ -115,7 +115,7 @@ public class SequentialTextFileList implements ListPersistenceObject{
 		}
 		// Create the adapter object that will be used as an argument to 
 		// instantiate an ArrayList instance.
-
+		ListUtilities.sort(reservs);
 		List<Reservation> listAdapter = java.util.Arrays.asList(reservs);
 
 		// return a reference to an ArrayList instance.

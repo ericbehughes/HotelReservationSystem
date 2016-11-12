@@ -26,7 +26,7 @@ public class ReservationListDBTest {
 	
 	public static void main(String[] args) {
 			System.out.println("ReservationListDbTest");
-			Email email1 = new Email("zhu@abc.com");
+			Email email1 = new Email("zhu@abcc.com");
 			Name name = new Name("eric", "hughes");
 			Optional<CreditCard> cardTest1 = Optional.of(new Amex("374616906032009"));
 			DawsonCustomer customer1 = new DawsonCustomer(name.getFirstName(), name.getLastName(), email1, cardTest1);
