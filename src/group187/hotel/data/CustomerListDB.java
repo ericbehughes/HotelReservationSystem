@@ -63,7 +63,10 @@ public class CustomerListDB implements CustomerDAO{
 		// Use bianry search to find proper index
 		int index = binarySearch(custCopy);
 		// Add customer
-		database.add(index, custCopy);
+		if (index >= database.size())
+			database.add(custCopy);
+		else
+			database.add(index, custCopy);
 		
 	}
 	

@@ -147,7 +147,7 @@ public class SequentialTextFileList implements ListPersistenceObject{
 		// Create the reservation file
 		File reservationFile = new File(reservationFilename);
 		reservationFile.createNewFile();
-		ListUtilities.sort(resArray);
+		//ListUtilities.sort(resArray);
 		ListUtilities.saveListToTextFile(resArray, reservationFile);	
 	}
 }
