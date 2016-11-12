@@ -8,10 +8,9 @@ public class NonExistingCustomerException extends Exception{
 	 * 
 	 */
 	private static final long serialVersionUID = 158840072470333095L;
-	private String message = null;
-	public NonExistingCustomerException() {
-		super();
-		// TODO Auto-generated constructor stub
+	public NonExistingCustomerException(String message) {
+		super(message);
+		
 	}
 
 	public NonExistingCustomerException(String message, Email email) {

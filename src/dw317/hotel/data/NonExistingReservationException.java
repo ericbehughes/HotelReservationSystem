@@ -10,8 +10,8 @@ public class NonExistingReservationException extends Exception{
 	 */
 	private static final long serialVersionUID = 2659460084493752828L;
 	
-	public NonExistingReservationException() {
-		super();
+	public NonExistingReservationException(String s) {
+		super(s);
 		
 	}
 	public NonExistingReservationException(String message, Customer dc, Room room) {
