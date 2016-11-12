@@ -136,8 +136,8 @@ public class DawsonReservation implements Reservation {
  	 */
 	@Override
 	public String toString() {
-		return customer.getEmail().toString() + "*" + this.getCheckInDate().toString() + "*" + this.getCheckOutDate().toString()
-				+ "*" + room.toString();
+		return customer.getEmail().toString() + "*" + this.getCheckInDate().getYear() + "*" + this.getCheckInDate().getMonthValue() + "*" +  this.getCheckInDate().getDayOfMonth()+ "*" + 
+	this.getCheckOutDate().getYear() + "*" + this.getCheckOutDate().getMonthValue() + "*" + this.getCheckOutDate().getDayOfMonth() + "*" + room.toString();
 	}
 
 	/* (non-Javadoc)

@@ -84,7 +84,9 @@ public class ReservationListDBTest {
 				
 				System.out.println(reservdb.toString());
 				
-			} catch (DuplicateReservationException | DuplicateCustomerException e) {
+				reservdb.disconnect();
+				
+			} catch (DuplicateReservationException | DuplicateCustomerException | IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}

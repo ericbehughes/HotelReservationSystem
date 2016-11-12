@@ -131,7 +131,7 @@ public class HotelFileLoader {
 		while ((str = in.readLine()) != null) {
 			if (str.isEmpty())
 				continue;
-			String [] array = str.split("\\*");
+			String[] array = str.split("\\*");
 			int i = 0;
 				
 			try{

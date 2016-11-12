@@ -19,6 +19,7 @@ import dw317.lib.Email;
 import group187.hotel.business.DawsonHotelFactory;
 import group187.hotel.business.DawsonReservation;
 import group187.hotel.business.DawsonRoom;
+import group187.util.ListUtilities;
 
 public class ReservationListDB implements ReservationDAO {
 	
@@ -40,6 +41,9 @@ public class ReservationListDB implements ReservationDAO {
 		this.factory = factory;
 		database = listPersistenceObject.getReservationDatabase();
 		allRooms = listPersistenceObject.getRoomDatabase();
+		System.out.println("Printing database");
+		for (Reservation r : database)
+			System.out.println(r.toString());
 	}
 
 
@@ -157,6 +161,7 @@ public class ReservationListDB implements ReservationDAO {
 		}
 		
 	}
+
 	
 	private <T> int binarySearch(T o){
 		DawsonReservation reservObj = null;
@@ -170,10 +175,10 @@ public class ReservationListDB implements ReservationDAO {
 		while (endIndex >= startIndex){
 			int  midIndex = (endIndex+startIndex) / 2;
 			DawsonReservation temp = (DawsonReservation)database.get(midIndex);
-			if (temp.compareTo(reservObj) < 0)			
+			if (temp.compareTo(reservObj) > 0)			
 				startIndex = midIndex+1;
 				
-		else if (temp.compareTo(reservObj) > 0)
+		else if (temp.compareTo(reservObj) < 0)
 				endIndex = midIndex -1;
 
 			else if (temp.equals(reservObj))
