@@ -8,6 +8,7 @@ import java.util.Optional;
 import dw317.hotel.business.interfaces.Customer;
 import dw317.hotel.business.interfaces.HotelFactory;
 import dw317.hotel.data.DuplicateCustomerException;
+import dw317.hotel.data.DuplicateReservationException;
 import dw317.hotel.data.NonExistingCustomerException;
 import dw317.hotel.data.interfaces.CustomerDAO;
 import dw317.hotel.data.interfaces.ListPersistenceObject;
@@ -54,6 +55,9 @@ public class CustomerListDB implements CustomerDAO{
 	
 	@Override
 	public void add(Customer cust) throws DuplicateCustomerException {
+		for (int i = 0; i < database.size(); i++)
+			if (cust.equals(database.get(i)))
+				throw new DuplicateCustomerException("CustomerListDB - add - The customer: " + cust.toString() + " is already in the list");
 		// Create a copy of the customer and add to the database
 		Customer custCopy = cust;
 		// Use bianry search to find proper index
