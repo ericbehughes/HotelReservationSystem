@@ -8,8 +8,8 @@ import dw317.lib.Email;
 public class DuplicateCustomerException extends Exception {
 	private static final long  serialVersionUID = 42031768871L;
 			
-	public DuplicateCustomerException(){
-		super("The provided Email address already exists.");
+	public DuplicateCustomerException(String s){
+		super(s);
 	}
 
 	public DuplicateCustomerException(String message, Email email) {

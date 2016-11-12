@@ -16,6 +16,7 @@ import dw317.hotel.data.NonExistingReservationException;
 import dw317.hotel.data.interfaces.ListPersistenceObject;
 import dw317.hotel.data.interfaces.ReservationDAO;
 import dw317.lib.Email;
+import group187.hotel.business.DawsonHotelFactory;
 import group187.hotel.business.DawsonReservation;
 import group187.hotel.business.DawsonRoom;
 
@@ -30,7 +31,7 @@ public class ReservationListDB implements ReservationDAO {
 		this.listPersistenceObject = listPersistenceObject;
 		database = listPersistenceObject.getReservationDatabase();
 		allRooms = listPersistenceObject.getRoomDatabase();
-		factory = null;
+		factory = DawsonHotelFactory.DAWSON;
 	}
 	public ReservationListDB (ListPersistenceObject listPersistenceObject,
 	HotelFactory factory)
