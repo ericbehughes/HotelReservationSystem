@@ -159,7 +159,6 @@ return "";
 	
 	private <T> int binarySearch(T o){
 		DawsonReservation reservObj = null;
-		DawsonRoom roomObj = null;
 		if (o instanceof Reservation)
 			reservObj = (DawsonReservation)o;
 		else
