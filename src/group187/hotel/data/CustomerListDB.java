@@ -71,8 +71,9 @@ public class CustomerListDB implements CustomerDAO{
 	
 	@Override
 	public Customer getCustomer(Email email) throws NonExistingCustomerException {
-
 		int customerIndex = binarySearch(email);
+		if (customerIndex == 0 && (!(database.get(customerIndex).getEmail().equals(email))))
+			throw new NonExistingCustomerException("The customer does not exist for the email: ",email );
 		Customer custObj = database.get(customerIndex);
 		Customer custObjCopy = custObj;
 		return custObjCopy;
