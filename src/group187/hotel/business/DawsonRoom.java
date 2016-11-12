@@ -142,14 +142,14 @@ public class DawsonRoom implements Room {
 			throw new NullPointerException();
 		if (this == o)
 			return 0;
-		if (this.getFloor() < o.getFloor())
-			return -1;
-		else if (this.getFloor() > o.getFloor())
+		if (this.getFloor() > o.getFloor())
+			return -1;  //^v switch signs
+		else if (this.getFloor() < o.getFloor())
 			return 1;
 		else if (this.getFloor() == o.getFloor()) {
-			if (this.getNumber() < o.getNumber())
-				return -1;
-			else if (this.getNumber() > o.getNumber())
+			if (this.getNumber() > o.getNumber())
+				return -1;   // ^v switch signs
+			else if (this.getNumber() < o.getNumber())
 				return 1;
 			else
 				return 0;
