@@ -108,7 +108,7 @@ public class CustomerListDB implements CustomerDAO{
 		
 		int startIndex = 0, // Start index where to start searching
 		endIndex = database.size(); // End index where to stop searching
-		while (endIndex >= startIndex){
+		while (endIndex > startIndex){
 			int  midIndex = (endIndex+startIndex) / 2;
 			Email temp = database.get(midIndex).getEmail();
 			if (temp.compareTo(emailObj) < 0)			

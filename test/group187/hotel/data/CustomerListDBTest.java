@@ -31,7 +31,7 @@ public class CustomerListDBTest {
 
 			customer1.setCreditCard(cardTest1);
 
-			Email email2 = new Email("fhssdasdasdasse@zzzz.com");
+			Email email2 = new Email("fhssdasdasdasse@zzzzzz.com");
 			Name name2 = new Name("something", "something");
 			Optional<CreditCard> cardTest2 = Optional.of(new Amex("374616906032009"));
 			DawsonCustomer customer2 = new DawsonCustomer(name2.getFirstName(), name2.getLastName(), email2, cardTest2);
