@@ -8,6 +8,7 @@ import java.util.Optional;
 import dw317.hotel.business.interfaces.Customer;
 import dw317.hotel.business.interfaces.HotelFactory;
 import dw317.hotel.data.DuplicateCustomerException;
+import dw317.hotel.data.NonExistingCustomerException;
 import dw317.hotel.data.interfaces.ListPersistenceObject;
 import dw317.lib.Email;
 import dw317.lib.Name;
@@ -28,10 +29,10 @@ public class CustomerListDBTest {
 			Name name = new Name("eric", "hughes");
 			Optional<CreditCard> cardTest1 = Optional.of(new Amex("374616906032009"));
 			DawsonCustomer customer1 = new DawsonCustomer(name.getFirstName(), name.getLastName(), email1, cardTest1);
-
+			CreditCard cardTest3 = new Amex("349997755621171");
 			customer1.setCreditCard(cardTest1);
 
-			Email email2 = new Email("fhssdasdasdasse@zzzzzz.com");
+			Email email2 = new Email("fhssdasdasdasse@zzzjjvtrcikjzuyyufzz.com");
 			Name name2 = new Name("something", "something");
 			Optional<CreditCard> cardTest2 = Optional.of(new Amex("374616906032009"));
 			DawsonCustomer customer2 = new DawsonCustomer(name2.getFirstName(), name2.getLastName(), email2, cardTest2);
@@ -46,16 +47,17 @@ public class CustomerListDBTest {
 			
 			try {
 				cDB.add(customer2);
+				cDB.update(email2, cardTest3);
 				System.out.println(cDB.toString());
 				
 				cDB.disconnect();
 			} catch (DuplicateCustomerException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			} catch (IOException e) {
+			} catch (IOException | NonExistingCustomerException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			} 
 			
 			
 		

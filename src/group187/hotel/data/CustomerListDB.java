@@ -14,6 +14,7 @@ import dw317.hotel.data.interfaces.CustomerDAO;
 import dw317.hotel.data.interfaces.ListPersistenceObject;
 import dw317.lib.Email;
 import dw317.lib.creditcard.CreditCard;
+import group187.hotel.business.DawsonHotelFactory;
 import group187.util.ListUtilities;
 
 public class CustomerListDB implements CustomerDAO{
@@ -24,14 +25,18 @@ public class CustomerListDB implements CustomerDAO{
 	private final HotelFactory factory;
 	
 	public CustomerListDB (ListPersistenceObject listPersistenceObject){
+		if (listPersistenceObject == null)
+			throw new IllegalArgumentException("CustomerListDB - The parameters cannot be null");
 		// Assign both vars
 		this.listPersistenceObject = listPersistenceObject;
-		this.factory = null;
+		this.factory = DawsonHotelFactory.DAWSON;
 		// Fill the database+
 		this.database = listPersistenceObject.getCustomerDatabase();
 	}
 	
 	public CustomerListDB (ListPersistenceObject listPersistenceObject, HotelFactory factory){
+		if (listPersistenceObject == null || factory == null)
+			throw new IllegalArgumentException("CustomerListDB - The parameters cannot be null");
 		// Assign the vars
 		this.listPersistenceObject = listPersistenceObject;
 		this.factory = factory;
@@ -59,7 +64,8 @@ public class CustomerListDB implements CustomerDAO{
 			if (cust.equals(database.get(i)))
 				throw new DuplicateCustomerException("CustomerListDB - add - The customer: " + cust.toString() + " is already in the list");
 		// Create a copy of the customer and add to the database
-		Customer custCopy = cust;
+		Customer custCopy = factory.getCustomerInstance(cust.getName().getFirstName(), cust.getName().getLastName()
+				, cust.getEmail(), cust.getCreditCard());
 		// Use bianry search to find proper index
 		int index = binarySearch(custCopy);
 		// Add customer
@@ -81,8 +87,10 @@ public class CustomerListDB implements CustomerDAO{
 		int customerIndex = binarySearch(email);
 		if (customerIndex == 0 && (!(database.get(customerIndex).getEmail().equals(email))))
 			throw new NonExistingCustomerException("The customer does not exist for the email: ",email );
-		Customer custObj = database.get(customerIndex);
-		Customer custObjCopy = custObj;
+		Customer cust = database.get(customerIndex);// Get the customer
+		// Use factory to make a copy of the customer
+		Customer custObjCopy = factory.getCustomerInstance(cust.getName().getFirstName(), cust.getName().getLastName()
+				, cust.getEmail(), cust.getCreditCard());
 		return custObjCopy;
 	}
 	@Override
@@ -92,7 +100,9 @@ public class CustomerListDB implements CustomerDAO{
 			if (!database.get(index).getEmail().equals(email)) // Check to see if the customer at index 0 is the intended one
 				throw new NonExistingCustomerException("The customer was not found in the database", email);
 		Customer temp = database.get(index); // Create a temp object of the customer we want to update
+		System.out.println("Current Card: " + temp.getCreditCard().toString());
 		temp.setCreditCard(Optional.ofNullable(card)); // Sets the credit card
+		System.out.println("New card: " + temp.getCreditCard().toString());
 		database.add(index, temp); // Updates the customer at index
 		database.remove(index+1); // Delete the old reference
 	}	

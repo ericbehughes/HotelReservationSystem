@@ -134,8 +134,7 @@ public class DawsonCustomer implements Customer {
 
 	@Override
 	public void setCreditCard(Optional<CreditCard> card) {
-		// TODO Auto-generated method stub
-		
+		this.card = card;
 	}
 
 

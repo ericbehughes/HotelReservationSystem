@@ -10,6 +10,7 @@ import dw317.hotel.business.interfaces.Reservation;
 import dw317.hotel.business.interfaces.Room;
 import dw317.hotel.data.DuplicateCustomerException;
 import dw317.hotel.data.DuplicateReservationException;
+import dw317.hotel.data.NonExistingReservationException;
 import dw317.hotel.data.interfaces.ListPersistenceObject;
 import dw317.lib.Email;
 import dw317.lib.Name;
@@ -27,14 +28,14 @@ public class ReservationListDBTest {
 	public static void main(String[] args) {
 			System.out.println("ReservationListDbTest");
 			Email email1 = new Email("zhu@abcc.com");
-			Name name = new Name("eric", "hughes");
+			Name name = new Name("test", "hughes");
 			Optional<CreditCard> cardTest1 = Optional.of(new Amex("374616906032009"));
 			DawsonCustomer customer1 = new DawsonCustomer(name.getFirstName(), name.getLastName(), email1, cardTest1);
 
 			customer1.setCreditCard(cardTest1);
 
 			Email email2 = new Email("fhse@abc.com");
-			Name name2 = new Name("Jon", "Depaz");
+			Name name2 = new Name("test", "Depaz");
 			Optional<CreditCard> cardTest2 = Optional.of(new Amex("374616906032009"));
 			DawsonCustomer customer2 = new DawsonCustomer(name2.getFirstName(), name2.getLastName(), email2, cardTest2);
 			customer2.setCreditCard(cardTest2);
@@ -45,10 +46,10 @@ public class ReservationListDBTest {
 			String reservationFilename = "datafiles/database/reservations.txt";
 			
 			// Create needed objects for first reservation obj
-			DawsonRoom rm1 = new DawsonRoom(201, RoomType.NORMAL);
-			DawsonRoom rm2 = new DawsonRoom(207, RoomType.NORMAL);
+			DawsonRoom rm1 = new DawsonRoom(101, RoomType.NORMAL);
+			DawsonRoom rm2 = new DawsonRoom(302, RoomType.NORMAL);
 			//2017*12*28*2018*1*3*101
-			DawsonReservation r1 = new DawsonReservation(customer1, rm1, 2017, 12, 28, 2018, 1, 3);
+			DawsonReservation r1 = new DawsonReservation(customer1, rm1, 2015, 9, 1, 2016, 9, 9);
 			
 			DawsonReservation r2 = new DawsonReservation(customer2, rm2, 2015, 9, 1, 2016, 9, 9);
 					
@@ -56,10 +57,10 @@ public class ReservationListDBTest {
 			SequentialTextFileList obj = new SequentialTextFileList(roomFilename, customerFilename, reservationFilename);
 			DawsonHotelFactory factory = DawsonHotelFactory.DAWSON;
 			CustomerListDB cDB = new CustomerListDB(obj, factory);
-			ReservationListDB reservdb = new ReservationListDB(obj, factory);
+			ReservationListDB reservdb = new ReservationListDB(obj);
 			try {
 				cDB.add(customer1);
-				//reservdb.add(r1);
+				reservdb.add(r1);
 				reservdb.add(r2);
 				LocalDate checkin = r2.getCheckInDate();
 				LocalDate checkout = r2.getCheckOutDate();
@@ -79,14 +80,43 @@ public class ReservationListDBTest {
 				System.out.println("");
 				System.out.println("");
 			
+				
 				for (Room r :reservdb.getReservedRooms(checkin, checkout))
 					System.out.println(r.toString());
 				
 				System.out.println(reservdb.toString());
 				
+				
+				reservdb.cancel(r2);
+				reservdb.cancel(r1);
+				
+				freeRooms = reservdb.getFreeRooms(checkin, checkout, RoomType.NORMAL);
+				System.out.println("");
+				System.out.println("");
+				System.out.println("");
+				System.out.println("");
+				System.out.println("--------------------------------");
+				System.out.println("Free rooms:");
+				for (Room room : freeRooms)
+					System.out.println(room.toString());
+				System.out.println("--------------------------------");
+				System.out.println("");
+				System.out.println("");
+				System.out.println("");
+				System.out.println("");
+				
+				reservdb.cancel(r2);
+				reservdb.cancel(r1);
+				
+				
+				
+				
+				for (Room r :reservdb.getReservedRooms(checkin, checkout))
+					System.out.println(r.toString());
+				
 				reservdb.disconnect();
 				
-			} catch (DuplicateReservationException | DuplicateCustomerException | IOException e) {
+			} catch (DuplicateReservationException | DuplicateCustomerException | IOException | NonExistingReservationException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}

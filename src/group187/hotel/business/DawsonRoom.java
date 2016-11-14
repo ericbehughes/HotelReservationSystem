@@ -94,6 +94,7 @@ public class DawsonRoom implements Room {
 		//
 		catch (IllegalArgumentException e) {
 			System.out.print(e.getMessage());
+			return false;
 		}
 
 		return true;

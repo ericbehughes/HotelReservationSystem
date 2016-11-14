@@ -29,6 +29,8 @@ public class ReservationListDB implements ReservationDAO {
 	private final HotelFactory factory;
 	public ReservationListDB (ListPersistenceObject listPersistenceObject)
 	{
+		if (listPersistenceObject == null)
+			throw new IllegalArgumentException("CustomerListDB - The parameters cannot be null");
 		this.listPersistenceObject = listPersistenceObject;
 		database = listPersistenceObject.getReservationDatabase();
 		allRooms = listPersistenceObject.getRoomDatabase();
@@ -37,13 +39,12 @@ public class ReservationListDB implements ReservationDAO {
 	public ReservationListDB (ListPersistenceObject listPersistenceObject,
 	HotelFactory factory)
 	{
+		if (listPersistenceObject == null || factory == null)
+			throw new IllegalArgumentException("CustomerListDB - The parameters cannot be null");
 		this.listPersistenceObject = listPersistenceObject;
 		this.factory = factory;
 		database = listPersistenceObject.getReservationDatabase();
 		allRooms = listPersistenceObject.getRoomDatabase();
-		System.out.println("Printing database");
-		for (Reservation r : database)
-			System.out.println(r.toString());
 	}
 
 
@@ -82,6 +83,9 @@ public class ReservationListDB implements ReservationDAO {
 			DawsonReservation tempReserv = (DawsonReservation)database.get(i); // Get the reservation at index i
 			if (tempReserv.equals(reservCopy)) // Check to see if the reservation matches the one to be deleted
 				database.remove(i);	 // Delete the reservation from the database
+			
+			else if (!tempReserv.equals(reservCopy))
+				throw new NonExistingReservationException("ReservationListDB - Cancel - The reservation does not exist");
 		}
 	}
 	@Override
@@ -172,7 +176,7 @@ public class ReservationListDB implements ReservationDAO {
 		
 		int startIndex = 0, // Start index where to start searching
 		endIndex = database.size(); // End index where to stop searching
-		while (endIndex >= startIndex){
+		while (endIndex > startIndex){
 			int  midIndex = (endIndex+startIndex) / 2;
 			DawsonReservation temp = (DawsonReservation)database.get(midIndex);
 			if (temp.compareTo(reservObj) > 0)			
