@@ -24,10 +24,6 @@ public class DawsonHotelAllocationPolicy implements AllocationPolicy {
 	public Optional<Room> getAvailableRoom(LocalDate checkin, LocalDate checkout, RoomType roomtype) {
 		/** Var explanations
 		 *  freeRooms: A list of all the rooms available for reservation
-		 *  multipleFloors: In the case where we have multiple floors with the same # of free rooms
-		 *  				this list, which uses Arrays.asList to create a list with a fixed size, will represent the different floors
-		 *  				where floor = index + 1. So index 0 = floor 1, index 1 = floor 2, and so on. The point of this is to be able
-		 *  				find the lowest floor with the most amount of free rooms, just grab the first index that is not 0.
 		 *  
 		 *  numFreeRooms: This array indicates how many free rooms per floor there are where index + 1 = floor (0 = floor 1). 
 		 *  			  The value at index 0 will indicate the # of free rooms on floor 1.
@@ -45,51 +41,14 @@ public class DawsonHotelAllocationPolicy implements AllocationPolicy {
 		 *  end: Thw floor to stop searching on, based on the roomtype
 		 */
 		List<Room> freeRooms = reservationDAO.getFreeRooms(checkin, checkout, roomtype); 
-		List<Integer> multipleFloors = Arrays.asList(new Integer[8]); 
 		int[] numFreeRooms = { 0, 0, 0, 0, 0, 0, 0, 0 }; 
 		int floorNum, highestNum = numFreeRooms[0], floor = 0, selectedRoom = 0, start = 0, end = 0;
-		Boolean matches = false;
 		
 		// Find the total number of free rooms per floor, read explanation on numFreeRooms above.
 		for (int i = 0; i < freeRooms.size(); i++) {
 			DawsonRoom temp = (DawsonRoom)freeRooms.get(i); // Get the room object at index
 			floorNum = temp.getFloor(); // Get the floor number
-			switch (floorNum) { 
-			case 1:
-				numFreeRooms[0] = numFreeRooms[0] + 1;
-				break;
-
-			case 2:
-				numFreeRooms[1] = numFreeRooms[1] + 1;
-				break;
-
-			case 3:
-				numFreeRooms[2] = numFreeRooms[2] + 1;
-				break;
-
-			case 4:
-				numFreeRooms[3] = numFreeRooms[3] + 1;
-				break;
-
-			case 5:
-				numFreeRooms[4] = numFreeRooms[4] + 1;
-				break;
-
-			case 6:
-				numFreeRooms[5] = numFreeRooms[5] + 1;
-				break;
-
-			case 7:
-				numFreeRooms[6] = numFreeRooms[6] + 1;
-				break;
-
-			case 8:
-				numFreeRooms[7] = numFreeRooms[7] + 1;
-				break;
-
-			default:
-				break;
-			}
+			numFreeRooms[floorNum-1]++;
 		}
 		
 		if (roomtype.equals(RoomType.NORMAL)){
