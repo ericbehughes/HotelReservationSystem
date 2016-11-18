@@ -114,15 +114,6 @@ public class DawsonHotelAllocationPolicy implements AllocationPolicy {
 				highestNum = numFreeRooms[start];
 				floor = start + 1;
 			}
-		
-			/**
-			 * If two or more floors have the same number of
-			 * free rooms, boolean matched = true and break out of loop.
-			
-			else if (numFreeRooms[i] == highestNum){
-				matches = true;
-			}
-			 */
 		}
 		
 		selectedRoom = pickRandomRoom(floor, freeRooms, roomtype);
