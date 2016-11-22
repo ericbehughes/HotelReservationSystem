@@ -6,10 +6,12 @@ package group187.hotel.business;
 import java.util.Optional;
 
 import dw317.hotel.business.RoomType;
+import dw317.hotel.business.interfaces.AllocationPolicy;
 import dw317.hotel.business.interfaces.Customer;
 import dw317.hotel.business.interfaces.HotelFactory;
 import dw317.hotel.business.interfaces.Reservation;
 import dw317.hotel.business.interfaces.Room;
+import dw317.hotel.data.interfaces.ReservationDAO;
 import dw317.lib.Email;
 import dw317.lib.creditcard.CreditCard;
 
@@ -84,6 +86,11 @@ public enum DawsonHotelFactory implements HotelFactory {
 				toCopy.getCheckInDate().getMonthValue(), toCopy.getCheckInDate().getDayOfMonth(),
 				toCopy.getCheckOutDate().getYear(), toCopy.getCheckOutDate().getMonthValue(),
 				toCopy.getCheckOutDate().getDayOfMonth());
+	}
+
+	@Override
+	public AllocationPolicy getAllocationPolicy(ReservationDAO reservations) {
+		return new DawsonHotelAllocationPolicy(reservations);
 	}
 
 }

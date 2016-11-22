@@ -6,6 +6,7 @@ package dw317.hotel.business.interfaces;
 import java.io.Serializable;
 import java.util.Optional;
 
+import dw317.hotel.data.interfaces.ReservationDAO;
 import dw317.lib.Email;
 import dw317.lib.creditcard.CreditCard;
 
@@ -85,4 +86,7 @@ public interface HotelFactory extends Serializable {
 	 * @return the reservation instance
 	 */
 	Reservation getReservationInstance(Reservation toCopy);
+	
+	//ADDED IN PHASE IV
+	AllocationPolicy getAllocationPolicy(ReservationDAO reservations);
 }
