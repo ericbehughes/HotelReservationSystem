@@ -7,6 +7,7 @@ import java.util.Observable;
 import java.util.Optional;
 
 import dw317.hotel.business.RoomType;
+import dw317.hotel.business.interfaces.AllocationPolicy;
 import dw317.hotel.business.interfaces.Customer;
 import dw317.hotel.business.interfaces.HotelFactory;
 import dw317.hotel.business.interfaces.HotelManager;
@@ -21,26 +22,29 @@ import dw317.hotel.data.interfaces.ReservationDAO;
 import dw317.hotel.data.interfaces.RoomDAO;
 import dw317.lib.Email;
 import dw317.lib.creditcard.*;
-import dw317.lib.creditcard.CreditCard.CardType;
 
 public class Hotel extends Observable implements HotelManager {
 	private final HotelFactory factory;
 	private final CustomerDAO customers;
 	private final ReservationDAO reservations;
-	private final RoomDAO rooms;
 	private static final long serialVersionUID = 42031768871L;
 	
 	public Hotel (HotelFactory factory, RoomDAO rooms, CustomerDAO customers, ReservationDAO reservations){
+		if (factory == null || rooms == null || customers == null || reservations == null)
+			throw new IllegalArgumentException("The parameters cannot be null");
 		this.factory = factory;
 		this.customers = customers;
 		this.reservations = reservations;
-		this.rooms = rooms;
 	}
 
 	@Override
 	public void cancelReservation(Reservation reservation) throws NonExistingReservationException {
+		try{
 		reservations.cancel(reservation);
-		
+		}
+		catch (NonExistingReservationException e){
+			throw new NonExistingReservationException(e.getMessage());
+		}
 	}
 
 	@Override
@@ -48,13 +52,12 @@ public class Hotel extends Observable implements HotelManager {
 		// TODO Auto-generated method stub
 		customers.disconnect();
 		reservations.disconnect();
-		
 	}
 
 	@Override
 	public Optional<Reservation> createReservation(Customer customer, LocalDate checkin, LocalDate checkout,
 			RoomType roomType) {
-		DawsonHotelAllocationPolicy allocationPolicy = new DawsonHotelAllocationPolicy(reservations);
+		AllocationPolicy allocationPolicy = factory.getAllocationPolicy(reservations);
 		Optional<Room> room = allocationPolicy.getAvailableRoom(checkin, checkout, roomType);
 		Reservation reservation =  new DawsonReservation(customer, room.get(), checkin.getYear(), checkin.getMonthValue(),
 				checkin.getDayOfMonth(), checkout.getYear(), checkout.getMonthValue(), checkout.getDayOfMonth());
@@ -70,7 +73,13 @@ public class Hotel extends Observable implements HotelManager {
 	@Override
 	public Customer findCustomer(String email) throws NonExistingCustomerException {
 		Email tempEmail = new Email(email);
-		Customer customer = customers.getCustomer(tempEmail);
+		Customer customer;
+		try{
+			customer = customers.getCustomer(tempEmail);
+		}
+		catch(NonExistingCustomerException e){
+			throw new NonExistingCustomerException("The customer does not exist with that email");
+		}
 		return customer;
 	}
 
@@ -84,33 +93,26 @@ public class Hotel extends Observable implements HotelManager {
 			throws DuplicateCustomerException {
 		Email tempEmail = new Email(email);
 		Customer tempCustomer = new DawsonCustomer(firstName, lastName, tempEmail, null);
-		customers.add(tempCustomer);
+		try{
+			customers.add(tempCustomer);
+		}
+		catch (DuplicateCustomerException e){
+			throw new DuplicateCustomerException(e.getMessage());
+		}
 		return tempCustomer;
 	}
 
 	@Override
 	public Customer updateCreditCard(String email, String cardType, String cardnumber)
 			throws NonExistingCustomerException {
-		String cardTypeTemp = cardType.toLowerCase();
-		
-		if (cardTypeTemp != "amex" && cardTypeTemp != "mastercard" && cardTypeTemp != "visa")
-			throw new IllegalArgumentException("The card type has to be either visa, mastercard or amex");
-		CreditCard card = null;
+		CreditCard card = factory.getCard(cardType, cardnumber);
 		Email emailOBJ = new Email(email);
-		
-
-		if (cardTypeTemp.equals("amex"))
-			card = new Amex(cardnumber);
-		
-		else if (cardTypeTemp.equals("mastercard"))
-			card = new MasterCard(cardnumber);
-
-		
-		else if (cardTypeTemp.equals("visa"))
-			card = new Visa(cardnumber);
-		
-		
-		customers.update(emailOBJ, card);
+		try{
+			customers.update(emailOBJ, card);
+		}
+		catch(NonExistingCustomerException e){
+			throw new NonExistingCustomerException(e.getMessage());
+		}
 		return customers.getCustomer(emailOBJ);
 	}
 }
