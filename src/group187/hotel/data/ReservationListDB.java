@@ -100,7 +100,7 @@ public class ReservationListDB implements ReservationDAO {
 					  tempCheckOut = reservTemp.getCheckOutDate();
 			
 			if ((tempCheckIn.isBefore(checkout) || tempCheckOut.isAfter(checkin)&&
-					!(tempCheckIn.isAfter(checkout)|| tempCheckIn.isBefore(checkin))
+					!(tempCheckIn.isAfter(checkout)|| tempCheckIn.isBefore(checkin))))
 						reservedRooms.add(roomTemp); 
 		}
 		return reservedRooms;

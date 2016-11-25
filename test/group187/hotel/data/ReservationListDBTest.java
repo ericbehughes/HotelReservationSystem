@@ -50,23 +50,25 @@ public class ReservationListDBTest {
 			DawsonRoom rm2 = new DawsonRoom(302, RoomType.NORMAL);
 			//2017*12*28*2018*1*3*101
 			DawsonReservation r1 = new DawsonReservation(customer1, rm1, 2015, 9, 1, 2016, 9, 9);
-			
 			DawsonReservation r2 = new DawsonReservation(customer2, rm2, 2015, 9, 1, 2016, 9, 9);
-					
-			
+
 			SequentialTextFileList obj = new SequentialTextFileList(roomFilename, customerFilename, reservationFilename);
 			DawsonHotelFactory factory = DawsonHotelFactory.DAWSON;
 			CustomerListDB cDB = new CustomerListDB(obj, factory);
 			ReservationListDB reservdb = new ReservationListDB(obj);
 			try {
 				cDB.add(customer1);
+				cDB.add(customer2);
+				
 				reservdb.add(r1);
 				reservdb.add(r2);
+				
 				LocalDate checkin = r2.getCheckInDate();
 				LocalDate checkout = r2.getCheckOutDate();
+				
 				List<Room> freeRooms = reservdb.getFreeRooms(checkin, checkout, RoomType.NORMAL);
+				List<Room> reservedRooms = reservdb.getReservedRooms(checkin, checkout);
 				cDB.toString();
-				System.out.println("");
 				System.out.println("");
 				System.out.println("");
 				System.out.println("");
@@ -79,41 +81,14 @@ public class ReservationListDBTest {
 				System.out.println("");
 				System.out.println("");
 				System.out.println("");
-			
-				
-				for (Room r :reservdb.getReservedRooms(checkin, checkout))
-					System.out.println(r.toString());
-				
 				System.out.println(reservdb.toString());
-				
 				
 				reservdb.cancel(r2);
 				reservdb.cancel(r1);
 				
 				freeRooms = reservdb.getFreeRooms(checkin, checkout, RoomType.NORMAL);
 				System.out.println("");
-				System.out.println("");
-				System.out.println("");
-				System.out.println("");
-				System.out.println("--------------------------------");
-				System.out.println("Free rooms:");
-				for (Room room : freeRooms)
-					System.out.println(room.toString());
-				System.out.println("--------------------------------");
-				System.out.println("");
-				System.out.println("");
-				System.out.println("");
-				System.out.println("");
-				
-				reservdb.cancel(r2);
-				reservdb.cancel(r1);
-				
-				
-				
-				
-				for (Room r :reservdb.getReservedRooms(checkin, checkout))
-					System.out.println(r.toString());
-				
+
 				reservdb.disconnect();
 				
 			} catch (DuplicateReservationException | DuplicateCustomerException | IOException | NonExistingReservationException e) {
