@@ -93,16 +93,21 @@ public class ReservationListDB implements ReservationDAO {
 		List<Room> reservedRooms = new ArrayList<>();
 		if (checkin.isAfter(checkout))
 			return reservedRooms;
-		for (int i = 0; i < allRooms.size(); i++){
+		System.out.println();
+		System.out.println("-----------Reservations for date---------------");
+		for (int i = 0; i < database.size(); i++){
 			DawsonReservation reservTemp = (DawsonReservation)database.get(i);
 			Room roomTemp = reservTemp.getRoom();
-			LocalDate tempCheckIn = reservTemp.getCheckInDate(),
-					  tempCheckOut = reservTemp.getCheckOutDate();
-			if ((tempCheckIn.isBefore(checkout) || tempCheckOut.isAfter(checkin)&&
-					!(tempCheckIn.isAfter(checkout)|| tempCheckIn.isBefore(checkin))))
-					if (!reservedRooms.contains(roomTemp))
-						reservedRooms.add(roomTemp); 
+			LocalDate roomCheckIn = reservTemp.getCheckInDate(),
+					  roomCheckOut = reservTemp.getCheckOutDate();
+			if ((roomCheckIn.isBefore(checkout) || roomCheckOut.isAfter(checkin)) &&
+					!(roomCheckIn.isAfter(checkout)|| roomCheckOut.isBefore(checkin))){
+						reservedRooms.add(roomTemp);
+						System.out.println(reservTemp.toString());
+					}
 		}
+		System.out.println("-----------------------------------------------");
+
 		return reservedRooms;
 	}
 	@Override
@@ -117,15 +122,17 @@ public class ReservationListDB implements ReservationDAO {
 					if (roomTemp.equals(reservedTemp)){
 						found = true;
 					}
+					if (!found){
+						if (!freeRooms.contains(roomTemp))
+							freeRooms.add(roomTemp);
+					}
+					found = false;
 			}
-			if (!found){
-				freeRooms.add(roomTemp);
-			}
-			found = false;
 				
 		}
 		return freeRooms;
 	}
+	
 	@Override
 	public String toString() {
 		 System.out.println("Number of reservations in database: " + database.size() + "\n");
@@ -133,6 +140,7 @@ public class ReservationListDB implements ReservationDAO {
 			System.out.println(arr.toString());
 			return "";
 	}
+	
 	@Override
 	public List<Room> getFreeRooms(LocalDate checkin, LocalDate checkout, RoomType roomType) {
 		boolean found = false;
@@ -142,18 +150,24 @@ public class ReservationListDB implements ReservationDAO {
 			DawsonRoom roomTemp = (DawsonRoom)allRooms.get(i);
 			for (int j = 0; j < reservedRooms.size(); j++){
 				DawsonRoom reservedTemp = (DawsonRoom)reservedRooms.get(j);
-					if (roomTemp.equals(reservedTemp) && roomTemp.getRoomType().equals(roomType)){
+					if (roomTemp.equals(reservedTemp)){
 						found = true;
 					}
+					if (!found){
+						if (!freeRooms.contains(roomTemp))
+							freeRooms.add(roomTemp);
+					}
+					found = false;
 			}
-			if (!found){
-				freeRooms.add(roomTemp);
-			}
-			found = false;
-				
 		}
 		return freeRooms;
 	}
+
+
+	
+	
+	
+	
 	@Override
 	public void clearAllPast() {
 		LocalDate date;
