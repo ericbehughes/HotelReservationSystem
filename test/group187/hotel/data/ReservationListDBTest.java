@@ -70,29 +70,27 @@ public class ReservationListDBTest {
 				List<Room> reservedRooms = reservdb.getReservedRooms(checkin, checkout);
 				cDB.toString();
 				System.out.println("");
-				System.out.println("");
-				System.out.println("");
 				System.out.println("--------------------------------");
 				System.out.println("Free rooms:");
 				for (Room room : freeRooms)
 					System.out.println(room.toString());
+				System.out.println("");
 				System.out.println("--------------------------------");
 				System.out.println("");
+				System.out.println("Reserved Rooms");
+				for (Room room : reservedRooms)
+					System.out.println(room.toString());
 				System.out.println("");
+				System.out.println("--------------------------------");
 				System.out.println("");
-				System.out.println("");
-				System.out.println(reservdb.toString());
+				System.out.println("Reservations");
+				System.out.print(reservdb.toString());
+				System.out.println("--------------------------------");
 				
-				reservdb.cancel(r2);
-				reservdb.cancel(r1);
-				
-				freeRooms = reservdb.getFreeRooms(checkin, checkout, RoomType.NORMAL);
-				System.out.println("");
-
 				reservdb.disconnect();
 				
-			} catch (DuplicateReservationException | DuplicateCustomerException | IOException | NonExistingReservationException e) {
-				// TODO Auto-generated catch block
+			} catch (DuplicateReservationException | DuplicateCustomerException | IOException e) {
+				
 				e.printStackTrace();
 			}
 	}
