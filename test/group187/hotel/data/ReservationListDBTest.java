@@ -64,10 +64,17 @@ public class ReservationListDBTest {
 				reservdb.add(r2);
 				
 				LocalDate checkin = LocalDate.of(2016, 9, 10);
+<<<<<<< HEAD
 			    LocalDate checkout = LocalDate.of(2016, 10, 31);
+=======
+				LocalDate checkout = LocalDate.of(2016, 10, 31);
+				
+>>>>>>> branch 'Development' of https://github.com/xavier-berthiaume/HotelReservationSystem.git
 				List<Room> freeRooms = reservdb.getFreeRooms(checkin, checkout, RoomType.NORMAL);
 				List<Room> reservedRooms = reservdb.getReservedRooms(checkin, checkout);
-				cDB.toString();
+				System.out.println(reservdb.toString());
+				//cDB.toString();
+				
 				System.out.println("");
 				System.out.println("--------------------------------");
 				System.out.println("Free rooms:");
@@ -75,6 +82,7 @@ public class ReservationListDBTest {
 					System.out.println(room.toString());
 				System.out.println("");
 				System.out.println("--------------------------------");
+				/**
 				System.out.println("");
 				System.out.println("Reserved Rooms");
 				for (Room room : reservedRooms)
@@ -85,7 +93,7 @@ public class ReservationListDBTest {
 				System.out.println("Reservations");
 				System.out.print(reservdb.toString());
 				System.out.println("--------------------------------");
-				
+				*/
 				reservdb.disconnect();
 				*/
 			} catch (DuplicateReservationException | DuplicateCustomerException e) {
