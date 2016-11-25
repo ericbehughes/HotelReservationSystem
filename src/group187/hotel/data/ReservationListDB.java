@@ -103,6 +103,7 @@ public class ReservationListDB implements ReservationDAO {
                       roomCheckOut = reservTemp.getCheckOutDate();
             if ((roomCheckIn.isBefore(checkout) || roomCheckOut.isAfter(checkin)) &&
                     !(roomCheckIn.isAfter(checkout)|| roomCheckOut.isBefore(checkin))){
+            			if (!reservedRooms.contains(roomTemp))
                         reservedRooms.add(roomTemp);
                         System.out.println(reservTemp.toString());
                     }
@@ -114,25 +115,28 @@ public class ReservationListDB implements ReservationDAO {
     
     @Override
     public List<Room> getFreeRooms(LocalDate checkin, LocalDate checkout) {
-    	   List<Room> freerooms = new ArrayList<>();
+    	List<Room> reservedRooms = getReservedRooms(checkin, checkout);
+    	List<Room> freeRooms = new ArrayList<>();
            if (checkin.isAfter(checkout))
-               return freerooms;
+               return freeRooms;
            System.out.println();
-           System.out.println("-----------Free rooms for time period--"+checkin+" "+checkout+"---------");
-           for (int i = 0; i < database.size(); i++){
-               DawsonReservation reservTemp = (DawsonReservation)database.get(i);
-               Room roomTemp = reservTemp.getRoom();
-               LocalDate roomCheckIn = reservTemp.getCheckInDate(),
-                         roomCheckOut = reservTemp.getCheckOutDate();
-               if (!((roomCheckIn.isBefore(checkout) || roomCheckOut.isAfter(checkin)) &&
-                       !(roomCheckIn.isAfter(checkout)|| roomCheckOut.isBefore(checkin)))){
-            	   		if (!freerooms.contains(roomTemp))
-                           freerooms.add(roomTemp);
-                           System.out.println(roomTemp.toString());
-                       }
-           }
-           System.out.println("-----------Free rooms for time period--"+checkin+" "+checkout+"---------");
-          return freerooms;
+           
+          int counter = 0;
+        	   
+        	   for (int j = 0; j < allRooms.size(); j++){
+        		   DawsonRoom currentRoom = (DawsonRoom)allRooms.get(j);
+        		   DawsonRoom reservedRoom = (DawsonRoom) reservedRooms.get(counter);
+        	    	if(!(currentRoom.equals(reservedRoom))){
+        	    			freeRooms.add(allRooms.get(j));
+        	    			
+        	    	}
+        	    	else if (currentRoom.equals(reservedRoom))
+        	    		counter++;
+                    
+           
+          }
+         
+          return freeRooms;
     }
    
     @Override

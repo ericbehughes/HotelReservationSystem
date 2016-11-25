@@ -66,16 +66,15 @@ public class ReservationListDBTest {
 				LocalDate checkin = LocalDate.of(2016, 9, 10);
 
 			    LocalDate checkout = LocalDate.of(2016, 10, 31);
-
+			    System.out.println("------------ReservedRooms-------------");
+			    List<Room> reservedRooms = reservdb.getFreeRooms(checkin, checkout);
+			    for (Room r :reservedRooms)
+					System.out.println(r.toString());
 				List<Room> freeRooms = reservdb.getFreeRooms(checkin, checkout);
-				System.out.println(freeRooms.size());
+				System.out.println("------------FreeRooms-------------");
+				for (Room r :freeRooms)
+					System.out.println(r.toString());
 
-				
-			
-				
-				
-				
-				
 				reservdb.disconnect();
 			
 			} catch (DuplicateReservationException | DuplicateCustomerException e) {
