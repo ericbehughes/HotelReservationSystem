@@ -3,6 +3,7 @@
  */
 package group187.hotel.business;
 import java.time.LocalDate;
+import java.io.Serializable;
 import java.time.DateTimeException;
 import java.time.temporal.ChronoUnit;
 import dw317.hotel.business.interfaces.*;
@@ -11,7 +12,7 @@ import dw317.hotel.business.interfaces.*;
 /**
  * The Class DawsonReservation.
  */
-public class DawsonReservation implements Reservation {
+public class DawsonReservation implements Reservation, Serializable {
 	
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 42031768871L;

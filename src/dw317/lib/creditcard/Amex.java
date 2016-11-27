@@ -1,10 +1,12 @@
 package dw317.lib.creditcard;
 
+import java.io.Serializable;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class Amex.
  */
-public class Amex extends AbstractCreditCard {
+public class Amex extends AbstractCreditCard implements Serializable{
 
 	/** The Constant serializeVersionUID. */
 	private static final long serializeVersionUID = 42031768871L;
