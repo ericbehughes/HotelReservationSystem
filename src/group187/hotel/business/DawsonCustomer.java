@@ -24,7 +24,7 @@ public class DawsonCustomer implements Customer {
 	private final Email email;
 	
 	/** The card. */
-	protected Optional<CreditCard> card;
+	protected CreditCard card;
 	
 	/**
 	 * Instantiates a new dawson customer.
@@ -37,7 +37,10 @@ public class DawsonCustomer implements Customer {
 	public DawsonCustomer(String firstN, String lastN, Email email, Optional<CreditCard> card){
 		this.email = new Email(email);
 		this.name = new Name(firstN, lastN);
-		this.card = card;
+		if (card.isPresent() == true)
+			this.card = card.get();
+		else
+			this.card = card.orElse(null);
 		
 	}
 	
@@ -57,7 +60,7 @@ public class DawsonCustomer implements Customer {
 	@Override
 	public String toString() {
 			if (card != null) //
-			return  email.toString() + "*" + this.name.toString() +"*"+ this.card.get().toString();
+			return  email.toString() + "*" + this.name.toString() +"*"+ this.card.toString();
 		return  email.toString() + "*" + this.name.toString();
 	}
 
@@ -129,12 +132,15 @@ public class DawsonCustomer implements Customer {
 	 */
 	@Override
 	public Optional<CreditCard> getCreditCard() {
-		return this.card;
+		return Optional.ofNullable(card);
 	}
 
 	@Override
 	public void setCreditCard(Optional<CreditCard> card) {
-		this.card = card;
+		if (card.isPresent() == true)
+			this.card = card.get();
+		else
+			this.card = card.orElse(null);
 	}
 
 
