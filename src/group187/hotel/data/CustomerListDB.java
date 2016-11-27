@@ -65,7 +65,8 @@ public class CustomerListDB implements CustomerDAO{
 				throw new DuplicateCustomerException("CustomerListDB - add - The customer: " + cust.toString() + " is already in the list");
 		// Create a copy of the customer and add to the database
 		Customer custCopy = factory.getCustomerInstance(cust.getName().getFirstName(), cust.getName().getLastName()
-				, cust.getEmail(), cust.getCreditCard());
+				, cust.getEmail());
+		custCopy.setCreditCard(custCopy.getCreditCard());
 		// Use bianry search to find proper index
 		int index = binarySearch(custCopy);
 		// Add customer
@@ -90,7 +91,8 @@ public class CustomerListDB implements CustomerDAO{
 		Customer cust = database.get(customerIndex);// Get the customer
 		// Use factory to make a copy of the customer
 		Customer custObjCopy = factory.getCustomerInstance(cust.getName().getFirstName(), cust.getName().getLastName()
-				, cust.getEmail(), cust.getCreditCard());
+				, cust.getEmail());
+		custObjCopy.setCreditCard(custObjCopy.getCreditCard());
 		return custObjCopy;
 	}
 	@Override

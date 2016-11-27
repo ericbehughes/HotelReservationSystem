@@ -41,7 +41,7 @@ public class DawsonReservationTest {
 		DawsonCustomer customer;
 		Email emailObj;
 		DawsonRoom room;
-		Optional<CreditCard> cardTest1 = Optional.of(new Amex("374616906032009"));
+		CreditCard cardTest1 = new Amex("374616906032009");
 		int inYear, inMonth, inDate, outYear, outMonth, outDate, roomNumber;
 		String email, firstName, lastName;
 		String[] customerInfo = new String[8];
@@ -88,7 +88,8 @@ public class DawsonReservationTest {
 		// Create object with pertinent info
 		emailObj = new Email(email);
 		room = new DawsonRoom(roomNumber, RoomType.NORMAL);
-		customer = new DawsonCustomer(firstName, lastName, emailObj, cardTest1);
+		customer = new DawsonCustomer(firstName, lastName, emailObj);
+		customer.setCreditCard(Optional.of(cardTest1));
 		DawsonReservation reservationTest = new DawsonReservation(customer, room, inYear, inMonth, inDate, outYear,
 				outMonth, outDate);
 

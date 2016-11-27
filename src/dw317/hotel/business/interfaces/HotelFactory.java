@@ -30,7 +30,7 @@ public interface HotelFactory extends Serializable {
 	 * @return the customer instance
 	 */
 	// interface
-	Customer getCustomerInstance(String firstName, String lastName, Email email, Optional<CreditCard> card);
+	Customer getCustomerInstance(String firstName, String lastName, Email email);
 
 	/**
 	 * Gets the card.

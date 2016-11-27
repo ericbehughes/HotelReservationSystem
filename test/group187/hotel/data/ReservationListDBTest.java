@@ -29,16 +29,15 @@ public class ReservationListDBTest {
 			System.out.println("ReservationListDbTest");
 			Email email1 = new Email("zhu@abcc.com");
 			Name name = new Name("test", "hughes");
-			Optional<CreditCard> cardTest1 = Optional.of(new Amex("374616906032009"));
-			DawsonCustomer customer1 = new DawsonCustomer(name.getFirstName(), name.getLastName(), email1, cardTest1);
-
-			customer1.setCreditCard(cardTest1);
+			CreditCard cardTest1 = new Amex("374616906032009");
+			DawsonCustomer customer1 = new DawsonCustomer(name.getFirstName(), name.getLastName(), email1);
+			customer1.setCreditCard(Optional.ofNullable(cardTest1));
 
 			Email email2 = new Email("fhse@abc.com");
 			Name name2 = new Name("test", "Depaz");
-			Optional<CreditCard> cardTest2 = Optional.of(new Amex("374616906032009"));
-			DawsonCustomer customer2 = new DawsonCustomer(name2.getFirstName(), name2.getLastName(), email2, cardTest2);
-			customer2.setCreditCard(cardTest2);
+			CreditCard cardTest2 = new Amex("374616906032009");
+			DawsonCustomer customer2 = new DawsonCustomer(name.getFirstName(), name.getLastName(), email1);
+			customer1.setCreditCard(Optional.ofNullable(cardTest2));
 			
 			
 			String roomFilename = "datafiles/database/rooms.txt";

@@ -32,8 +32,8 @@ public class DawsonHotelAllocationPolicyTest {
 		DawsonRoom rm1 = new DawsonRoom(101, RoomType.NORMAL);
 		Email email1 = new Email("zhu@abcc.com");
 		Name name = new Name("test", "hughes");
-		Optional<CreditCard> cardTest1 = Optional.of(new Amex("374616906032009"));
-		DawsonCustomer customer1 = new DawsonCustomer(name.getFirstName(), name.getLastName(), email1, cardTest1);
+		CreditCard cardTest1 = new Amex("374616906032009");
+		DawsonCustomer customer1 = new DawsonCustomer(name.getFirstName(), name.getLastName(), email1);
 		DawsonReservation r1 = new DawsonReservation(customer1, rm1, 2015, 9, 1, 2016, 9, 9);
 		
 		// Get checkin and checkout dates

@@ -28,19 +28,20 @@ public class DawsonCustomerTest {
 		try {
 			Email email1 = new Email("zhu@-abc.com");
 			Name name = new Name("eric", "hughes");
-			Optional<CreditCard> cardTest1 = Optional.of(new Amex("374616906032009"));
-			DawsonCustomer customer1 = new DawsonCustomer(name.getFirstName(), name.getLastName(), email1, cardTest1);
+			CreditCard cardTest1 = new Amex("374616906032009");
+			DawsonCustomer customer1 = new DawsonCustomer(name.getFirstName(), name.getLastName(), email1);
+			customer1.setCreditCard(Optional.ofNullable(cardTest1));
 
-			customer1.setCreditCard(cardTest1);
 			System.out.println(customer1.toString());
 			customer1.setCreditCard(null);
 			customer1.getCreditCard();
 
 			Email email2 = new Email("fhse@asdfscom");
 			Name name2 = new Name("something", "something");
-			Optional<CreditCard> cardTest2 = Optional.of(new Amex("374616906032009"));
-			DawsonCustomer customer2 = new DawsonCustomer(name2.getFirstName(), name2.getLastName(), email2, cardTest2);
-			customer2.setCreditCard(cardTest2);
+			CreditCard cardTest2 = new Amex("374616906032009");
+			DawsonCustomer customer2 = new DawsonCustomer(name2.getFirstName(), name2.getLastName(), email2);
+			
+			customer2.setCreditCard(Optional.ofNullable(cardTest2));
 			System.out.println(customer2.toString());
 			customer2.compareTo(customer1);
 

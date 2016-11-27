@@ -27,16 +27,15 @@ public class CustomerListDBTest {
 		System.out.println("test");
 			Email email1 = new Email("zhu@abc.com");
 			Name name = new Name("eric", "hughes");
-			Optional<CreditCard> cardTest1 = Optional.of(new Amex("374616906032009"));
-			DawsonCustomer customer1 = new DawsonCustomer(name.getFirstName(), name.getLastName(), email1, cardTest1);
-			CreditCard cardTest3 = new Amex("349997755621171");
-			customer1.setCreditCard(cardTest1);
+			CreditCard cardTest1 = new Amex("374616906032009");
+			DawsonCustomer customer1 = new DawsonCustomer(name.getFirstName(), name.getLastName(), email1);
+			customer1.setCreditCard(Optional.ofNullable(cardTest1));
 
 			Email email2 = new Email("ftest@test.com");
 			Name name2 = new Name("something", "something");
-			Optional<CreditCard> cardTest2 = Optional.of(new Amex("374616906032009"));
-			DawsonCustomer customer2 = new DawsonCustomer(name2.getFirstName(), name2.getLastName(), email2, cardTest2);
-			customer2.setCreditCard(cardTest2);
+			CreditCard cardTest2 = new Amex("374616906032009");
+			DawsonCustomer customer2 = new DawsonCustomer(name.getFirstName(), name.getLastName(), email1);
+			customer1.setCreditCard(Optional.ofNullable(cardTest2));
 			String roomFilename = "datafiles/database/rooms.txt";
 			String customerFilename = "datafiles/database/customers.txt";
 			String reservationFilename = "datafiles/database/reservations.txt";
@@ -47,7 +46,7 @@ public class CustomerListDBTest {
 			
 			try {
 				cDB.add(customer2);
-				cDB.update(email2, cardTest3);
+				cDB.update(email2, cardTest2);
 				System.out.println(cDB.toString());
 				
 				cDB.disconnect();
