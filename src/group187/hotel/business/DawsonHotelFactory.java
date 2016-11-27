@@ -33,7 +33,10 @@ public enum DawsonHotelFactory implements HotelFactory {
 	 */
 	@Override
 	public Customer getCustomerInstance(String firstName, String lastName, Email email, Optional<CreditCard> card) {
-		return new DawsonCustomer(firstName, lastName, email, card);
+		DawsonCustomer cust = new DawsonCustomer(firstName, lastName, email);
+		cust.setCreditCard(card);
+		return cust;
+		
 	}
 
 	/*

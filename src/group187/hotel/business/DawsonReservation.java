@@ -87,7 +87,7 @@ public class DawsonReservation implements Reservation, Serializable {
 	 */
 	@Override
 	public Customer getCustomer() {
-		return new DawsonCustomer((DawsonCustomer) this.customer);
+		return (DawsonCustomer)this.customer;
 	}
 
 

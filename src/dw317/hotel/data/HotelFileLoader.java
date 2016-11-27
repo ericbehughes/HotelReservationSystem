@@ -83,7 +83,7 @@ public class HotelFileLoader {
 			if (str.isEmpty())
 				continue;
 			String[] array = str.split("\\*");
-			Optional<CreditCard> card;
+			CreditCard card;
 			int i = 0; 
 				try {
 					
@@ -92,9 +92,10 @@ public class HotelFileLoader {
 					if (array.length != 5)
 						card = null;
 					else
-						card = Optional.of(CreditCard.getInstance(
-								CardType.valueOf(array[i+3].toUpperCase()), array[i + 4]));
-					DawsonCustomer customer = new DawsonCustomer(name.getFirstName(), name.getLastName(), email, card);
+						card = CreditCard.getInstance(
+								CardType.valueOf(array[i+3].toUpperCase()), array[i + 4]);
+					DawsonCustomer customer = new DawsonCustomer(name.getFirstName(), name.getLastName(), email);
+					customer.setCreditCard(Optional.ofNullable(card));
 					list.add(customer);
 				} catch (IllegalArgumentException iae) {
 					System.out.println("cant build customer object in hotel file loader illegal argument for record  ");
@@ -178,7 +179,8 @@ public class HotelFileLoader {
 			if(customerList[i].getEmail().equals(email)){
 				try{
 				Name name = new Name(customerList[i].getName());
-				customer = new DawsonCustomer(name.getFirstName(),name.getLastName(), email, customerList[i].getCreditCard());
+				customer = new DawsonCustomer(name.getFirstName(),name.getLastName(), email);
+				customer.setCreditCard(Optional.ofNullable(customerList[i].getCreditCard().get()));
 				return customer;
 				}catch (IllegalArgumentException iae) {
 					System.out.println("name or customer cant be made in search");

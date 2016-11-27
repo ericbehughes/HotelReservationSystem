@@ -92,7 +92,8 @@ public class Hotel extends Observable implements HotelManager {
 	public Customer registerCustomer(String firstName, String lastName, String email)
 			throws DuplicateCustomerException {
 		Email tempEmail = new Email(email);
-		Customer tempCustomer = new DawsonCustomer(firstName, lastName, tempEmail, null);
+		Customer tempCustomer = new DawsonCustomer(firstName, lastName, tempEmail);
+		tempCustomer.setCreditCard(null);
 		try{
 			customers.add(tempCustomer);
 		}

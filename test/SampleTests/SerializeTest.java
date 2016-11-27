@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.NoSuchElementException;
+import java.lang.NullPointerException;
 import java.util.Optional;
 
 import dw317.hotel.business.RoomType;
@@ -29,13 +31,14 @@ public class SerializeTest implements Serializable{
 		System.out.println("Run");
 		Email email = new Email("abc@test.com");
 		Name name = new Name("John", "Smith");
-		CreditCard amex = new Amex("374616906032009");
-		DawsonCustomer cust = new DawsonCustomer(name.getFirstName(), name.getLastName(), email, Optional.of(amex));
+		Amex amex = new Amex("374616906032009");
+		DawsonCustomer cust = new DawsonCustomer(name.getFirstName(), name.getLastName(), email);
+		cust.setCreditCard(Optional.ofNullable(amex));
 		DawsonRoom room = new DawsonRoom(707, RoomType.SUITE);
 		DawsonReservation reservation = new DawsonReservation(cust, room, 2016, 9, 1, 2016, 9, 10);
 		DawsonCustomer c2 = null;
 		//Begin serialization
-		
+		//reservation.getCustomer().setCreditCard(Optional.of(amex));
 		try {
 			// Serialize
 			FileOutputStream fOut = new FileOutputStream("obj.ser");
@@ -51,9 +54,9 @@ public class SerializeTest implements Serializable{
 			System.out.println(resObj.toString());
 			c2 = (DawsonCustomer)resObj.getCustomer();
 			//System.out.println(resObj.getCustomer().getCreditCard().get().getClass());
-			//System.out.println(resObj.getCustomer().getCreditCard());
+			System.out.println(resObj.getCustomer().getCreditCard().get());
 			
-		} catch (IOException  | ClassNotFoundException e) {
+		} catch (IOException  | ClassNotFoundException | NoSuchElementException e) {
 			System.out.println(e.getMessage() + " " + e.getCause());
 		}
 		
