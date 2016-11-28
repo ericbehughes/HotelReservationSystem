@@ -16,7 +16,6 @@ import dw317.lib.creditcard.Amex;
 import dw317.lib.creditcard.CreditCard;
 import group187.hotel.business.DawsonCustomer;
 import group187.hotel.business.DawsonHotelFactory;
-import group187.reserv.DawsonHotelFactoryTest;
 import group187.util.ListUtilities;
 
 public class CustomerListDBTest {
