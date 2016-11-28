@@ -43,15 +43,15 @@ public class Hotel extends Observable implements HotelManager {
 		reservations.cancel(reservation);
 		}
 		catch (NonExistingReservationException e){
-			throw new NonExistingReservationException(e.getMessage());
+			System.out.println(e.getMessage());
 		}
 	}
 
 	@Override
 	public void closeHotel() throws IOException {
-		// TODO Auto-generated method stub
 		customers.disconnect();
 		reservations.disconnect();
+
 	}
 
 	@Override
@@ -67,7 +67,7 @@ public class Hotel extends Observable implements HotelManager {
 		catch (DuplicateReservationException dre){
 			System.out.println(dre.getMessage());
 		}
-		return Optional.of(reservation);
+		return Optional.ofNullable(reservation);
 	}
 
 	@Override

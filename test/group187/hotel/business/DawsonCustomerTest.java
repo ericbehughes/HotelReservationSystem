@@ -25,16 +25,24 @@ public class DawsonCustomerTest {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		System.out.println("run");
 		try {
-			Email email1 = new Email("zhu@-abc.com");
+			System.out.println("entered try");
+			Email email1 = new Email("zhu@abc.com");
+			System.out.println("created email");
 			Name name = new Name("eric", "hughes");
+			System.out.println("created name");
 			CreditCard cardTest1 = new Amex("374616906032009");
+			System.out.println("created card");
 			DawsonCustomer customer1 = new DawsonCustomer(name.getFirstName(), name.getLastName(), email1);
+			System.out.println("created cust");
 			customer1.setCreditCard(Optional.ofNullable(cardTest1));
+			System.out.println("set card");
+			System.out.println(customer1.getCreditCard().get().toString());
 
 			System.out.println(customer1.toString());
-			customer1.setCreditCard(null);
-			customer1.getCreditCard();
+			//customer1.setCreditCard(null);
+			//customer1.getCreditCard();
 
 			Email email2 = new Email("fhse@asdfscom");
 			Name name2 = new Name("something", "something");
@@ -45,8 +53,6 @@ public class DawsonCustomerTest {
 			System.out.println(customer2.toString());
 			customer2.compareTo(customer1);
 
-			customer1.equals(customer1);
-			customer1.equals(customer1);
 		} catch (IllegalArgumentException iae) {
 			iae.getMessage();
 		}
