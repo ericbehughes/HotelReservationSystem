@@ -34,7 +34,7 @@ public class HotelFileLoader {
 	
 	//The Room array returned by the above method must be an array whose size is equal to
 	//its capacity (i.e. the array must be full to capacity).
-	 public static  Room[] getRoomListFromSequentialFile(File file) throws IOException
+	 public static  List<Room> getRoomListFromSequentialFile(File file) throws IOException
 	{
 		BufferedReader in = new BufferedReader(new FileReader(file));
 		String str;
@@ -66,16 +66,16 @@ public class HotelFileLoader {
 			
 		}
 
-		Room[] rooms = list.toArray(new Room[0]);
+		//Room[] rooms = list.toArray(new Room[0]);
 		in.close();
-		return rooms;
+		return list;
 
 	}
 			
 	 //The Customer array returned by the above method must be an array whose size is equal
 	 //to its capacity (i.e. the array must be full to capacity).
 	// Email*First name*Last name*Card type*Card number \\
-	public static Customer[] getCustomerListFromSequentialFile(File file) throws IOException {
+	public static List<Customer> getCustomerListFromSequentialFile(File file) throws IOException {
 		BufferedReader in = new BufferedReader(new FileReader(file));
 		String str;
 		List<Customer> list = new ArrayList<Customer>();
@@ -116,19 +116,19 @@ public class HotelFileLoader {
 				}
 		}
 
-		Customer[] customers = list.toArray(new Customer[0]);
+		//Customer[] customers = list.toArray(new Customer[0]);
 		in.close();
-		return customers;
+		return list;
 	 }
 
 	 
-	public static Reservation[] getReservationListFromSequentialFile (File file, Customer[] customerList, Room[] roomList)
+	public static List<Reservation> getReservationListFromSequentialFile (File file, Customer[] customerList, Room[] roomList)
     throws IOException, IllegalArgumentException {
 		BufferedReader in = new BufferedReader(new FileReader(file));
 		String str;
 		int inYear; int inMonth; int inDay;
 		int outYear; int outMonth; int outDay;
-		List<Reservation> list = new ArrayList<Reservation>();
+		List<Reservation> list = new ArrayList<>();
 		while ((str = in.readLine()) != null) {
 			if (str.isEmpty())
 				continue;
@@ -166,9 +166,9 @@ public class HotelFileLoader {
 			}// end of while
 				
 				successfullreservationcount++;
-		Reservation [] reservation = list.toArray(new Reservation[list.size()]);
+		//Reservation [] reservation = list.toArray(new Reservation[list.size()]);
 		in.close();
-		return reservation;
+		return list;
 	}
 	 //super_woman669@hotmail.com*Andreea*Galchenyuk*mastercard*5388941127716138
 	private static Customer search(Customer[] customerList, Email email) {
@@ -180,7 +180,7 @@ public class HotelFileLoader {
 				try{
 				Name name = new Name(customerList[i].getName());
 				customer = new DawsonCustomer(name.getFirstName(),name.getLastName(), email);
-				customer.setCreditCard(Optional.ofNullable(customerList[i].getCreditCard().get()));
+				customer.setCreditCard(customerList[i].getCreditCard());
 				return customer;
 				}catch (IllegalArgumentException iae) {
 					System.out.println("name or customer cant be made in search");
