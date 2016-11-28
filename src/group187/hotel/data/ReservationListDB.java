@@ -94,8 +94,7 @@ public class ReservationListDB implements ReservationDAO {
         List<Room> reservedRooms = new ArrayList<>();
         if (checkin.isAfter(checkout))
             return reservedRooms;
-        System.out.println();
-        System.out.println("-----------Reservations for date---------------");
+        
         for (int i = 0; i < database.size(); i++){
             DawsonReservation reservTemp = (DawsonReservation)database.get(i);
             Room roomTemp = reservTemp.getRoom();
@@ -105,7 +104,7 @@ public class ReservationListDB implements ReservationDAO {
                     !(roomCheckIn.isAfter(checkout)|| roomCheckOut.isBefore(checkin))){
             			if (!reservedRooms.contains(roomTemp))
                         reservedRooms.add(roomTemp);
-                        System.out.println(reservTemp.toString());
+                        
                     }
         }
         System.out.println("-----------------------------------------------");
