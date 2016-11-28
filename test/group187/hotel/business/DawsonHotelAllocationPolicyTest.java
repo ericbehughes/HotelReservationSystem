@@ -135,8 +135,7 @@ public class DawsonHotelAllocationPolicyTest {
 					System.out.println("\t Chosen Free Room: " + r.get() + "\n");
 
 				} catch (Exception e) {
-					System.out.println("\t\t Error: " + e.getMessage() + "\n");
-					continue;
+					System.out.println(e.getMessage());
 				}
 			
 			}

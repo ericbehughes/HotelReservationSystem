@@ -1,0 +1,8 @@
+304*normal
+205*normal
+407*normal
+108*normal
+801*penthouse
+105*normal
+302*normal
+700*suite
