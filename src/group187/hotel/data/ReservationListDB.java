@@ -129,8 +129,10 @@ public class ReservationListDB implements ReservationDAO {
         	    			freeRooms.add(allRooms.get(j));
         	    			
         	    	}
-        	    	else if (currentRoom.equals(reservedRoom))
+        	    	else if (currentRoom.equals(reservedRoom) && counter < reservedRooms.size() - 1)
         	    		counter++;
+        	    	else 
+        	    		counter = reservedRooms.size() - 1;
                     
            
           }
@@ -148,8 +150,15 @@ public class ReservationListDB implements ReservationDAO {
    
     @Override
     public List<Room> getFreeRooms(LocalDate checkin, LocalDate checkout, RoomType roomType) {
-    	List<Room> reservedRooms = getReservedRooms(checkin, checkout);
-    	List<Room> freeRooms = new ArrayList<>();
+    	//List<Room> reservedRooms = getReservedRooms(checkin, checkout);
+    	List<Room> freeRooms = getFreeRooms(checkin, checkout);
+    	List<Room> freeRoomType = new ArrayList<>();
+    	for (Room room : freeRooms){
+    		if (room.getRoomType().equals(roomType))
+    			freeRoomType.add(room);
+    	}
+    	return freeRoomType;
+    	/**
            if (checkin.isAfter(checkout))
                return freeRooms;
            System.out.println();
@@ -163,13 +172,13 @@ public class ReservationListDB implements ReservationDAO {
         	    			freeRooms.add(allRooms.get(j));
         	    			
         	    	}
-        	    	else if (currentRoom.equals(reservedRoom))
+        	    	else if (currentRoom.equals(reservedRoom) && counter < reservedRooms.size() - 1)
         	    		counter++;
-                    
-           
+        	    	else 
+        	    		counter = reservedRooms.size() - 1;
+        	    	
           }
-         
-          return freeRooms;
+         */
     }
  
  

@@ -77,7 +77,7 @@ public class DawsonHotelAllocationPolicy implements AllocationPolicy {
 		
 		selectedRoom = pickRandomRoom(floor, freeRooms, roomtype);
 		DawsonRoom chosenRoom = new DawsonRoom(selectedRoom, roomtype);
-		return Optional.of((Room)chosenRoom);
+		return Optional.of(chosenRoom);
 	}
 	
 	/**
@@ -89,6 +89,7 @@ public class DawsonHotelAllocationPolicy implements AllocationPolicy {
 	 * @param freeRooms: The list containing all the free rooms.
 	 * @param roomtype: The room type for the room.
 	 * @return room: The room number.
+	 * @throws Exception 
 	 */
 	private int pickRandomRoom(int floor, List<Room> freeRooms, RoomType roomtype){
 		/** Var explanation
@@ -98,18 +99,18 @@ public class DawsonHotelAllocationPolicy implements AllocationPolicy {
 		 * checkRoom: A cast of DawsonRoom to Room so that we can check the list of free rooms
 		 * 			  for the same room.
 		 */
-		
+		if (freeRooms.size() == 0 || freeRooms == null)
+			throw new IllegalArgumentException("There are no free rooms for the specified roomtype");
 		Random random = new Random();
 		int room = random.nextInt((8 - 1) + 1) + 1;
 		DawsonRoom temp = new DawsonRoom((floor*100) + room, roomtype);
-		Room checkRoom = (Room)temp;
+		Room checkRoom = temp;
 		if (freeRooms.contains(checkRoom))
-			room = (floor*100) + room;
+			return room = (floor*100) + room;
 			
 		else 
-			pickRandomRoom(floor, freeRooms, roomtype);
+			return pickRandomRoom(floor, freeRooms, roomtype);
 		
-		return room;
 	}
 	
 	

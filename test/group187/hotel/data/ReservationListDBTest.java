@@ -27,8 +27,8 @@ public class ReservationListDBTest {
 	
 	public static void main(String[] args) {
 			System.out.println("ReservationListDbTest");
-			Email email1 = new Email("zhu@abcc.com");
-			Name name = new Name("test", "hughes");
+			Email email1 = new Email("zhaaaau@abcc.com");
+			Name name = new Name("teaaaaaaast", "huaaaaaghes");
 			CreditCard cardTest1 = new Amex("374616906032009");
 			DawsonCustomer customer1 = new DawsonCustomer(name.getFirstName(), name.getLastName(), email1);
 			customer1.setCreditCard(Optional.ofNullable(cardTest1));
@@ -56,8 +56,8 @@ public class ReservationListDBTest {
 			CustomerListDB cDB = new CustomerListDB(obj, factory);
 			ReservationListDB reservdb = new ReservationListDB(obj);
 			try {
-				cDB.add(customer1);
-				cDB.add(customer2);
+				//cDB.add(customer1);
+				//cDB.add(customer2);
 				
 				reservdb.add(r1);
 				reservdb.add(r2);
@@ -66,7 +66,7 @@ public class ReservationListDBTest {
 
 			    LocalDate checkout = LocalDate.of(2016, 10, 31);
 			    System.out.println("------------ReservedRooms-------------");
-			    List<Room> reservedRooms = reservdb.getFreeRooms(checkin, checkout);
+			    List<Room> reservedRooms = reservdb.getReservedRooms(checkin, checkout);
 			    for (Room r :reservedRooms)
 					System.out.println(r.toString());
 				List<Room> freeRooms = reservdb.getFreeRooms(checkin, checkout);
@@ -76,7 +76,7 @@ public class ReservationListDBTest {
 
 				reservdb.disconnect();
 			
-			} catch (DuplicateReservationException | DuplicateCustomerException e) {
+			} catch (DuplicateReservationException  e) {
 				
 				e.printStackTrace();
 			} catch (IOException e) {
