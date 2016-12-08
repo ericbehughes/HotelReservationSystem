@@ -74,7 +74,7 @@ public class DawsonReservation implements Reservation, Serializable {
 	 */
 	private boolean validateDateFormat(int year, int month, int day) {
 		
-		if (year > 100 && year < 2020)
+		if (year > 100 && year < 2050)
 			if (month > 0 && month < 13)
 				if (day > 0 && day < 32)
 					return true;

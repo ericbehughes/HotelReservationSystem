@@ -18,38 +18,55 @@ public class TextView implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		if (arg instanceof Optional<?>){
-			Reservation reservation = ((Optional<Reservation>)arg).get();
-			System.out.println("Your reservation is for:");
-			System.out.println("\t"+reservation.getCustomer().getName().toString());
-			System.out.println("\tat email: " + reservation.getCustomer().getEmail().toString());
-			System.out.println(("\tcheck in at: " + reservation.getCheckInDate()));
-			System.out.println(("\tcheck out at: "+ reservation.getCheckOutDate()));
-			System.out.println(("\tyour room: " + reservation.getRoom().getRoomNumber() +
-					" is a " + reservation.getRoom().getRoomType() + " on the " + 
-					reservation.getRoom().getFloor() + " floor"));
+			Optional<Reservation> reservation = ((Optional<Reservation>)arg);
+			if (reservation.isPresent()){
+				System.out.println("Your reservation is for:");
+				System.out.println("\t"+reservation.get().getCustomer().getName().toString());
+				System.out.println("\tat email: " + reservation.get().getCustomer().getEmail().toString());
+				System.out.println(("\tcheck in at: " + reservation.get().getCheckInDate()));
+				System.out.println(("\tcheck out at: "+ reservation.get().getCheckOutDate()));
+				System.out.println(("\tyour room: " + reservation.get().getRoom().getRoomNumber() +
+						" is a " + reservation.get().getRoom().getRoomType() + " on the " + 
+						reservation.get().getRoom().getFloor() + " floor"));
+			}
 		}
 		
 		else if (arg instanceof Customer){
 			System.out.println("Customer information: ");
 			System.out.println("Name: " + ((Customer)arg).getName().toString());
 			System.out.println(("Email: " + ((Customer)arg).getEmail().toString()));
-			CreditCard card = ((Customer)arg).getCreditCard().get();
-			if (card == null)
+			Optional<CreditCard> card = ((Customer)arg).getCreditCard();
+			if (!card.isPresent())
 				System.out.println(("No credit card on file."));
 			else
-				System.out.println(("Credit card: " + card.getType() + " " + card.getNumber()));
+				System.out.println(("Credit card: " + card.get().getType() + " " + card.get().getNumber()));
 		}
 		
 		else if (arg instanceof List<?>){
 			List<Reservation> reservations = (List<Reservation>)arg;
-			Customer customer = reservations.get(0).getCustomer();
-			update(o, customer);
-			System.out.println();
-			System.out.println("You have " + reservations.size() + " reservation(s) on file: ");
-			for (Reservation reservation : reservations)
-				System.out.println(reservation.toString());
+			if (reservations.size() > 0){
+				Customer customer = reservations.get(0).getCustomer();
+				update(o, customer);
+				System.out.println();
+				System.out.println("You have " + reservations.size() + " reservation(s) on file: ");
+				for (Reservation reservation : reservations){
+					System.out.println("Room: " + reservation.getRoom().getRoomNumber());
+					System.out.println("Room type: " + reservation.getRoom().getRoomType());
+					System.out.println("Check in year: " + reservation.getCheckInDate().getYear());
+					System.out.println("Check in month: " + reservation.getCheckInDate().getMonthValue());
+					System.out.println("Check in day: " + reservation.getCheckInDate().getDayOfMonth());
+					System.out.println("Check out year: " + reservation.getCheckOutDate().getYear());
+					System.out.println("Check out month: " + reservation.getCheckOutDate().getMonthValue());
+					System.out.println("Check out day: " + reservation.getCheckOutDate().getDayOfMonth());
+				}
+			}
+			else{
+				System.out.println();
+				System.out.println("You have " + reservations.size() + " reservation(s) on file: ");
+			}
+	    }
+				
 		}
 		
-	}
-
 }
+

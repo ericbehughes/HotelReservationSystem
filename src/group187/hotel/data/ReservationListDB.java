@@ -58,6 +58,11 @@ public class ReservationListDB implements ReservationDAO {
         int index = binarySearch(reserv); // Find the index for the object to keep order
         Reservation reservationObj = factory.getReservationInstance(reserv); // Create a copy of the object
         database.add(index, reservationObj); // Add the copy
+		try {
+			listPersistenceObject.saveReservationDatabase(database);
+		} catch (IOException e) {
+			System.out.println("Cannot save the reservation databse to the file");
+		}
         }
  
     @Override
@@ -118,6 +123,8 @@ public class ReservationListDB implements ReservationDAO {
     	List<Room> freeRooms = new ArrayList<>();
            if (checkin.isAfter(checkout))
                return freeRooms;
+           if (reservedRooms.size() == 0)
+           		return allRooms;
            System.out.println();
            
           int counter = 0;

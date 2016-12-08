@@ -22,6 +22,7 @@ import dw317.hotel.data.interfaces.ReservationDAO;
 import dw317.hotel.data.interfaces.RoomDAO;
 import dw317.lib.Email;
 import dw317.lib.creditcard.*;
+import group187.hotel.data.SequentialTextFileList;
 
 public class Hotel extends Observable implements HotelManager {
 	private final HotelFactory factory;
@@ -98,8 +99,7 @@ public class Hotel extends Observable implements HotelManager {
 	public Customer registerCustomer(String firstName, String lastName, String email)
 			throws DuplicateCustomerException {
 		Email tempEmail = new Email(email);
-		Customer tempCustomer = new DawsonCustomer(firstName, lastName, tempEmail);
-		tempCustomer.setCreditCard(null);
+		Customer tempCustomer = new DawsonCustomer(firstName, lastName, tempEmail);	
 		try{
 			customers.add(tempCustomer);
 		}

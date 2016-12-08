@@ -133,7 +133,10 @@ public class DawsonCustomer implements Customer {
 
 	@Override
 	public void setCreditCard(Optional<CreditCard> card) {
-		this.card = card.orElse(null);
+		if (card.isPresent())
+			this.card = card.get();
+		else
+			this.card = null;
 
 	}
 

@@ -91,9 +91,9 @@ public class HotelFileLoader {
 					Name name = new Name(array[i + 1], array[i + 2]);
 					if (array.length != 5)
 						card = null;
-					else
-						card = CreditCard.getInstance(
-								CardType.valueOf(array[i+3].toUpperCase()), array[i + 4]);
+					else{
+						card = CreditCard.getInstance(CardType.valueOf(array[3].toUpperCase()), array[4]);
+					}
 					DawsonCustomer customer = new DawsonCustomer(name.getFirstName(), name.getLastName(), email);
 					customer.setCreditCard(Optional.ofNullable(card));
 					list.add(customer);

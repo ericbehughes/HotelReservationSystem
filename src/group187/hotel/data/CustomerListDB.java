@@ -89,10 +89,12 @@ public class CustomerListDB implements CustomerDAO{
 		if (customerIndex == 0 && (!(database.get(customerIndex).getEmail().equals(email))))
 			throw new NonExistingCustomerException("The customer does not exist for the email: ",email );
 		Customer cust = database.get(customerIndex);// Get the customer
+		if (!cust.getEmail().equals(email))
+			throw new NonExistingCustomerException("The customer does not exist for the email: ",email );
 		// Use factory to make a copy of the customer
 		Customer custObjCopy = factory.getCustomerInstance(cust.getName().getFirstName(), cust.getName().getLastName()
 				, cust.getEmail());
-		custObjCopy.setCreditCard(custObjCopy.getCreditCard());
+		custObjCopy.setCreditCard(cust.getCreditCard());
 		return custObjCopy;
 	}
 	@Override

@@ -84,7 +84,9 @@ public class TextController {
 		String lastName = getInput(keyboard, "Please enter the last name: ");
 		
 		//get email
-    	String email = getEmail(keyboard);
+    	//String email = getEmail(keyboard);
+		System.out.print("Please enter your email address: ");
+        String email = keyboard.nextLine();
     	try {
 			model.registerCustomer(firstName, lastName, email);
 		} catch (DuplicateCustomerException e) {
@@ -94,7 +96,8 @@ public class TextController {
 	}
     
     private void newReservation(Scanner keyboard) {
-    	System.out.print(("Please enter your email address: "));
+    	System.out.print("P2lease enter your email address: ");
+    	keyboard.nextLine();
         String email = keyboard.nextLine();
         try {
 			Customer customer = model.findCustomer(email);
@@ -113,8 +116,11 @@ public class TextController {
 	}
 
     private void customerInfo(Scanner keyboard) {
-        String email = getEmail(keyboard);
-        try {
+        //String email = getEmail(keyboard);
+    	System.out.print("Please enter your email address: ");
+    	keyboard.nextLine();
+        String email = keyboard.nextLine();
+    	try {
 			model.findCustomer(email);
 		} catch (NonExistingCustomerException e) {
 			System.out.println("There is no customer on file with that email");
@@ -124,7 +130,9 @@ public class TextController {
     }
     
     private void reservationInfo(Scanner keyboard) {
-    	String email = getEmail(keyboard);
+    	System.out.print("Please enter your email address: ");
+    	keyboard.nextLine();
+        String email = keyboard.nextLine();
         try {
 			Customer customer = model.findCustomer(email);
 			model.findReservations(customer);
