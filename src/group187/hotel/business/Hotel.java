@@ -67,6 +67,8 @@ public class Hotel extends Observable implements HotelManager {
 		catch (DuplicateReservationException dre){
 			System.out.println(dre.getMessage());
 		}
+		setChanged();
+		notifyObservers(Optional.ofNullable(reservation));
 		return Optional.ofNullable(reservation);
 	}
 
@@ -80,11 +82,15 @@ public class Hotel extends Observable implements HotelManager {
 		catch(NonExistingCustomerException e){
 			throw new NonExistingCustomerException("The customer does not exist with that email");
 		}
+		setChanged();
+		notifyObservers(customer);
 		return customer;
 	}
 
 	@Override
 	public List<Reservation> findReservations(Customer customer) {
+		setChanged();
+		notifyObservers(reservations.getReservations(customer));
 		return reservations.getReservations(customer);
 	}
 
@@ -100,6 +106,8 @@ public class Hotel extends Observable implements HotelManager {
 		catch (DuplicateCustomerException e){
 			throw new DuplicateCustomerException(e.getMessage());
 		}
+		setChanged();
+		notifyObservers(tempCustomer);
 		return tempCustomer;
 	}
 
@@ -114,6 +122,8 @@ public class Hotel extends Observable implements HotelManager {
 		catch(NonExistingCustomerException e){
 			throw new NonExistingCustomerException(e.getMessage());
 		}
+		setChanged();
+		notifyObservers(customers.getCustomer(emailOBJ));
 		return customers.getCustomer(emailOBJ);
 	}
 }
