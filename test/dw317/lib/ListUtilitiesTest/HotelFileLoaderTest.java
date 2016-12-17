@@ -1,6 +1,8 @@
 package dw317.lib.ListUtilitiesTest;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import dw317.hotel.business.interfaces.Customer;
 import dw317.hotel.business.interfaces.Reservation;
@@ -21,8 +23,8 @@ public class HotelFileLoaderTest {
 				for (int count = 1; count <= 10; count++){
 					try{
 						//create list per customer text file
-							Customer[] customerArray = HotelFileLoader.getCustomerListFromSequentialFile(
-									new File("datafiles/unsorted/customers/customers" + count + ".txt"));
+							Customer[] customerArray = (Customer[]) HotelFileLoader.getCustomerListFromSequentialFile(
+									new File("datafiles/unsorted/customers/customers" + count + ".txt")).toArray();
 							//save list to big AllCustomers.txt file
 							ListUtilities.saveListToTextFile(customerArray, allCustomers);
 							
@@ -42,13 +44,13 @@ public class HotelFileLoaderTest {
 	
 		try {
 			//create giant list with all customers
-			Customer[] allCustomerObjects = HotelFileLoader.getCustomerListFromSequentialFile(
+			List<Customer> allCustomerObjects = HotelFileLoader.getCustomerListFromSequentialFile(
 					new File("datafiles/unsorted/customers/AllCustomers.txt"));
 			
 			// create roomsList
 			File roomsFile = new File("datafiles/rooms.txt");
 			roomsFile.createNewFile();
-			Room[] allRooms = HotelFileLoader.getRoomListFromSequentialFile(roomsFile);
+			Room[] allRooms = (Room[]) HotelFileLoader.getRoomListFromSequentialFile(roomsFile).toArray();
 			System.out.println("rooms done");
 			// create a file from customer and rooms list
 			File allReservations = new File("datafiles/unsorted/reservations/AllReservations.txt");
@@ -57,8 +59,9 @@ public class HotelFileLoaderTest {
 			for (int count = 1; count <= 10; count++) {
 				try {
 					//create reservations array for each reservation file while using BIG customerArray and roomArray
-					Reservation[] reservationsArray = HotelFileLoader.getReservationListFromSequentialFile(
-							new File("datafiles/unsorted/reservations/reservations" + count + ".txt"), allCustomerObjects, allRooms);
+					Customer[] allCustsArr = (Customer[]) allCustomerObjects.toArray();
+					Reservation[] reservationsArray = (Reservation[]) HotelFileLoader.getReservationListFromSequentialFile(
+							new File("datafiles/unsorted/reservations/reservations" + count + ".txt"), allCustsArr, allRooms).toArray();
 					//save reservation to BIG reservation file
 					
 					ListUtilities.saveListToTextFile(reservationsArray,allReservations );

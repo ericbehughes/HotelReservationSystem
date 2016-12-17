@@ -146,7 +146,9 @@ public class TextController {
     }
     
     private void updateCard (Scanner keyboard) {
-    	String email = getEmail(keyboard);
+    	keyboard.nextLine(); // consume any previous data
+    	System.out.print("Please enter your email address: ");
+        String email = keyboard.nextLine();
     	System.out.print("Please enter the card number: ");
     	String cardNumber = keyboard.nextLine();
     	CardType cardType = getCardType(keyboard);

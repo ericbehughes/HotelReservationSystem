@@ -30,8 +30,8 @@ public class Hotel extends Observable implements HotelManager {
 	private final ReservationDAO reservations;
 	private static final long serialVersionUID = 42031768871L;
 	
-	public Hotel (HotelFactory factory, RoomDAO rooms, CustomerDAO customers, ReservationDAO reservations){
-		if (factory == null || rooms == null || customers == null || reservations == null)
+	public Hotel (HotelFactory factory, CustomerDAO customers, ReservationDAO reservations){
+		if (factory == null || customers == null || reservations == null)
 			throw new IllegalArgumentException("The parameters cannot be null");
 		this.factory = factory;
 		this.customers = customers;

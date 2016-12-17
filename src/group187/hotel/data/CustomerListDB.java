@@ -74,6 +74,11 @@ public class CustomerListDB implements CustomerDAO{
 			database.add(custCopy);
 		else
 			database.add(index, custCopy);
+		try {
+			listPersistenceObject.saveCustomerDatabase(database);
+		} catch (IOException e) {
+			System.out.println("The database file does not exist - CustomerListDB add(Customer cust)");
+		}
 		
 	}
 	

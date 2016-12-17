@@ -22,8 +22,8 @@ public class SortMergeAppTest {
 						for (int count = 1; count <= 10; count++){
 							try{
 								//create list per customer text file
-									customerArray = HotelFileLoader.getCustomerListFromSequentialFile(
-											new File("datafiles/unsorted/customers/customers" + count + ".txt"));
+									customerArray = (Customer[]) HotelFileLoader.getCustomerListFromSequentialFile(
+											new File("datafiles/unsorted/customers/customers" + count + ".txt")).toArray();
 									//save list to big AllCustomers.txt file
 									ListUtilities.saveListToTextFile(customerArray, allCustomers);
 									
@@ -46,13 +46,13 @@ public class SortMergeAppTest {
 			
 				try {
 					//create giant list with all customers
-					Customer[] allCustomerObjects = HotelFileLoader.getCustomerListFromSequentialFile(
-							new File("datafiles/unsorted/customers/AllCustomers.txt"));
+					Customer[] allCustomerObjects = (Customer[]) HotelFileLoader.getCustomerListFromSequentialFile(
+							new File("datafiles/unsorted/customers/AllCustomers.txt")).toArray();
 					
 					// create roomsList
 					File roomsFile = new File("datafiles/rooms.txt");
 					roomsFile.createNewFile();
-					Room[] allRooms = HotelFileLoader.getRoomListFromSequentialFile(roomsFile);
+					Room[] allRooms = (Room[]) HotelFileLoader.getRoomListFromSequentialFile(roomsFile).toArray();
 					System.out.println("rooms done");
 					// create a file from customer and rooms list
 					File allReservations = new File("datafiles/unsorted/reservations/AllReservations.txt");
@@ -61,8 +61,8 @@ public class SortMergeAppTest {
 					for (int count = 1; count <= 10; count++) {
 						try {
 							//create reservations array for each reservation file while using BIG customerArray and roomArray
-							Reservation[] reservationsArray = HotelFileLoader.getReservationListFromSequentialFile(
-									new File("datafiles/unsorted/reservations/reservations" + count + ".txt"), allCustomerObjects, allRooms);
+							Reservation[] reservationsArray = (Reservation[]) HotelFileLoader.getReservationListFromSequentialFile(
+									new File("datafiles/unsorted/reservations/reservations" + count + ".txt"), allCustomerObjects, allRooms).toArray();
 							//save reservation to BIG reservation file
 							
 							ListUtilities.saveListToTextFile(reservationsArray,allReservations );
@@ -95,10 +95,10 @@ public class SortMergeAppTest {
 					e1.printStackTrace();
 				}
 				try {
-					Customer[] array1  = HotelFileLoader.getCustomerListFromSequentialFile(
-							new File("datafiles/unsorted/customers/customers1.txt"));
-					Customer[] array2  = HotelFileLoader.getCustomerListFromSequentialFile(
-							new File("datafiles/unsorted/customers/customers2.txt"));
+					Customer[] array1  = (Customer[]) HotelFileLoader.getCustomerListFromSequentialFile(
+							new File("datafiles/unsorted/customers/customers1.txt")).toArray();
+					Customer[] array2  = (Customer[]) HotelFileLoader.getCustomerListFromSequentialFile(
+							new File("datafiles/unsorted/customers/customers2.txt")).toArray();
 					System.out.println("non sorted array 1\n");
 					for (Customer a1: array1){
 						System.out.println(a1.toString());
